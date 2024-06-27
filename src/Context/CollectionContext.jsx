@@ -5,7 +5,7 @@ export const CollectionContext = createContext();
 
 const getDefaultCart = () => {
   let cart = {};
-  for (let i = 1; i < ProductData.length; i++) {
+  for (let i = 1; i <= ProductData.length; i++) {
     cart[i] = 0;
   }
   return cart;

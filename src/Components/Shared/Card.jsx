@@ -1,7 +1,11 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext } from 'react'
+
+import { CollectionContext } from '../../Context/CollectionContext'
+
 
 const Card = ({data}) => {
+    const { addToCart } = useContext(CollectionContext) 
+    
   return (
     <>
     {data.map((item, index) => (
@@ -10,7 +14,7 @@ const Card = ({data}) => {
           <h2 className="text-lg font-semibold">{item.name}</h2>
           <p className="text-sm text-gray-500">{item.type}</p>
           <p className="text-xl text-gray-700 mt-2 mb-5">  ₹ {item.price}</p>
-          <Link to="#" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-gray-800 ">Add To cart</Link>
+          <button onClick={()=>{addToCart(item.id)}} className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-gray-800 ">Add To cart</button>
         </div>
       ))}
   </>

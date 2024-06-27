@@ -9,6 +9,7 @@ import Registration from "../Pages/Registration";
 import Contact from "../Pages/Contact";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "../Components/Navbar";
+import Profile from "../Pages/Profile";
 const RouterApp = () => {
   return (
     <div>
@@ -22,6 +23,7 @@ const RouterApp = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Registration />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );

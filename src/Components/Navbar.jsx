@@ -1,25 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { GiRunningShoe } from "react-icons/gi";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { MdMenu, MdClose } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { CollectionContext } from "../Context/CollectionContext";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const { cartItems } = useContext(CollectionContext);
+
+  const [length, setLength] = useState(0);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
+  useEffect(() => {
+    const len = Object.keys(cartItems).filter(
+      (id) => cartItems[id] !== 0
+    ).length;
+
+    setLength(len);
+  }, [cartItems]);
+
   return (
-    <nav className="bg-gray-100 shadow-md">
-      <div className=" mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-gray-100 shadow-md fixed w-full">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <GiRunningShoe className="text-red-700 text-3xl mr-2" />
-            <Link to="/" className="text-3xl font-serif ">
+            <Link to="/" className="text-3xl font-serif">
               FOOTFUSION
             </Link>
           </div>
@@ -58,13 +71,18 @@ const Navbar = () => {
                 placeholder="Search..."
                 className="pl-10 pr-4 py-2 rounded-full text-black w-[155px]"
               />
-
               <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             </div>
 
             <div className="hidden md:flex space-x-4">
-              <Link to="/cart"><FiShoppingCart className="text-3xl mr-2" /></Link>
-              <span>0</span>
+              <div className="relative">
+                <Link to="/cart">
+                  <FiShoppingCart className="text-3xl text-gray-700 hover:text-red-700" />
+                </Link>
+                <div className="absolute top-0 right-0 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
+                  {length}
+                </div>
+              </div>
               <Link
                 to="/login"
                 className="bg-red-700 text-white font-serif px-4 py-2 rounded-lg hover:bg-red-600"
@@ -119,7 +137,15 @@ const Navbar = () => {
               >
                 CONTACT
               </Link>
-              <FiShoppingCart className="text-3xl mr-2" />
+              <div className="relative flex gap-1 align-middle ">
+                <Link to="/cart">
+                  <FiShoppingCart className="text-4xl text-gray-700 hover:text-red-700" />
+                </Link>
+                <div className=" absolute left-5 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
+                  3
+                </div>
+              </div>
+
               <Link
                 to="/login"
                 className="bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-red-600 font-serif"

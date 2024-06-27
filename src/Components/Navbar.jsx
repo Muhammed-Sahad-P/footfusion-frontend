@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GiRunningShoe } from "react-icons/gi";
-import { LiaOpencart } from "react-icons/lia";
+import { FiShoppingCart } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { MdMenu, MdClose } from "react-icons/md";
@@ -63,7 +63,8 @@ const Navbar = () => {
             </div>
 
             <div className="hidden md:flex space-x-4">
-              <LiaOpencart className="text-3xl mr-2" />
+              <Link to="/cart"><FiShoppingCart className="text-3xl mr-2" /></Link>
+              <span>0</span>
               <Link
                 to="/login"
                 className="bg-red-700 text-white font-serif px-4 py-2 rounded-lg hover:bg-red-600"
@@ -118,6 +119,7 @@ const Navbar = () => {
               >
                 CONTACT
               </Link>
+              <FiShoppingCart className="text-3xl mr-2" />
               <Link
                 to="/login"
                 className="bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-red-600 font-serif"

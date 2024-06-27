@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { GiRunningShoe, GiShoppingCart } from "react-icons/gi";
-import { GrUserAdmin } from "react-icons/gr";
+import { GiRunningShoe } from "react-icons/gi";
+import { LiaOpencart } from "react-icons/lia";
+import { FaUserCircle } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { MdMenu, MdClose } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -14,29 +15,38 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gray-100 shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className=" mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <GiRunningShoe className="text-red-700 text-3xl mr-2" />
-            <Link to="/" className="text-2xl font-bold">
+            <Link to="/" className="text-3xl font-serif ">
               FOOTFUSION
             </Link>
           </div>
 
           <div className="hidden md:flex space-x-8 font-semibold">
-            <Link to="/men" className="text-gray-700 hover:text-red-700">
+            <Link
+              to="/men"
+              className="text-gray-700 hover:text-red-700 font-serif"
+            >
               MEN
             </Link>
-            <Link to="/women" className="text-gray-700 hover:text-red-700">
+            <Link
+              to="/women"
+              className="text-gray-700 hover:text-red-700 font-serif"
+            >
               WOMEN
             </Link>
-            <Link to="/collection" className="text-gray-700 hover:text-red-700">
+            <Link
+              to="/collection"
+              className="text-gray-700 hover:text-red-700 font-serif"
+            >
               COLLECTION
             </Link>
-            <Link to="/sale" className="text-gray-700 hover:text-red-700">
-              SALE
-            </Link>
-            <Link to="/contact" className="text-gray-700 hover:text-red-700">
+            <Link
+              to="/contact"
+              className="text-gray-700 hover:text-red-700 font-serif"
+            >
               CONTACT
             </Link>
           </div>
@@ -46,20 +56,27 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search..."
-                className="pl-10 pr-4 py-2 rounded-full text-black"
+                className="pl-10 pr-4 py-2 rounded-full text-black w-[155px]"
               />
+
               <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             </div>
 
             <div className="hidden md:flex space-x-4">
-              <GiShoppingCart className="text-3xl mr-2" />
-              <Link to="/login" className="bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+              <LiaOpencart className="text-3xl mr-2" />
+              <Link
+                to="/login"
+                className="bg-red-700 text-white font-serif px-4 py-2 rounded-lg hover:bg-red-600"
+              >
                 Login
               </Link>
-              <Link to="/signup" className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600">
-                Register
+              <Link
+                to="/signup"
+                className="bg-gray-700 text-white font-serif px-4 py-2 rounded-lg hover:bg-gray-600"
+              >
+                Sign in
               </Link>
-              <GrUserAdmin className="text-3xl mr-2" />
+              <FaUserCircle className="text-4xl mr-2" />
             </div>
 
             <div className="md:hidden flex items-center">
@@ -77,26 +94,41 @@ const Navbar = () => {
         {menuOpen && (
           <div className="md:hidden">
             <div className="flex flex-col space-y-4 py-2">
-              <Link to="/men" className="text-gray-700 hover:text-red-700">
+              <Link
+                to="/men"
+                className="text-gray-700 hover:text-red-700 font-serif"
+              >
                 MEN
               </Link>
-              <Link to="/women" className="text-gray-700 hover:text-red-700">
+              <Link
+                to="/women"
+                className="text-gray-700 hover:text-red-700 font-serif"
+              >
                 WOMEN
               </Link>
-              <Link to="/collection" className="text-gray-700 hover:text-red-700">
+              <Link
+                to="/collection"
+                className="text-gray-700 hover:text-red-700 font-serif"
+              >
                 COLLECTION
               </Link>
-              <Link to="/sale" className="text-gray-700 hover:text-red-700">
-                SALE
-              </Link>
-              <Link to="/contact" className="text-gray-700 hover:text-red-700">
+              <Link
+                to="/contact"
+                className="text-gray-700 hover:text-red-700 font-serif"
+              >
                 CONTACT
               </Link>
-              <Link to="/login" className="bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+              <Link
+                to="/login"
+                className="bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-red-600 font-serif"
+              >
                 Login
               </Link>
-             <Link to="/signup" className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600">
-                Register
+              <Link
+                to="/signup"
+                className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+              >
+                Sign in
               </Link>
             </div>
           </div>

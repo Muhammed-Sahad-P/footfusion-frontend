@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const initialValues = { fullName: "", email: "", password: "", confirmPassword: "", termsAccepted: false };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -15,15 +16,22 @@ const Registration = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormErrors(validate(formValues));
+    const errors = validate(formValues);
+    setFormErrors(errors);
     setIsSubmitted(true);
+
+    if (Object.keys(errors).length === 0) {
+      localStorage.setItem('user', JSON.stringify(formValues));
+      alert("Signed up successfully");
+      navigate('/login');
+    }
   };
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmitted) {
       console.log(formValues);
     }
-  }, [formErrors]);
+  }, [formErrors, isSubmitted, formValues]);
 
   const validate = (values) => {
     const errors = {};

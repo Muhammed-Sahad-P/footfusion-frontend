@@ -59,7 +59,7 @@ export const ProductData = [
       type: "men",
       image:
         "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-008-600x600.jpg",
-      price: 1049.9,
+      price: 1049.0,
     },
   
     {
@@ -68,7 +68,7 @@ export const ProductData = [
       type: "men",
       image:
         "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-006-600x600.jpg",
-      price: 1049.9,
+      price: 1049.0,
     },
   
     {
@@ -104,7 +104,7 @@ export const ProductData = [
       type: "women",
       image:
         "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-015-600x600.jpg",
-      price: 949.9,
+      price: 949.0,
     },
   
     {
@@ -113,7 +113,7 @@ export const ProductData = [
       type: "women",
       image:
         "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-001-600x600.jpg",
-      price: 449.9,
+      price: 449.0,
     },
   
     {
@@ -122,7 +122,7 @@ export const ProductData = [
       type: "women",
       image:
         "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-010-600x600.jpg",
-      price: 899.9,
+      price: 899.0,
     },
   
     {
@@ -131,7 +131,7 @@ export const ProductData = [
       type: "women",
       image:
         "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-009-600x600.jpg",
-      price: 899.9,
+      price: 899.0,
     },
   
     {
@@ -140,7 +140,7 @@ export const ProductData = [
       type: "women",
       image:
         "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-004-600x600.jpg",
-      price: 549.9,
+      price: 549.0,
     },
   
     {
@@ -149,7 +149,7 @@ export const ProductData = [
       type: "women",
       image:
         "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-016-600x600.jpg",
-      price: 599.9,
+      price: 599.0,
     },
   
     {
@@ -158,7 +158,7 @@ export const ProductData = [
       type: "women",
       image:
         "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-002-600x600.jpg",
-      price: 549.9,
+      price: 549.0,
     },
   
     {

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
   const initialValues = { email: "", password: "", termsAccepted: false };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -14,8 +16,22 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormErrors(validate(formValues));
+    const errors = validate(formValues);
+    setFormErrors(errors);
     setIsSubmitted(true);
+    
+    if (Object.keys(errors).length === 0) {
+      const storedUser = JSON.parse(localStorage.getItem('user'));
+      console.log(storedUser)
+      if (storedUser && storedUser.email === formValues.email && storedUser.password === formValues.password) {
+        alert("Logged in successfully");
+        navigate('/');
+        localStorage.setItem('isLogin', JSON.stringify(true));
+        setIsLoggedIn(true);
+      } else {
+        setFormErrors({ ...errors, general: "Invalid email or password" });
+      }
+    }
   };
 
   useEffect(() => {
@@ -35,14 +51,19 @@ const Login = () => {
     }
     if (!values.password) {
       errors.password = "Password is required!";
-
+    }
     if (!values.termsAccepted) {
       errors.termsAccepted = "You must accept the terms and conditions!";
     }
 
     return errors;
   };
-}
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -63,6 +84,7 @@ const Login = () => {
                 placeholder="Email Address"
                 value={formValues.email}
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 mt-1"
               />
               <p className="text-red-600">{formErrors.email}</p>
@@ -78,6 +100,7 @@ const Login = () => {
                 placeholder="Password"
                 value={formValues.password}
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 mt-1"
               />
               <p className="text-red-600">{formErrors.password}</p>
@@ -98,13 +121,14 @@ const Login = () => {
               </p>
             </div>
             <p className="text-red-600">{formErrors.termsAccepted}</p>
+            <p className="text-red-600">{formErrors.general}</p>
           </div>
           <button className="w-full bg-red-600 text-white py-3 mt-6 rounded-lg hover:bg-red-700 transition duration-300 text-lg font-medium">
             Continue
           </button>
         </form>
         {Object.keys(formErrors).length === 0 && isSubmitted ? (
-          <div className="text-green-600 text-center mt-4">Signed in successfully</div>
+          <div className="text-green-600 text-center mt-4">Logged in successfully</div>
         ) : (
           ""
         )}
@@ -113,4 +137,4 @@ const Login = () => {
   );
 };
 
-export default Login
+export default Login;

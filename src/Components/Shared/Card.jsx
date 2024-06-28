@@ -15,7 +15,7 @@ const Card = ({ data }) => {
           <img
             src={item.image}
             alt={item.name}
-            className="w-full h-48 object-cover mb-4 rounded"
+            className="w-full h-48 object-cover mb-4 rounded hover:scale-90 transition-all"
           />
           <h2 className="text-lg font-semibold">{item.name}</h2>
           <p className="text-sm text-gray-500">{item.type}</p>

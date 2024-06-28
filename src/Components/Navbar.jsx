@@ -27,7 +27,7 @@ const Navbar = () => {
   }, [cartItems]);
 
   return (
-    <nav className="bg-gray-100 shadow-md fixed w-full">
+    <nav className="bg-gray-100 shadow-md relative w-full">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
@@ -69,7 +69,7 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search..."
-                className="pl-10 pr-4 py-2 rounded-full text-black w-[155px]"
+                className="pl-10 pr-4 py-2 rounded-full text-black w-[100px] md:w-[155px]"
               />
               <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
             </div>
@@ -93,9 +93,9 @@ const Navbar = () => {
                 to="/signup"
                 className="bg-gray-700 text-white font-serif px-4 py-2 rounded-lg hover:bg-gray-600"
               >
-                Sign in
+                Sign Up
               </Link>
-              <FaUserCircle className="text-4xl mr-2" />
+              <Link to="/profile" ><FaUserCircle className="text-4xl mr-2" /></Link>
             </div>
 
             <div className="md:hidden flex items-center">
@@ -142,7 +142,7 @@ const Navbar = () => {
                   <FiShoppingCart className="text-4xl text-gray-700 hover:text-red-700" />
                 </Link>
                 <div className=" absolute left-5 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
-                  3
+                 {length}
                 </div>
               </div>
 
@@ -154,10 +154,11 @@ const Navbar = () => {
               </Link>
               <Link
                 to="/signup"
-                className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+                className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 font-serif"
               >
-                Sign in
+                Sign Up
               </Link>
+              <Link to="/profile" ><FaUserCircle className="text-4xl mr-2" /></Link>
             </div>
           </div>
         )}

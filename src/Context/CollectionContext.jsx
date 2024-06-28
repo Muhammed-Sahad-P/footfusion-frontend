@@ -13,6 +13,7 @@ const getDefaultCart = () => {
 
 export const CollectionProvider = (props) => {
   const [cartItems, setCartItems] = useState(getDefaultCart());
+  console.log(cartItems)
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));

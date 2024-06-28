@@ -1,33 +1,31 @@
-import React, { createContext, useState } from "react";
-import { ProductData } from "../Components/Products/Product";
+    import React, { createContext, useState } from "react";
+    import { ProductData } from "../Components/Products/Product";
 
-export const CollectionContext = createContext();
+    export const CollectionContext = createContext();
 
-const getDefaultCart = () => {
-  let cart = {};
-  for (let i = 1; i <= ProductData.length; i++) {
-    cart[i] = 0;
-  }
-  return cart;
-};
+    export const CollectionProvider = (props) => {
+      const [clickedarray, setClickedarray] = useState([]);
 
-export const CollectionProvider = (props) => {
-  const [cartItems, setCartItems] = useState(getDefaultCart());
-  console.log(cartItems)
+      const addToCart = (itemId) => {
+        const Newarray = ProductData.filter((item, index) => {
+          return item.id == itemId;
+        });
+        setClickedarray([...clickedarray, Newarray]);
+      };
+      console.log(clickedarray);
 
-  const addToCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-  };
+      const removeFromCart = (itemId) => {
+        const removedArray = clickedarray.filter((itemM, index) => {
+          return itemM.id !== itemId;
+        })
+        setClickedarray([...removedArray]);
+      }
 
-  const removeFromCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-  };
+      const contextValue = { addToCart, removeFromCart, clickedarray };
 
-  const contextValue = { cartItems, addToCart, removeFromCart };
-
-  return (
-    <CollectionContext.Provider value={contextValue}>
-      {props.children}
-    </CollectionContext.Provider>
-  );
-};
+      return (
+        <CollectionContext.Provider value={contextValue}>
+          {props.children}
+        </CollectionContext.Provider>
+      )
+    };

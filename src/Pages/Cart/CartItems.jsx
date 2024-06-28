@@ -5,7 +5,7 @@ const CartItems = (props) => {
     const { addToCart } = useContext(CollectionContext) 
   return (
     <div>
-        
+        <h1>Cart items</h1>
     </div>
   );
 };

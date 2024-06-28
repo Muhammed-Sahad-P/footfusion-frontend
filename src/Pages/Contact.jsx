@@ -21,8 +21,8 @@ function Contact() {
     console.log("Form data submitted:", formData);
   };
 
-  const contactNumber = "123-456-7890"; // Contact number
-  const location = "123 Main St, Anytown, USA"; // Location
+  const contactNumber = "123-456-7890";
+  const location = "123 Main St, Anytown, USA"; 
 
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center">

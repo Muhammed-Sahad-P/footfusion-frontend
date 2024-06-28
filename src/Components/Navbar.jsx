@@ -10,24 +10,27 @@ import { CollectionContext } from "../Context/CollectionContext";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const { cartItems } = useContext(CollectionContext);
+  const [active, setActive] = useState(null);
 
-  const [length, setLength] = useState(0);
+  const {clickedarray} = useContext(CollectionContext)
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   useEffect(() => {
-    const len = Object.keys(cartItems).filter(
-      (id) => cartItems[id] !== 0
-    ).length;
-
-    setLength(len);
-  }, [cartItems]);
+    const ScrollActive = () => {
+      setActive(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", ScrollActive);
+  }, [active]);
 
   return (
-    <nav className="bg-gray-100 shadow-md relative w-full">
+    <nav
+      className={`${
+        active ? "border-b-4 border-gray-300" : ""
+      } bg-gray-100 fixed top-0 left-0 w-full z-30 transition-all `}
+    >
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
@@ -78,10 +81,10 @@ const Navbar = () => {
               <div className="relative">
                 <Link to="/cart">
                   <FiShoppingCart className="text-3xl text-gray-700 hover:text-red-700" />
+                  <div className="absolute top-0 right-0 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
+                    {clickedarray.length}
+                  </div>
                 </Link>
-                <div className="absolute top-0 right-0 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
-                  {length}
-                </div>
               </div>
               <Link
                 to="/login"
@@ -89,13 +92,9 @@ const Navbar = () => {
               >
                 Login
               </Link>
-              <Link
-                to="/signup"
-                className="bg-gray-700 text-white font-serif px-4 py-2 rounded-lg hover:bg-gray-600"
-              >
-                Sign Up
+              <Link to="/profile">
+                <FaUserCircle className="text-4xl mr-2" />
               </Link>
-              <Link to="/profile" ><FaUserCircle className="text-4xl mr-2" /></Link>
             </div>
 
             <div className="md:hidden flex items-center">
@@ -140,10 +139,10 @@ const Navbar = () => {
               <div className="relative flex gap-1 align-middle ">
                 <Link to="/cart">
                   <FiShoppingCart className="text-4xl text-gray-700 hover:text-red-700" />
+                  <div className=" absolute left-5 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
+                  {clickedarray.length}
+                  </div>
                 </Link>
-                <div className=" absolute left-5 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
-                 {length}
-                </div>
               </div>
 
               <Link
@@ -152,13 +151,10 @@ const Navbar = () => {
               >
                 Login
               </Link>
-              <Link
-                to="/signup"
-                className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 font-serif"
-              >
-                Sign Up
+
+              <Link to="/profile">
+                <FaUserCircle className="text-4xl mr-2" />
               </Link>
-              <Link to="/profile" ><FaUserCircle className="text-4xl mr-2" /></Link>
             </div>
           </div>
         )}

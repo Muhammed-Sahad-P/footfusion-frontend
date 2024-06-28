@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Login = ({ setIsLoggedIn }) => {
   const initialValues = { email: "", password: "", termsAccepted: false };
@@ -126,6 +127,10 @@ const Login = ({ setIsLoggedIn }) => {
           <button className="w-full bg-red-600 text-white py-3 mt-6 rounded-lg hover:bg-red-700 transition duration-300 text-lg font-medium">
             Continue
           </button>
+          <p className="text-center mt-4">
+          Don't have an Account?
+          <Link to="/signup" className="text-red-600 cursor-pointer hover:underline"> SignUp </Link>
+        </p>
         </form>
         {Object.keys(formErrors).length === 0 && isSubmitted ? (
           <div className="text-green-600 text-center mt-4">Logged in successfully</div>

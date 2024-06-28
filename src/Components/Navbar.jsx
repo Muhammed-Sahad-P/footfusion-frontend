@@ -4,7 +4,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { MdMenu, MdClose } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { CollectionContext } from "../Context/CollectionContext";
 
 const Navbar = () => {
@@ -17,6 +17,10 @@ const Navbar = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const handleClick = () => {
+    Navigate(isLogged ? '/profile' : '/login')
+  }
 
   useEffect(() => {
     const ScrollActive = () => {
@@ -42,7 +46,7 @@ const Navbar = () => {
 
           <div className="hidden md:flex space-x-8 font-semibold">
             <Link
-              to="/men"
+              to="/payment"
               className="text-gray-700 hover:text-red-700 font-serif"
             >
               MEN
@@ -93,7 +97,7 @@ const Navbar = () => {
                 Login
               </Link>
               <Link to="/profile">
-                <FaUserCircle className="text-4xl mr-2" />
+                <FaUserCircle onClick={handleClick} className="text-4xl mr-2" />
               </Link>
             </div>
 
@@ -153,7 +157,7 @@ const Navbar = () => {
               </Link>
 
               <Link to="/profile">
-                <FaUserCircle className="text-4xl mr-2" />
+                <FaUserCircle onClick={handleClick} className="text-4xl mr-2" />
               </Link>
             </div>
           </div>

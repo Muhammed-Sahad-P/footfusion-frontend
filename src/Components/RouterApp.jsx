@@ -10,6 +10,7 @@ import Contact from "../Pages/Contact";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Profile from "../Pages/Profile";
+import Payment from "../Pages/Payment";
 const RouterApp = () => {
   return (
     <div>
@@ -25,6 +26,7 @@ const RouterApp = () => {
           <Route path="/signup" element={<Registration />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/payment" element={<Payment />} />
         </Routes>
       </div>
     </div>

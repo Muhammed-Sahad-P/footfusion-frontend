@@ -6,6 +6,7 @@ const Cart = () => {
 
   const {clickedarray} = useContext(CollectionContext)
   console.log(clickedarray);
+
   return (
     <div className="p-4">
     <h2 className="text-center text-3xl font-semibold mb-2">

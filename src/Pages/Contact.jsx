@@ -18,7 +18,7 @@ function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Sended in successfully");
+    alert("Sended  successfully");
   };
 
   const contactNumber = "123-456-7890";

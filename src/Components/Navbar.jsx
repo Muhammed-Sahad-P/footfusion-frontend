@@ -46,7 +46,7 @@ const Navbar = () => {
 
           <div className="hidden md:flex space-x-8 font-semibold">
             <Link
-              to="/payment"
+              to="/men"
               className="text-gray-700 hover:text-red-700 font-serif"
             >
               MEN

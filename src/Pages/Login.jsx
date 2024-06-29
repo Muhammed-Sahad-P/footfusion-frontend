@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 
 const Login = () => {
-  const {setIsLoggedIn} = useContext(UserContext);
+  const { setIsLoggedIn } = useContext(UserContext);
   const initialValues = { email: "", password: "", termsAccepted: false };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -22,14 +22,18 @@ const Login = () => {
     const errors = validate(formValues);
     setFormErrors(errors);
     setIsSubmitted(true);
-    
+
     if (Object.keys(errors).length === 0) {
-      const storedUser = JSON.parse(localStorage.getItem('user'));
-      console.log(storedUser)
-      if (storedUser && storedUser.email === formValues.email && storedUser.password === formValues.password) {
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+
+      if (
+        storedUser &&
+        storedUser.email === formValues.email &&
+        storedUser.password === formValues.password
+      ) {
         alert("Logged in successfully");
-        navigate('/');
-        localStorage.setItem('isLogin', JSON.stringify(true));
+        navigate("/");
+        localStorage.setItem("isLogin", JSON.stringify(true));
         setIsLoggedIn(true);
       } else {
         setFormErrors({ ...errors, general: "Invalid email or password" });
@@ -39,10 +43,9 @@ const Login = () => {
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmitted) {
-      console.log(formValues);
     }
   }, [formErrors]);
-
+    
   const validate = (values) => {
     const errors = {};
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -63,7 +66,7 @@ const Login = () => {
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleSubmit(e);
     }
   };
@@ -77,7 +80,10 @@ const Login = () => {
           </h1>
           <div className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-gray-600 font-medium">
+              <label
+                htmlFor="email"
+                className="block text-gray-600 font-medium"
+              >
                 Email Address
               </label>
               <input
@@ -93,7 +99,10 @@ const Login = () => {
               <p className="text-red-600">{formErrors.email}</p>
             </div>
             <div>
-              <label htmlFor="password" className="block text-gray-600 font-medium">
+              <label
+                htmlFor="password"
+                className="block text-gray-600 font-medium"
+              >
                 Password
               </label>
               <input
@@ -118,9 +127,15 @@ const Login = () => {
               />
               <p className="text-sm text-gray-600">
                 By continuing, I agree to the
-                <span className="text-red-600 cursor-pointer hover:underline"> terms of use </span>
+                <span className="text-red-600 cursor-pointer hover:underline">
+                  {" "}
+                  terms of use{" "}
+                </span>
                 &
-                <span className="text-red-600 cursor-pointer hover:underline"> privacy policy</span>
+                <span className="text-red-600 cursor-pointer hover:underline">
+                  {" "}
+                  privacy policy
+                </span>
               </p>
             </div>
             <p className="text-red-600">{formErrors.termsAccepted}</p>
@@ -130,12 +145,20 @@ const Login = () => {
             Continue
           </button>
           <p className="text-center mt-4">
-          Don't have an Account?
-          <Link to="/signup" className="text-red-600 cursor-pointer hover:underline"> SignUp </Link>
-        </p>
+            Don't have an Account?
+            <Link
+              to="/signup"
+              className="text-red-600 cursor-pointer hover:underline"
+            >
+              {" "}
+              SignUp{" "}
+            </Link>
+          </p>
         </form>
         {Object.keys(formErrors).length === 0 && isSubmitted ? (
-          <div className="text-green-600 text-center mt-4">Logged in successfully</div>
+          <div className="text-green-600 text-center mt-4">
+            Logged in successfully
+          </div>
         ) : (
           ""
         )}

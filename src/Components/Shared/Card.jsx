@@ -4,7 +4,8 @@ import { CollectionContext } from "../../Context/CollectionContext";
 
 const Card = ({ data }) => {
   const { addToCart, removeFromCart } = useContext(CollectionContext);
-
+  
+ 
   return (
     <>
       {data.map((item, index) => (

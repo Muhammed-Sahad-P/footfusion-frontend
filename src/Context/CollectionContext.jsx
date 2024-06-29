@@ -7,7 +7,7 @@
 
       export const CollectionProvider = (props) => {
         const [clickedarray, setClickedarray] = useState([]);
-
+        const productData = ProductData
         const param = useParams();
 
         const addToCart = (itemId) => {
@@ -26,7 +26,9 @@
           setClickedarray([...removedArray]);
         }
 
-        const contextValue = { addToCart, removeFromCart, clickedarray };
+  
+
+        const contextValue = { addToCart, removeFromCart, clickedarray,  productData };
 
         return (
           <CollectionContext.Provider value={contextValue}>

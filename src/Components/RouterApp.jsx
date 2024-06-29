@@ -11,6 +11,7 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Profile from "../Pages/Profile";
 import Payment from "../Pages/Payment";
+import CartItemDetails from "../Pages/Cart/CartItemDetails";
 const RouterApp = () => {
   return (
     <div>
@@ -22,6 +23,7 @@ const RouterApp = () => {
           <Route path="/women" element={<Women />} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/cart/:id" element={<CartItemDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Registration />} />
           <Route path="/contact" element={<Contact />} />

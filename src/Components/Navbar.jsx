@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import  { useState, useContext, useEffect } from "react";
 import { GiRunningShoe } from "react-icons/gi";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
@@ -90,12 +90,12 @@ const Navbar = () => {
                   </div>
                 </Link>
               </div>
-              <Link
+              {/* <Link
                 to="/login"
                 className="bg-red-700 text-white font-serif px-4 py-2 rounded-lg hover:bg-red-600"
               >
                 Login
-              </Link>
+              </Link> */}
               <Link to="/profile">
                 <FaUserCircle onClick={handleClick} className="text-4xl mr-2" />
               </Link>
@@ -149,12 +149,12 @@ const Navbar = () => {
                 </Link>
               </div>
 
-              <Link
+              {/* <Link
                 to="/login"
                 className="bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-red-600 font-serif"
               >
                 Login
-              </Link>
+              </Link> */}
 
               <Link to="/profile">
                 <FaUserCircle onClick={handleClick} className="text-4xl mr-2" />

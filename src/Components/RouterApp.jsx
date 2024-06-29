@@ -12,6 +12,7 @@ import Navbar from "../Components/Navbar";
 import Profile from "../Pages/Profile";
 import Payment from "../Pages/Payment";
 import CartItemDetails from "../Pages/Cart/CartItemDetails";
+import Footer from "../Pages/Footer";
 const RouterApp = () => {
   return (
     <div>
@@ -30,6 +31,7 @@ const RouterApp = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/payment" element={<Payment />} />
         </Routes>
+        <Footer />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { CollectionContext } from "../../Context/CollectionContext";
 
@@ -24,17 +24,17 @@ const CartItemDetails = () => {
 
   const handleIncrement = (index) => {
     const updatedCart = [...cartItems];
-    updatedCart[index].quantity += 1;
+    updatedCart[index].quantity += 1; 
     setCartItems(updatedCart);
     calculateTotal(updatedCart);
   };
 
   const handleDecrement = (index) => {
     const updatedCart = [...cartItems];
-    if (updatedCart[index].quantity > 0) {
+    if (updatedCart[index].quantity > 1) {
       updatedCart[index].quantity -= 1;
       setCartItems(updatedCart);
-      calculateTotal(updatedCart);
+      calculateTotal(updatedCart); 
     }
   };
 
@@ -43,6 +43,9 @@ const CartItemDetails = () => {
     setCartItems(updatedCart);
     calculateTotal(updatedCart);
   };
+
+  
+  const finalTotalCost = totalCost + 50;
 
   return (
     <div className="p-4 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -61,7 +64,8 @@ const CartItemDetails = () => {
             <div className="ml-4 flex-grow">
               <h3 className="text-xl font-semibold">{item.name}</h3>
               <p className="text-gray-600">{item.description}</p>
-              <p className="text-lg font-bold mt-2">Price: ₹{item.price}</p>
+              <p className="text-lg font-bold mt-2">Price: ₹{item.price.toFixed(2)}</p>
+              <p className="text-lg font-bold mt-2">Total: ₹{(item.price * item.quantity).toFixed(2)}</p>
             </div>
             <div className="flex items-center">
               <button
@@ -113,7 +117,7 @@ const CartItemDetails = () => {
         </div>
         <div className="flex justify-between font-bold text-lg mb-4">
           <span>Total Cost</span>
-          <span>₹{(totalCost + 50).toFixed(2)}</span>
+          <span>₹{finalTotalCost.toFixed(2)}</span>
         </div>
         <Link
           to="/payment"

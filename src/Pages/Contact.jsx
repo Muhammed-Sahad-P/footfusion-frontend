@@ -21,8 +21,8 @@ function Contact() {
     alert("Sended  successfully");
   };
 
-  const contactNumber = "123-456-7890";
-  const location = "123 Main St, Anytown, USA"; 
+  const contactNumber = "9744106849";
+  const location = "Thurakkal,Manjeri"; 
 
   return (
     <div className="bg-gray-200 min-h-screen flex items-center justify-center bg-fixed bg-cover" >

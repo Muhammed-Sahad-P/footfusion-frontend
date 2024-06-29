@@ -1,7 +1,10 @@
 
+import React from 'react'
 
-export const Searchfield = () => {
+const Searchfield = () => {
   return (
     <div>Searchfield</div>
   )
 }
+
+export default Searchfield

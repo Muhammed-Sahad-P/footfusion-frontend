@@ -1,13 +1,26 @@
-import React from 'react';
+import  { useContext, useEffect } from 'react';
 import { CgProfile } from "react-icons/cg";
 import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../Context/UserContext';
 
 const Profile = () => {
     const navigate = useNavigate();
     const userData = JSON.parse(localStorage.getItem("user"));
 
+    const {isLoggedIn, setIsLoggedIn} = useContext(UserContext);
+   
+
+    useEffect(() => {
+        if (!isLoggedIn) {
+            navigate('/login');
+        }
+    },[])
+
+   
+
     const handleLogOut = () => {
-        localStorage.removeItem("user");
+       setIsLoggedIn(false);
+       localStorage.getItem("isLogin", JSON.stringify(false));
         navigate('/login');
     }
 

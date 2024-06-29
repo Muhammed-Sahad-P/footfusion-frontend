@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { UserContext } from "../Context/UserContext";
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = () => {
+  const {setIsLoggedIn} = useContext(UserContext);
   const initialValues = { email: "", password: "", termsAccepted: false };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});

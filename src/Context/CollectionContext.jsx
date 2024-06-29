@@ -7,15 +7,14 @@
         const [clickedarray, setClickedarray] = useState([]);
 
         const addToCart = (itemId) => {
-          const Newarray = ProductData.filter((item, index) => {
+          const Newarray = ProductData.filter((item) => {
             return item.id == itemId;
           });
           setClickedarray([...clickedarray, Newarray]);
         };
-        console.log(clickedarray);
-
+       
         const removeFromCart = (itemId) => {
-          const removedArray = clickedarray.filter((itemM, index) => {
+          const removedArray = clickedarray.filter((itemM) => {
             return itemM[0].id !== itemId
           })
           setClickedarray([...removedArray]);

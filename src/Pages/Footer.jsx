@@ -47,7 +47,7 @@ const Footer = () => {
         </div>
       </div>
       <p className="text-center mt-8 text-gray-400">
-        &copy; 2024 FOOTFUSION | Powered by FOOTFUSION
+        &copy; 2024 FootFusion | Powered by FootFusion
       </p>
     </footer>
   );

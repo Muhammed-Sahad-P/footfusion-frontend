@@ -5,10 +5,13 @@ export const CollectionContext = createContext();
 
 export const CollectionProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
+  const [buyItems, setBuyItems] = useState({});
   const productData = ProductData;
 
   const addToCart = (itemId) => {
+    
     const item = productData.find((item) => item.id === itemId);
+    
     setCartItems((prevCartItems) => {
       const existingItem = prevCartItems[itemId];
       if (existingItem) {
@@ -50,7 +53,7 @@ export const CollectionProvider = (props) => {
     });
   };
 
-  const contextValue = { addToCart, removeFromCart, cartItems, productData };
+  const contextValue = { addToCart, removeFromCart, cartItems, productData, buyItems,setBuyItems };
 
   return (
     <CollectionContext.Provider value={contextValue}>

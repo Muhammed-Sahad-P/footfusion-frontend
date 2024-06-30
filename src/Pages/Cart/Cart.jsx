@@ -1,14 +1,32 @@
 import { useContext } from "react";
 import { CollectionContext } from "../../Context/CollectionContext";
 import CartCard from "../../Components/Shared/CartCard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../Context/UserContext";
+import { ProductData } from "../../Components/Products/Product";
 
 const Cart = () => {
-  const { cartItems } = useContext(CollectionContext)
+  const navigate = useNavigate()
+  const { cartItems,setBuyItems } = useContext(CollectionContext)
+  const { currentUser } = useContext(UserContext)
   const cartItemsArray = Object.keys(cartItems).map((key) => ({
     id: key,
     ...cartItems[key],
   }));
+
+  // const totalAmount = Object.keys(cartItems).reduce((acc, itemId) => {
+  //   const product = ProductData.find((item) => item.id === itemId);
+  //   return acc + Number(product.discountPrice) * Number(cartItems[itemId]);
+  // }, 0);
+ 
+  function handleCheckout() {
+    if (!currentUser) {
+      navigate("/login");
+      return;
+    }
+    setBuyItems(cartItems);
+    navigate("/checkout");
+  }
 
   return (
     <div className="p-4">
@@ -25,6 +43,7 @@ const Cart = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
         <CartCard cartData={cartItemsArray} />
       </div>
+      
       <button>Checkout</button>
     </div>
   );

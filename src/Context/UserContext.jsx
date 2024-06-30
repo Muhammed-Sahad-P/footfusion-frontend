@@ -13,15 +13,6 @@ export const UserContextProvider = (props) => {
     }
   }, []);
 
-  function login(user) {
-    localStorage.setItem("currentUser", JSON.stringify(user));
-    setCurrentUser(user);
-  }
-
-  function logout() {
-    localStorage.removeItem("currentUser");
-    setCurrentUser(null);
-  }
 
   return (
     <UserContext.Provider
@@ -30,8 +21,7 @@ export const UserContextProvider = (props) => {
         setIsLoggedIn,
         currentUser,
         setCurrentUser,
-        login,
-        logout,
+       
       }}
     >
       {props.children}

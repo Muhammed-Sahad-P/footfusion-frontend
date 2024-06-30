@@ -11,28 +11,33 @@ export default function Searchfield() {
 
   function handleSearch(e) {
     e.preventDefault();
-    if (value === "") {
+    if (value.trim() === "") {
       return;
     }
     navigate(`/search/${value}`);
   }
 
   function handleChange(e) {
-    if (e.target.value === "") {
+    const inputValue = e.target.value;
+    setValue(inputValue);
+
+    if (inputValue.trim() === "") {
       setSearchResults([]);
       return;
     }
-    setSearchResults(
-      ProductData.filter((item) =>
-        item.name.toLowerCase().includes(e.target.value.toLowerCase())
-      )
+
+    const filteredResults = ProductData.filter((item) =>
+      item.name.toLowerCase().includes(inputValue.toLowerCase())
     );
-    setValue(e.target.value);
+    setSearchResults(filteredResults);
+    setIsOpen(true);
   }
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (!e.target.closest("#search-container")) setIsOpen(false);
+      if (!e.target.closest("#search-container") && !e.target.closest("#search-results")) {
+        setIsOpen(false);
+      }
     };
     document.addEventListener("click", handleClickOutside);
     return () => {
@@ -41,7 +46,7 @@ export default function Searchfield() {
   }, []);
 
   return (
-    <div>
+    <div className="relative">
       <form onSubmit={handleSearch} className="flex">
         <input
           autoComplete="off"
@@ -49,17 +54,18 @@ export default function Searchfield() {
           className="h-7 p-1 w-full outline-none border-b border-gray-700 bg-transparent"
           placeholder="Search.."
           type="text"
+          value={value}
           onChange={handleChange}
           onClick={() => setIsOpen(true)}
         />
-        <button className="-m-7">
+        <button className="-m-7" type="submit">
           <FaSearch className="text-gray-700 text-2xl" />
         </button>
       </form>
       {searchResults.length > 0 && isOpen && (
-        <div className="h-52 overflow-y-scroll py-2 mt-2 rounded-md bg-stone-100 shadow-md absolute">
+        <div id="search-results" className="h-52 overflow-y-scroll py-2 mt-2 rounded-md bg-stone-100 shadow-md absolute z-10 w-full">
           {searchResults.map((item) => (
-            <Link key={item.id} to={`/products/${item.id}`}>
+            <Link key={item.id} to={`/products/${item.id}`} onClick={() => setIsOpen(false)}>
               <p className="p-1 hover:bg-red-100">{item.name}</p>
             </Link>
           ))}

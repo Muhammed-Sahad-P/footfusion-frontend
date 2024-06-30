@@ -45,7 +45,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <GiRunningShoe className="text-red-700 text-3xl mr-2" />
             <Link to="/" className="text-3xl font-serif">
-              Foot Fusion
+              FootFusion
             </Link>
           </div>
 

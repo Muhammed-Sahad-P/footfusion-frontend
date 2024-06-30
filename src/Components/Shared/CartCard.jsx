@@ -1,28 +1,28 @@
 import  { useContext } from "react";
 import { CollectionContext } from "../../Context/CollectionContext";
-import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../../Context/UserContext";
+import { Link } from "react-router-dom";
+
 
 
 const CartCard = (props) => {
-  const { removeFromCart, addToCart, cartItems,setBuyItems } = useContext(CollectionContext);
+  const { removeFromCart, addToCart, cartItems } = useContext(CollectionContext);
 
-  const navigate = useNavigate();
-  const { currentUser } = useContext(UserContext);
+  // const navigate = useNavigate();
+  // const { currentUser } = useContext(UserContext);
 
   const totalPrice = Object.keys(cartItems).reduce((total, key) => {
     const { price, quantity } = cartItems[key];
     return total + price * quantity;
   }, 0);
 
-  function handleCheckout() {
-    if (!currentUser) {
-      navigate("/login");
-      return;
-    }
-    setBuyItems(cartItems);
-    navigate("/checkout");
-  }
+  // function handleCheckout() {
+  //   if (!currentUser) {
+  //     navigate("/login");
+  //     return;
+  //   }
+  //   setBuyItems(cartItems);
+  //   navigate("/checkout");
+  // }
 
   return (
     <>
@@ -64,10 +64,11 @@ const CartCard = (props) => {
       <div className="bg-white p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mt-4">
         <div className="text-center ">
         <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
-          <p className="text-sm font-semibold mb-2">Total Cart Price: ₹ {totalPrice.toFixed(2)}</p>
+          <p className="text-sm font-semibold mt-10 mb-2">Total Cart Price: ₹ {totalPrice.toFixed(2)}</p>
           <p className="text-m font-semibold mt-10 mb-2">Shipping Charge:₹---</p>
-          <p className="text-m font-semibold mt-10 mb-2">Discount:NA</p>
-          <Link to='/payment' className="bg-red-500 mt-30 text-white px-4 py-2 rounded-lg hover:bg-gray-800">
+          <p className="text-m font-semibold mt-20 mb-2">Discount:NA</p>
+          <br />
+          <Link to='/payment' className="bg-red-500 mt-10  text-white px-4 py-2 rounded-lg hover:bg-gray-800">
             Checkout
           </Link>
         </div>

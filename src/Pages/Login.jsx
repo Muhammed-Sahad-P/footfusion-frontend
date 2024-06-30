@@ -43,9 +43,9 @@ const Login = () => {
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmitted) {
-    }
+}
   }, [formErrors]);
-    
+
   const validate = (values) => {
     const errors = {};
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

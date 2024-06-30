@@ -1,38 +1,59 @@
-      import  { createContext, useState } from "react";
-      import { ProductData } from "../Components/Products/Product";
-      import { useParams } from "react-router-dom";
+import { createContext, useState } from "react";
+import { ProductData } from "../Components/Products/Product";
 
-      export const CollectionContext = createContext();
+export const CollectionContext = createContext();
 
+export const CollectionProvider = (props) => {
+  const [cartItems, setCartItems] = useState({});
+  const productData = ProductData;
 
-      export const CollectionProvider = (props) => {
-        const [clickedarray, setClickedarray] = useState([]);
-        const productData = ProductData
-        const param = useParams();
-
-        const addToCart = (itemId) => {
-          const Newarray = ProductData.filter((item, index) => {
-            return item.id == itemId;
-          });
-          console.log(itemId,param);
-          setClickedarray([...clickedarray, Newarray]);
+  const addToCart = (itemId) => {
+    const item = productData.find((item) => item.id === itemId);
+    setCartItems((prevCartItems) => {
+      const existingItem = prevCartItems[itemId];
+      if (existingItem) {
+        return {
+          ...prevCartItems,
+          [itemId]: {
+            ...existingItem,
+            quantity: existingItem.quantity + 1,
+          },
         };
-        console.log(clickedarray);
+      } else {
+        return {
+          ...prevCartItems,
+          [itemId]: {
+            ...item,
+            quantity: 1,
+          },
+        };
+      }
+    });
+  };
 
-        const removeFromCart = (itemId) => {
-          const removedArray = clickedarray.filter((itemM, index) => {
-            return itemM[0].id !== itemId
-          })
-          setClickedarray([...removedArray]);
-        }
+  const removeFromCart = (itemId) => {
+    setCartItems((prevCartItems) => {
+      const existingItem = prevCartItems[itemId];
+      if (existingItem.quantity > 1) {
+        return {
+          ...prevCartItems,
+          [itemId]: {
+            ...existingItem,
+            quantity: existingItem.quantity - 1,
+          },
+        };
+      } else {
+        const { [itemId]: _, ...newCartItems } = prevCartItems;
+        return newCartItems;
+      }
+    });
+  };
 
-  
+  const contextValue = { addToCart, removeFromCart, cartItems, productData };
 
-        const contextValue = { addToCart, removeFromCart, clickedarray,  productData };
-
-        return (
-          <CollectionContext.Provider value={contextValue}>
-            {props.children}
-          </CollectionContext.Provider>
-        )
-      };
+  return (
+    <CollectionContext.Provider value={contextValue}>
+      {props.children}
+    </CollectionContext.Provider>
+  );
+};

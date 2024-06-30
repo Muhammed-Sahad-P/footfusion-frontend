@@ -4,22 +4,26 @@ import { FiShoppingCart } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { MdMenu, MdClose } from "react-icons/md";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CollectionContext } from "../Context/CollectionContext";
+import { UserContext } from "../Context/UserContext";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const [active, setActive] = useState(null);
 
-  const {clickedarray} = useContext(CollectionContext)
+  const Navigate = useNavigate()
+
+  const {cartItems} = useContext(CollectionContext)
+  const {isLoggedIn} = useContext(UserContext)
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   const handleClick = () => {
-    Navigate(isLogged ? '/profile' : '/login')
+    Navigate(isLoggedIn ? '/profile' : '/login')
   }
 
   useEffect(() => {
@@ -86,7 +90,7 @@ const Navbar = () => {
                 <Link to="/cart">
                   <FiShoppingCart className="text-3xl text-gray-700 hover:text-red-700" />
                   <div className="absolute top-0 right-0 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
-                    {clickedarray.length}
+                   {Object.keys(cartItems).length}
                   </div>
                 </Link>
               </div>
@@ -144,7 +148,7 @@ const Navbar = () => {
                 <Link to="/cart">
                   <FiShoppingCart className="text-4xl text-gray-700 hover:text-red-700" />
                   <div className=" absolute left-5 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
-                  {clickedarray.length}
+                 {Object.keys(cartItems).length}
                   </div>
                 </Link>
               </div>

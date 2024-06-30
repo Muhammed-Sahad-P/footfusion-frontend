@@ -16,10 +16,11 @@ const CartItemDetails = () => {
 
   const calculateTotal = (items) => {
     const total = items.reduce(
-      (sum, item) => sum + item.price * item.quantity,
+      (sum, item) => sum + item.price ,
       0
     );
     setTotalCost(total);
+    console.log(items);
   };
 
   const handleIncrement = (index) => {
@@ -63,9 +64,9 @@ const CartItemDetails = () => {
             />
             <div className="ml-4 flex-grow">
               <h3 className="text-xl font-semibold">{item.name}</h3>
-              <p className="text-gray-600">{item.description}</p>
+              <p className="text-gray-600">{item.type}</p>
               <p className="text-lg font-bold mt-2">Price: ₹{item.price.toFixed(2)}</p>
-              <p className="text-lg font-bold mt-2">Total: ₹{(item.price * item.quantity).toFixed(2)}</p>
+              <p className="text-lg font-bold mt-2">Total: ₹{(item.price*item.quantity).toFixed(2)}</p>
             </div>
             <div className="flex items-center">
               <button
@@ -105,12 +106,6 @@ const CartItemDetails = () => {
           </select>
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700">Promo Code</label>
-          <input
-            type="text"
-            className="w-full px-2 py-1 border rounded"
-            placeholder="Enter your code"
-          />
           <button className="w-full mt-2 px-4 py-2 bg-red-500 text-white rounded">
             Apply
           </button>

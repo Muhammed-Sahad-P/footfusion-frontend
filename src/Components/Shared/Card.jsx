@@ -1,9 +1,9 @@
 import  { useContext } from "react";
 import { CollectionContext } from "../../Context/CollectionContext";
+import { Link } from "react-router-dom";
 
 const Card = ({ data }) => {
-  const { addToCart, removeFromCart } = useContext(CollectionContext);
-  console.log("Data in Card Component:", data);
+  const { addToCart } = useContext(CollectionContext);
 
   return (
     <>
@@ -28,12 +28,11 @@ const Card = ({ data }) => {
             >
               Add To Cart
             </button>
-            <button
-              onClick={() => removeFromCart(item.id)}
+            <Link to='/login'
               className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-gray-800"
             >
-              Remove From Cart
-            </button>
+              Buy Now
+            </Link>
           </div>
         </div>
       ))}

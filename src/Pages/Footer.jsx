@@ -10,6 +10,7 @@ const Footer = () => {
           <p className="mb-2">Thurakkal, Manjeri</p>
           <p className="mb-2">+91 9744106849</p>
           <p className="mb-6">footfusion@gmail.com</p>
+          <h2>Connect with us</h2><br />
           <div className="flex space-x-4">
             <FaInstagram className="text-3xl hover:text-pink-500 transition duration-300" />
             <FaFacebook className="text-3xl hover:text-blue-600 transition duration-300" />

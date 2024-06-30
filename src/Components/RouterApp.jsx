@@ -1,4 +1,4 @@
-import React from "react";
+
 import Home from "./Home";
 import Men from "../Pages/Men";
 import Women from "../Pages/Women";
@@ -13,6 +13,7 @@ import Profile from "../Pages/Profile";
 import Payment from "../Pages/Payment";
 import CartItemDetails from "../Pages/Cart/CartItemDetails";
 import Footer from "../Pages/Footer";
+import Searchfield from "../Pages/Searchfield";
 const RouterApp = () => {
   return (
     <div>
@@ -30,6 +31,7 @@ const RouterApp = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/searchfield" element={<Searchfield />} />
         </Routes>
         <Footer />
       </div>

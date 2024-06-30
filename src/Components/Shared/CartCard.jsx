@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { CollectionContext } from "../../Context/CollectionContext";
-import { Link } from "react-router-dom";
+
 
 const CartCard = (props) => {
   const { removeFromCart,addToCart  } = useContext(CollectionContext);

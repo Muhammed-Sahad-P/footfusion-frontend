@@ -1,4 +1,4 @@
-import  { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { GiRunningShoe } from "react-icons/gi";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
@@ -13,18 +13,18 @@ const Navbar = () => {
 
   const [active, setActive] = useState(null);
 
-  const Navigate = useNavigate()
+  const Navigate = useNavigate();
 
-  const {cartItems} = useContext(CollectionContext)
-  const {isLoggedIn} = useContext(UserContext)
+  const { cartItems } = useContext(CollectionContext);
+  const { isLoggedIn } = useContext(UserContext);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   const handleClick = () => {
-    Navigate(isLoggedIn ? '/profile' : '/login')
-  }
+    Navigate(isLoggedIn ? "/profile" : "/login");
+  };
 
   useEffect(() => {
     const ScrollActive = () => {
@@ -37,14 +37,14 @@ const Navbar = () => {
     <nav
       className={`${
         active ? "border-b-4 border-gray-300" : ""
-      } bg-gray-100 fixed top-0 left-0 w-full z-30 transition-all `}
+      } bg-gray-100 fixed top-0 left-0 w-full z-30 transition-all`}
     >
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <GiRunningShoe className="text-red-700 text-3xl mr-2" />
             <Link to="/" className="text-3xl font-serif">
-              FOOTFUSION
+              FootFusion
             </Link>
           </div>
 
@@ -90,7 +90,7 @@ const Navbar = () => {
                 <Link to="/cart">
                   <FiShoppingCart className="text-3xl text-gray-700 hover:text-red-700" />
                   <div className="absolute top-0 right-0 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
-                   {Object.keys(cartItems).length}
+                    {Object.keys(cartItems).length}
                   </div>
                 </Link>
               </div>
@@ -148,7 +148,7 @@ const Navbar = () => {
                 <Link to="/cart">
                   <FiShoppingCart className="text-4xl text-gray-700 hover:text-red-700" />
                   <div className=" absolute left-5 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
-                 {Object.keys(cartItems).length}
+                    {Object.keys(cartItems).length}
                   </div>
                 </Link>
               </div>

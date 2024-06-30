@@ -43,6 +43,7 @@ export const CollectionProvider = (props) => {
           },
         };
       } else {
+        // eslint-disable-next-line no-unused-vars
         const { [itemId]: _, ...newCartItems } = prevCartItems;
         return newCartItems;
       }

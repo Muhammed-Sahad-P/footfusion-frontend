@@ -53,7 +53,7 @@ export const CollectionProvider = (props) => {
     });
   };
 
-  const contextValue = { addToCart, removeFromCart, cartItems, productData, buyItems,setBuyItems };
+  const contextValue = { addToCart, removeFromCart, cartItems, productData, buyItems,setBuyItems,setCartItems };
 
   return (
     <CollectionContext.Provider value={contextValue}>

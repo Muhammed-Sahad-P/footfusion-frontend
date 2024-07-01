@@ -1,5 +1,5 @@
 
-import Home from "./Home";
+import Home from "./Hero/Home";
 import Men from "../Pages/Men";
 import Women from "../Pages/Women";
 import Collection from "../Pages/Collection";
@@ -25,7 +25,7 @@ const RouterApp = () => {
           <Route path="/women" element={<Women />} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/cart/:id" element={<CartItemDetails />} />
+          <Route path="/collection/:id" element={<CartItemDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Registration />} />
           <Route path="/contact" element={<Contact />} />

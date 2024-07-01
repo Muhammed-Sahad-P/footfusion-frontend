@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import { useNavigate} from 'react-router-dom';
+import { CollectionContext } from '../Context/CollectionContext';
 
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState('');
   const [cardNumber, setCardNumber] = useState('');
+  const {setCartItems} = useContext(CollectionContext)
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -23,6 +25,7 @@ const Payment = () => {
       setErrors(errors);
     } else {
       setErrors({});
+      setCartItems({})
       alert('Payment successful!');
       navigate('/')
     }

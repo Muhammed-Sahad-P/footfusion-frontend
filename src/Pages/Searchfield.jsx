@@ -1,23 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { ProductData } from "../Components/Products/Product";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export default function Searchfield() {
-  const navigate = useNavigate();
+const SearchField = () => {
   const [value, setValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
 
-  function handleSearch(e) {
-    e.preventDefault();
-    if (value.trim() === "") {
-      return;
-    }
-    navigate(`/search/${value}`);
-  }
-
-  function handleChange(e) {
+  const handleChange = (e) => {
     const inputValue = e.target.value;
     setValue(inputValue);
 
@@ -29,48 +19,36 @@ export default function Searchfield() {
     const filteredResults = ProductData.filter((item) =>
       item.name.toLowerCase().includes(inputValue.toLowerCase())
     );
-    setSearchResults(filteredResults);
-    setIsOpen(true);
-  }
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!e.target.closest("#search-container") && !e.target.closest("#search-results")) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
+    setSearchResults(filteredResults);
+  };
 
   return (
     <div className="relative">
-      <form onSubmit={handleSearch} className="flex">
+      <form className="flex items-center">
         <input
           autoComplete="off"
-          id="search-container"
           className="h-7 p-1 w-full outline-none border-b border-gray-700 bg-transparent"
-          placeholder="Search.."
+          placeholder="Search..."
           type="text"
           value={value}
           onChange={handleChange}
-          onClick={() => setIsOpen(true)}
         />
         <button className="-m-7" type="submit">
           <FaSearch className="text-gray-700 text-2xl" />
         </button>
       </form>
-      {searchResults.length > 0 && isOpen && (
-        <div id="search-results" className="h-52 overflow-y-scroll py-2 mt-2 rounded-md bg-stone-100 shadow-md absolute z-10 w-full">
+      {searchResults.length > 0 && (
+        <div id="search-results" className="absolute bg-white shadow-md rounded-md mt-1 w-full">
           {searchResults.map((item) => (
-            <Link key={item.id} to={`/products/${item.id}`} onClick={() => setIsOpen(false)}>
-              <p className="p-1 hover:bg-red-100">{item.name}</p>
+            <Link key={item.id} to={`/collection/${item.id}`}>
+              <div className="p-2 hover:bg-gray-100">{item.name}</div>
             </Link>
           ))}
         </div>
       )}
     </div>
   );
-}
+};
+
+export default SearchField;

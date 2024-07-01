@@ -77,7 +77,7 @@ export const ProductData = [
       type: "women",
       image:
         "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-003-600x600.jpg",
-      price: 660.0,
+      price: 699.0,
     },
   
     {

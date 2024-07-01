@@ -2,12 +2,14 @@ import  { useContext, useEffect } from 'react';
 import { CgProfile } from "react-icons/cg";
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../Context/UserContext';
+import { CollectionContext } from '../Context/CollectionContext';
 
 const Profile = () => {
     const navigate = useNavigate();
     const userData = JSON.parse(localStorage.getItem("user"));
 
     const {isLoggedIn, setIsLoggedIn} = useContext(UserContext);
+    const {setCartItems} = useContext(CollectionContext)
    
 
     useEffect(() => {
@@ -20,6 +22,7 @@ const Profile = () => {
 
     const handleLogOut = () => {
        setIsLoggedIn(false);
+       setCartItems({})
        localStorage.getItem("isLogin", JSON.stringify(false));
         navigate('/login');
     }
@@ -43,7 +46,7 @@ const Profile = () => {
                     </div>
                 </div>
                 <div className="flex justify-between">
-                    <Link to='/'>
+                    <Link to='/collection'>
                         <button className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition-colors duration-300">
                             Go To Shop
                         </button>

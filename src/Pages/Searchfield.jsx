@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { ProductData } from "../Components/Products/Product";
 import { Link } from "react-router-dom";
@@ -6,6 +6,22 @@ import { Link } from "react-router-dom";
 const SearchField = () => {
   const [value, setValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const searchRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setSearchResults([]);
+        setValue(""); 
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleChange = (e) => {
     const inputValue = e.target.value;
@@ -13,18 +29,16 @@ const SearchField = () => {
 
     if (inputValue.trim() === "") {
       setSearchResults([]);
-      return;
+    } else {
+      const filteredResults = ProductData.filter((item) =>
+        item.name.toLowerCase().includes(inputValue.toLowerCase())
+      );
+      setSearchResults(filteredResults);
     }
-
-    const filteredResults = ProductData.filter((item) =>
-      item.name.toLowerCase().includes(inputValue.toLowerCase())
-    );
-
-    setSearchResults(filteredResults);
   };
 
   return (
-    <div className="relative">
+    <div className="relative" ref={searchRef}>
       <form className="flex items-center">
         <input
           autoComplete="off"
@@ -39,7 +53,7 @@ const SearchField = () => {
         </button>
       </form>
       {searchResults.length > 0 && (
-        <div id="search-results" className="absolute bg-white shadow-md rounded-md mt-1 w-full">
+        <div id="search-results" className="absolute overflow-scroll bg-white h-64 shadow-md rounded-md mt-1 w-full">
           {searchResults.map((item) => (
             <Link key={item.id} to={`/collection/${item.id}`}>
               <div className="p-2 hover:bg-gray-100">{item.name}</div>

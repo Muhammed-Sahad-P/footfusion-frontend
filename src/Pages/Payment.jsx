@@ -1,11 +1,11 @@
-import { useState,useContext } from 'react';
-import { useNavigate} from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CollectionContext } from '../Context/CollectionContext';
 
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState('');
   const [cardNumber, setCardNumber] = useState('');
-  const {setCartItems} = useContext(CollectionContext)
+  const { setCartItems } = useContext(CollectionContext);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -25,18 +25,18 @@ const Payment = () => {
       setErrors(errors);
     } else {
       setErrors({});
-      setCartItems({})
+      setCartItems({}); 
       alert('Payment successful!');
-      navigate('/')
+      navigate('/'); 
     }
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 pt-6 pb-8 bg-white rounded shadow-lg">
+    <div className="max-w-md mx-auto p-4 pt-6 pb-8 bg-white rounded-lg shadow-lg my-10 mt-40">
       <h2 className="text-lg font-bold mb-4">Payment Information</h2>
       <form>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm mb-2" htmlFor="paymentMethod">
+          <label htmlFor="paymentMethod" className="block text-sm font-medium text-gray-700 mb-2">
             Payment Method
           </label>
           <select
@@ -57,13 +57,13 @@ const Payment = () => {
         </div>
         
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm mb-2" htmlFor="cardNumber">
+          <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700 mb-2">
             Card Number
           </label>
           <input
             type="text"
             id="cardNumber"
-            className={`appearance-none border ${errors.cardNumber ? 'border-red-500' : 'border-gray-200'} rounded w-full py-2 pl-10 text-sm text-gray-700`}
+            className={`block w-full py-2 pl-3 pr-10 text-sm text-gray-700 border ${errors.cardNumber ? 'border-red-500' : 'border-gray-200'} rounded`}
             placeholder="Enter card number"
             value={cardNumber}
             onChange={(e) => setCardNumber(e.target.value)}

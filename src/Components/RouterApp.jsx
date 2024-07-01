@@ -18,7 +18,6 @@ const RouterApp = () => {
   return (
     <div>
       <Navbar />
-      <div className="mt-28">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/men" element={<Men />} />
@@ -35,7 +34,7 @@ const RouterApp = () => {
         </Routes>
         <Footer />
       </div>
-    </div>
+    
   );
 };
 

@@ -61,18 +61,30 @@ const CartCard = (props) => {
           </div>
         </div>
       ))}
-      <div className="bg-white p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mt-4">
-        <div className="text-center ">
-        <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
-          <p className="text-sm font-semibold mt-10 mb-2">Total Cart Price: ₹ {totalPrice.toFixed(2)}</p>
-          <p className="text-m font-semibold mt-10 mb-2">Shipping Charge:₹---</p>
-          <p className="text-m font-semibold mt-20 mb-2">Discount:NA</p>
-          <br />
-          <Link to='/payment' className="bg-red-500 mt-10  text-white px-4 py-2 rounded-lg hover:bg-gray-800">
-            Checkout
-          </Link>
-        </div>
-      </div>
+    <div className="bg-white p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 mt-4">
+  <div className="text-center">
+    <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
+    
+    <div className="border-t border-gray-300 pt-4">
+      <p className="text-sm font-semibold mb-2">Total Cart Price: ₹ {totalPrice.toFixed(2)}</p>
+      <p className="text-sm font-semibold mb-2">Shipping Charge: Free</p>
+      <p className="text-sm font-semibold mb-2">Discount: NA</p>
+    </div>
+    
+    <div className="flex justify-between items-center mt-6">
+      <p className="text-lg font-semibold">Total:</p>
+      <p className="text-lg font-semibold text-red-500">₹ {totalPrice.toFixed(2)}</p>
+    </div>
+    
+    <Link
+      to='/payment'
+      className="block bg-red-500 mt-6 text-white px-4 py-2 rounded-lg hover:bg-gray-800"
+    >
+      Proceed to Checkout
+    </Link>
+  </div>
+</div>
+
     </>
   );
 };

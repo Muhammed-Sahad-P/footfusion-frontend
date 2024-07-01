@@ -15,10 +15,10 @@ const CartItemDetails = () => {
               src={item.image}
               alt={item.name}
               className="w-full h-auto object-cover mb-4 rounded-lg hover:scale-105 transition-transform duration-300"
-              style={{ maxWidth: "100%", maxHeight: "300px" }} // Adjust dimensions here
+              style={{ maxWidth: "100%", maxHeight: "300px" }} 
             />
             <h2 className="text-2xl font-semibold mb-2">{item.name}</h2>
-            <p className="text-sm text-gray-500 mb-2">{item.type}</p>
+            <p className="text-sm text-gray-700 mb-2">{item.type}</p>
             <p className="text-xl text-gray-700 mt-2 mb-4">₹ {item.price}</p>
           </div>
         ))}

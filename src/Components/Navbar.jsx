@@ -1,16 +1,15 @@
-import { useState, useContext, useEffect } from "react";
-import { GiRunningShoe } from "react-icons/gi";
+import { useState, useContext } from "react";
 import { FiShoppingCart } from "react-icons/fi";
+import { GiRunningShoe } from "react-icons/gi";
 import { FaUserCircle } from "react-icons/fa";
 import { MdMenu, MdClose } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
+import SearchField from "../Pages/Searchfield";
 import { CollectionContext } from "../Context/CollectionContext";
 import { UserContext } from "../Context/UserContext";
-import Searchfield from "../Pages/Searchfield";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [active, setActive] = useState(null);
   const navigate = useNavigate();
 
   const { cartItems } = useContext(CollectionContext);
@@ -24,62 +23,28 @@ const Navbar = () => {
     navigate(isLoggedIn ? "/profile" : "/login");
   };
 
-  useEffect(() => {
-    const ScrollActive = () => {
-      setActive(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", ScrollActive);
-    return () => {
-      window.removeEventListener("scroll", ScrollActive);
-    };
-  }, [active]);
-
   return (
-    <nav
-      className={`${
-        active ? "border-b-4 border-gray-300" : ""
-      } bg-gray-100 fixed top-0 left-0 w-full z-30 transition-all`}
-    >
+    <nav className="bg-gray-100 fixed top-0 left-0 w-screen z-30">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
-            <GiRunningShoe className="text-red-700 text-3xl mr-2" />
-            <Link to="/" className="text-3xl font-serif">
-              FootFusion
+            <Link to="/" className="flex items-center space-x-2">
+              <GiRunningShoe className="text-red-700 text-3xl" />
+              <span className="text-2xl font-serif">FootFusion</span>
             </Link>
           </div>
 
           <div className="hidden md:flex space-x-8 font-semibold">
-            <Link
-              to="/men"
-              className="text-gray-700 hover:text-red-700 font-serif"
-            >
-              MEN
-            </Link>
-            <Link
-              to="/women"
-              className="text-gray-700 hover:text-red-700 font-serif"
-            >
-              WOMEN
-            </Link>
-            <Link
-              to="/collection"
-              className="text-gray-700 hover:text-red-700 font-serif"
-            >
-              COLLECTION
-            </Link>
-            <Link
-              to="/contact"
-              className="text-gray-700 hover:text-red-700 font-serif"
-            >
-              CONTACT
-            </Link>
+            <Link to="/men" className="nav-link">MEN</Link>
+            <Link to="/women" className="nav-link">WOMEN</Link>
+            <Link to="/collection" className="nav-link">COLLECTION</Link>
+            <Link to="/contact" className="nav-link">CONTACT</Link>
           </div>
 
           <div className="flex items-center space-x-4">
-            <Searchfield />
+            <SearchField />
             <div className="relative">
-              <Link to="/cart">
+              <Link to="/cart" className="flex items-center">
                 <FiShoppingCart className="text-3xl text-gray-700 hover:text-red-700" />
                 <div className="absolute top-0 right-0 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
                   {Object.keys(cartItems).length}
@@ -88,7 +53,7 @@ const Navbar = () => {
             </div>
             <div className="hidden md:flex items-center">
               <Link to="/profile">
-                <FaUserCircle onClick={handleClick} className="text-4xl mr-2" />
+                <FaUserCircle onClick={handleClick} className="text-4xl" />
               </Link>
             </div>
           </div>
@@ -107,40 +72,12 @@ const Navbar = () => {
         {menuOpen && (
           <div className="md:hidden">
             <div className="flex flex-col space-y-4 py-2">
-              <Link
-                to="/men"
-                className="text-gray-700 hover:text-red-700 font-serif"
-              >
-                MEN
-              </Link>
-              <Link
-                to="/women"
-                className="text-gray-700 hover:text-red-700 font-serif"
-              >
-                WOMEN
-              </Link>
-              <Link
-                to="/collection"
-                className="text-gray-700 hover:text-red-700 font-serif"
-              >
-                COLLECTION
-              </Link>
-              <Link
-                to="/contact"
-                className="text-gray-700 hover:text-red-700 font-serif"
-              >
-                CONTACT
-              </Link>
-              {/* <div className="relative flex gap-1 align-middle">
-                <Link to="/cart">
-                  <FiShoppingCart className="text-4xl text-gray-700 hover:text-red-700" />
-                  <div className="absolute left-5 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
-                    {Object.keys(cartItems).length}
-                  </div>
-                </Link>
-              </div> */}
-              <Link to="/profile">
-                <FaUserCircle onClick={handleClick} className="text-4xl mr-2" />
+              <Link to="/men" className="nav-link">MEN</Link>
+              <Link to="/women" className="nav-link">WOMEN</Link>
+              <Link to="/collection" className="nav-link">COLLECTION</Link>
+              <Link to="/contact" className="nav-link">CONTACT</Link>
+              <Link to="/profile" className="nav-link">
+                <FaUserCircle onClick={handleClick} className="text-4xl" />
               </Link>
             </div>
           </div>

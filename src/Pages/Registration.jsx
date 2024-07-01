@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Registration = () => {
@@ -21,7 +21,9 @@ const Registration = () => {
     setIsSubmitted(true);
 
     if (Object.keys(errors).length === 0) {
-      localStorage.setItem('user', JSON.stringify(formValues));
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      users.push(formValues);
+      localStorage.setItem("users", JSON.stringify(users));
       alert("Signed up successfully");
       navigate('/login');
     }
@@ -29,9 +31,9 @@ const Registration = () => {
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmitted) {
-      console.log(formValues);
+      
     }
-  }, [formErrors, isSubmitted, formValues]);
+  }, [formErrors, isSubmitted]);
 
   const validate = (values) => {
     const errors = {};
@@ -68,80 +70,95 @@ const Registration = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 className="text-3xl font-bold mb-6 text-center">Sign Up</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <input
-              type="text"
-              name="fullName"
-              placeholder="Full Name"
-              value={formValues.fullName}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
-            />
-            <p className="text-red-600">{formErrors.fullName}</p>
+        <form onSubmit={handleSubmit}>
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="fullName" className="block text-gray-600 font-medium">
+                Full Name
+              </label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                placeholder="Full Name"
+                value={formValues.fullName}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 mt-1"
+              />
+              <p className="text-red-600">{formErrors.fullName}</p>
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-gray-600 font-medium">
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email Address"
+                value={formValues.email}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 mt-1"
+              />
+              <p className="text-red-600">{formErrors.email}</p>
+            </div>
+            <div>
+              <label htmlFor="password" className="block text-gray-600 font-medium">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                value={formValues.password}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 mt-1"
+              />
+              <p className="text-red-600">{formErrors.password}</p>
+            </div>
+            <div>
+              <label htmlFor="confirmPassword" className="block text-gray-600 font-medium">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                value={formValues.confirmPassword}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 mt-1"
+              />
+              <p className="text-red-600">{formErrors.confirmPassword}</p>
+            </div>
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                name="termsAccepted"
+                checked={formValues.termsAccepted}
+                onChange={handleChange}
+                className="mr-2"
+              />
+              <p className="text-sm text-gray-600">
+                By continuing, I agree to the
+                <span className="text-red-600 cursor-pointer hover:underline"> terms of use </span>
+                &
+                <span className="text-red-600 cursor-pointer hover:underline"> privacy policy</span>
+              </p>
+            </div>
+            <p className="text-red-600">{formErrors.termsAccepted}</p>
           </div>
-          <div>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              value={formValues.email}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
-            />
-            <p className="text-red-600">{formErrors.email}</p>
-          </div>
-          <div>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formValues.password}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
-            />
-            <p className="text-red-600">{formErrors.password}</p>
-          </div>
-          <div>
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              value={formValues.confirmPassword}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
-            />
-            <p className="text-red-600">{formErrors.confirmPassword}</p>
-          </div>
-          <div className="flex items-center">
-            <input 
-              type="checkbox" 
-              name="termsAccepted" 
-              checked={formValues.termsAccepted} 
-              onChange={handleChange} 
-              className="mr-2" 
-            />
-            <p className="text-sm text-gray-600">
-              By creating an account, I agree to the
-              <span className="text-red-600 cursor-pointer hover:underline"> terms of use </span>
-              &
-              <span className="text-red-600 cursor-pointer hover:underline"> privacy policy</span>.
-            </p>
-          </div>
-          <p className="text-red-600">{formErrors.termsAccepted}</p>
-          <button className="w-full bg-red-600 text-white py-2 mt-4 rounded-lg hover:bg-red-700 transition duration-300">
+          <button className="w-full bg-red-600 text-white py-3 mt-6 rounded-lg hover:bg-red-700 transition duration-300 text-lg font-medium">
             Sign Up
           </button>
+          <p className="text-center mt-4">
+            Already have an Account?
+            <Link to="/login" className="text-red-600 cursor-pointer hover:underline">
+              {" "}Login{" "}
+            </Link>
+          </p>
         </form>
-        <p className="text-center mt-4">
-          Already have an account?
-          <Link to="/login" className="text-red-600 cursor-pointer hover:underline"> Login here</Link>
-        </p>
-        {Object.keys(formErrors).length === 0 && isSubmitted ? (
-          <div className="text-green-600 text-center mt-4">Registered successfully</div>
-        ) : (
-          ""
-        )}
       </div>
     </div>
   );

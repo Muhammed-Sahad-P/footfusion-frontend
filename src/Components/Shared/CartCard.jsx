@@ -7,22 +7,11 @@ import { Link } from "react-router-dom";
 const CartCard = (props) => {
   const { removeFromCart, addToCart, cartItems } = useContext(CollectionContext);
 
-  // const navigate = useNavigate();
-  // const { currentUser } = useContext(UserContext);
-
   const totalPrice = Object.keys(cartItems).reduce((total, key) => {
     const { price, quantity } = cartItems[key];
     return total + price * quantity;
   }, 0);
 
-  // function handleCheckout() {
-  //   if (!currentUser) {
-  //     navigate("/login");
-  //     return;
-  //   }
-  //   setBuyItems(cartItems);
-  //   navigate("/checkout");
-  // }
 
   return (
     <>

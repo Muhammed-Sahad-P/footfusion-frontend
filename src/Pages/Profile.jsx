@@ -1,30 +1,15 @@
-import  { useContext, useEffect } from 'react';
+import  { useContext } from 'react';
 import { CgProfile } from "react-icons/cg";
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../Context/UserContext';
-import { CollectionContext } from '../Context/CollectionContext';
 
 const Profile = () => {
     const navigate = useNavigate();
-    const userData = JSON.parse(localStorage.getItem("user"));
+    const { isLoggedIn, currentUser, handleLogout } = useContext(UserContext);
 
-    const {isLoggedIn, setIsLoggedIn} = useContext(UserContext);
-    const {setCartItems} = useContext(CollectionContext)
-   
-
-    useEffect(() => {
-        if (!isLoggedIn) {
-            navigate('/login');
-        }
-    },[])
-
-   
-
-    const handleLogOut = () => {
-       setIsLoggedIn(false);
-       setCartItems({})
-       localStorage.getItem("isLogin", JSON.stringify(false));
+    if (!isLoggedIn) {
         navigate('/login');
+        return null; 
     }
 
     return (
@@ -33,16 +18,16 @@ const Profile = () => {
                 <div className="text-center mb-6">
                     <h1 className="text-3xl font-extrabold mb-4 text-gray-900">Profile</h1>
                     <CgProfile className="text-5xl mx-auto text-gray-700 mb-4" />
-                    <h2 className="text-2xl font-semibold text-gray-800">{userData.fullName}</h2>
+                    <h2 className="text-2xl font-semibold text-gray-800">{currentUser.fullName}</h2>
                 </div>
                 <div className="mb-6">
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-600">Username:</label>
-                        <h2 className="text-xl font-medium text-gray-900">{userData.fullName}</h2>
+                        <h2 className="text-xl font-medium text-gray-900">{currentUser.fullName}</h2>
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-600">Email:</label>
-                        <h2 className="text-xl font-medium text-gray-900">{userData.email}</h2>
+                        <h2 className="text-xl font-medium text-gray-900">{currentUser.email}</h2>
                     </div>
                 </div>
                 <div className="flex justify-between">
@@ -51,7 +36,7 @@ const Profile = () => {
                             Go To Shop
                         </button>
                     </Link>
-                    <button onClick={handleLogOut} className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600 transition-colors duration-300">
+                    <button onClick={handleLogout} className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600 transition-colors duration-300">
                         Logout
                     </button>
                 </div>

@@ -1,15 +1,23 @@
-import  { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 
 const Login = () => {
-  const { setIsLoggedIn } = useContext(UserContext);
-  const initialValues = { email: "", password: "", termsAccepted: false };
-  const [formValues, setFormValues] = useState(initialValues);
+  const { isLoggedIn } = useContext(UserContext);
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+    termsAccepted: false,
+  });
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/profile");
+    }
+  }, [isLoggedIn, navigate]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -24,27 +32,13 @@ const Login = () => {
     setIsSubmitted(true);
 
     if (Object.keys(errors).length === 0) {
-      const storedUser = JSON.parse(localStorage.getItem("user"));
+      const user = { email: formValues.email, fullName: "John Doe" };
 
-      if (
-        storedUser &&
-        storedUser.email === formValues.email &&
-        storedUser.password === formValues.password
-      ) {
-        alert("Logged in successfully");
-        navigate("/");
-        localStorage.setItem("isLogin", JSON.stringify(true));
-        setIsLoggedIn(true);
-      } else {
-        setFormErrors({ ...errors, general: "Invalid email or password" });
-      }
+      localStorage.setItem("currentUser", JSON.stringify(user));
+      alert("Logged in successfully");
+      navigate("/profile");
     }
   };
-
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmitted) {
-}
-  }, [formErrors]);
 
   const validate = (values) => {
     const errors = {};
@@ -131,7 +125,7 @@ const Login = () => {
                   {" "}
                   terms of use{" "}
                 </span>
-                &
+                &{" "}
                 <span className="text-red-600 cursor-pointer hover:underline">
                   {" "}
                   privacy policy

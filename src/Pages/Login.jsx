@@ -31,12 +31,29 @@ const Login = () => {
     setFormErrors(errors);
     setIsSubmitted(true);
 
-    if (Object.keys(errors).length === 0) {
-      const user = { email: formValues.email, fullName: "John Doe" };
+    
 
-      localStorage.setItem("currentUser", JSON.stringify(user));
-      alert("Logged in successfully");
-      navigate("/profile");
+    if (Object.keys(errors).length === 0) {
+      const storedUsers = JSON.parse(localStorage.getItem("users"));
+    
+
+      const existingUser = storedUsers.find((obj)=>{
+        return obj.email === formValues.email
+      })
+
+
+
+      if (
+        existingUser.password === formValues.password
+      ) {
+        alert("Logged in successfully");
+        navigate("/");
+        localStorage.setItem("currentUser", JSON.stringify(existingUser));
+        
+      } else {
+        setFormErrors({ ...errors, general: "Invalid email or password" });
+      }
+     
     }
   };
 

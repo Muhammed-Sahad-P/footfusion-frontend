@@ -1,16 +1,18 @@
 import  { useContext } from 'react';
 import { CgProfile } from "react-icons/cg";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link,Navigate } from 'react-router-dom';
 import { UserContext } from '../Context/UserContext';
 
 const Profile = () => {
-    const navigate = useNavigate();
-    const { isLoggedIn, currentUser, handleLogout } = useContext(UserContext);
+  
+    const { handleLogout } = useContext(UserContext);
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-    if (!isLoggedIn) {
-        navigate('/login');
-        return null; 
+
+    if (!JSON.parse(localStorage.getItem("currentUser")) ) {
+        return <Navigate to="/login"/>
     }
+ 
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-200">

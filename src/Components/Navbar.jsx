@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { GiRunningShoe } from "react-icons/gi";
 import { FaUserCircle } from "react-icons/fa";
@@ -6,14 +6,20 @@ import { MdMenu, MdClose } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import SearchField from "../Pages/Searchfield";
 import { CollectionContext } from "../Context/CollectionContext";
-import { UserContext } from "../Context/UserContext";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  const isLoggedIn = JSON.parse(localStorage.getItem("currentUser"));
   const navigate = useNavigate();
 
   const { cartItems } = useContext(CollectionContext);
-  const { isLoggedIn } = useContext(UserContext);
+
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+    setCurrentUser(user);
+  }, []);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -43,18 +49,18 @@ const Navbar = () => {
 
           <div className="flex items-center space-x-4">
             <SearchField />
-            <div className="relative">
-              <Link to="/cart" className="flex items-center">
-                <FiShoppingCart className="text-3xl text-gray-700 hover:text-red-700" />
-                <div className="absolute top-0 right-0 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
-                  {Object.keys(cartItems).length}
-                </div>
-              </Link>
-            </div>
+            {isLoggedIn &&(
+              <div className="relative">
+                <Link to="/cart" className="flex items-center">
+                  <FiShoppingCart className="text-3xl text-gray-700 hover:text-red-700" />
+                  <div className="absolute top-0 right-0 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
+                    {Object.keys(cartItems).length}
+                  </div>
+                </Link>
+              </div>
+            )}
             <div className="hidden md:flex items-center">
-              <Link to="/profile">
-                <FaUserCircle onClick={handleClick} className="text-4xl" />
-              </Link>
+              <FaUserCircle onClick={handleClick} className="text-4xl" />
             </div>
           </div>
 

@@ -1,15 +1,15 @@
 import { useContext } from "react";
 import { CollectionContext } from "../../Context/CollectionContext";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../../Context/UserContext";
-
 const Card = ({ data }) => {
   const { addToCart } = useContext(CollectionContext);
-  const { isLoggedIn } = useContext(UserContext);
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+ 
+
   const navigate = useNavigate();
 
   const handleAddToCart = (itemId) => {
-    if (isLoggedIn) {
+    if (currentUser) {
       addToCart(itemId);
     } else {
       alert("You need to log in to add items to the cart");
@@ -18,7 +18,7 @@ const Card = ({ data }) => {
   };
 
   const handleBuyNow = () => {
-    if (isLoggedIn) {
+    if (currentUser) {
       navigate('/payment');
     } else {
       alert("You need to log in to proceed with the purchase");

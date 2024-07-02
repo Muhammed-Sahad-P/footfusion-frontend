@@ -14,6 +14,7 @@ import Payment from "../Pages/Payment";
 import CartItemDetails from "../Pages/Cart/CartItemDetails";
 import Footer from "../Pages/Footer";
 import Searchfield from "../Pages/Searchfield";
+import Admin from "../Pages/Admin/Admin";
 const RouterApp = () => {
   return (
     <div>
@@ -29,6 +30,7 @@ const RouterApp = () => {
           <Route path="/signup" element={<Registration />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/searchfield" element={<Searchfield />} />
         </Routes>

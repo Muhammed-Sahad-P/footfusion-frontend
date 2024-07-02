@@ -21,7 +21,6 @@ export const UserContextProvider = (props) => {
     setCurrentUser(null);
     localStorage.removeItem("currentUser");
   };
-
   return (
     <UserContext.Provider
       value={{

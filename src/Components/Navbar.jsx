@@ -15,7 +15,6 @@ const Navbar = () => {
 
   const { cartItems } = useContext(CollectionContext);
 
-
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("currentUser"));
     setCurrentUser(user);
@@ -48,7 +47,7 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center space-x-4">
-            <SearchField />
+            <SearchField/>
             {isLoggedIn &&(
               <div className="relative">
                 <Link to="/cart" className="flex items-center">

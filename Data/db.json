@@ -1,6 +1,11 @@
 
-  {
-    "db" : [
+  {"users": [
+    {
+      "id": 1,
+      "fullName": "sa",
+      "email": "sah@example.com"
+    }],
+    "products" : [
         {
           "id": 1,
           "name": "Men’s Black Running",

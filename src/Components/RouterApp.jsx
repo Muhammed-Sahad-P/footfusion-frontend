@@ -12,12 +12,14 @@ import Navbar from "../Components/Navbar";
 import Profile from "../Pages/Profile";
 import Payment from "../Pages/Payment";
 import CartItemDetails from "../Pages/Cart/CartItemDetails";
-import Footer from "../Pages/Footer";
+import Footer from "./Footer";
 import Searchfield from "../Pages/Searchfield";
-import Admin from "../Pages/Admin/Admin";
+import Api from "../utils/Api";
+
 const RouterApp = () => {
   return (
     <div>
+      <Api/>
       <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -30,7 +32,6 @@ const RouterApp = () => {
           <Route path="/signup" element={<Registration />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/admin" element={<Admin />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/searchfield" element={<Searchfield />} />
         </Routes>

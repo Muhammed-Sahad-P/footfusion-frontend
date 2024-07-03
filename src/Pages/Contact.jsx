@@ -21,7 +21,7 @@ function Contact() {
     alert("Sended  successfully");
   };
 
-  const contactNumber = "9744106849";
+  const contactNumber = "+91 1234567890";
   const location = "Thurakkal,Manjeri"; 
 
   return (

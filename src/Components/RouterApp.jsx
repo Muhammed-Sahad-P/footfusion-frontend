@@ -12,7 +12,6 @@ import Navbar from "../Components/Navbar";
 import Profile from "../Pages/Profile";
 import Payment from "../Pages/Payment";
 import CartItemDetails from "../Pages/Cart/CartItemDetails";
-import Footer from "./Footer";
 import Searchfield from "../Pages/Searchfield";
 import Api from "../utils/Api";
 
@@ -35,7 +34,6 @@ const RouterApp = () => {
           <Route path="/payment" element={<Payment />} />
           <Route path="/searchfield" element={<Searchfield />} />
         </Routes>
-        <Footer />
       </div>
     
   );

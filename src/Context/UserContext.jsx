@@ -1,8 +1,13 @@
-import  { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
+
+import { useNavigate } from "react-router-dom";
+import { CollectionContext } from "./CollectionContext";
 
 export const UserContext = createContext();
 
 export const UserContextProvider = (props) => {
+  const navigate = useNavigate();
+  const { setCartItems } = useContext(CollectionContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("currentUser")) || null
@@ -12,7 +17,7 @@ export const UserContextProvider = (props) => {
     const userExists = JSON.parse(localStorage.getItem("currentUser"));
     if (userExists) {
       setCurrentUser(userExists);
-      setIsLoggedIn(true); 
+      setIsLoggedIn(true);
     }
   }, []);
 
@@ -20,6 +25,8 @@ export const UserContextProvider = (props) => {
     setIsLoggedIn(false);
     setCurrentUser(null);
     localStorage.removeItem("currentUser");
+    setCartItems({});
+    navigate("/login");
   };
   return (
     <UserContext.Provider

@@ -7,12 +7,12 @@ import { CollectionProvider } from "./Context/CollectionContext.jsx";
 import { UserContextProvider } from "./Context/UserContext.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <CollectionProvider>
-      <UserContextProvider>
-        <BrowserRouter>
+    <BrowserRouter>
+      <CollectionProvider>
+        <UserContextProvider>
           <App />
-        </BrowserRouter>
-      </UserContextProvider>
-    </CollectionProvider>
+        </UserContextProvider>
+      </CollectionProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );

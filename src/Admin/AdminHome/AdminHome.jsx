@@ -1,14 +1,11 @@
+import AdminNavbar from "../AdminNavbar";
 
-import AdminNavbar from '../AdminNavbar'
-import AdminSidebar from '../AdminSidebar'
-
-const AdminHome = ({children}) => {
+const AdminHome = ({ children }) => {
   return (
     <div>
-      <AdminNavbar/>
-      <AdminSidebar/>
+      <AdminNavbar />
     </div>
-  )
-}
+  );
+};
 
-export default AdminHome
+export default AdminHome;

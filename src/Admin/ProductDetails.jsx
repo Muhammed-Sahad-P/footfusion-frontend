@@ -5,6 +5,7 @@ const ProductDetails = () => {
     <div>
       <h2>Product Details</h2>
       <p>List of products.</p>
+      <p>PRoduct ddetsials</p>
     </div>
   );
 };

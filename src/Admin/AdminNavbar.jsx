@@ -1,5 +1,5 @@
 import { GiRunningShoe } from "react-icons/gi";
-const Navbar = () => {
+const AdminNavbar = () => {
   return (
     <nav className="bg-gray-100 fixed top-0 left-0 w-screen z-30">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,4 +16,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AdminNavbar;

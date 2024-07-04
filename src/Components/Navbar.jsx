@@ -10,6 +10,7 @@ import { CollectionContext } from "../Context/CollectionContext";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
   const isLoggedIn = JSON.parse(localStorage.getItem("currentUser"));
   const navigate = useNavigate();
 
@@ -29,7 +30,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-100 fixed top-0 left-0 w-screen z-30">
+    
+    <>
+    {!isAdmin && (
+      <nav className="bg-gray-100 fixed top-0 left-0 w-screen z-30">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
@@ -89,6 +93,8 @@ const Navbar = () => {
         )}
       </div>
     </nav>
+    )}
+    </>
   );
 };
 

@@ -14,7 +14,7 @@ const {cartItems} = useContext(CollectionContext)
   
 
   return (
-    <div className="p-4">
+    <div className="p-4 mt-24">
       <h2 className="text-center text-3xl font-semibold mb-2">My Cart</h2>
       <br />
       <div>

@@ -1,9 +1,11 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
+import { AdminData } from "../Admin/AdminData";
+
 
 const Login = () => {
-  const { isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn, setCurrentUser } = useContext(UserContext);
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -30,17 +32,26 @@ const Login = () => {
     const errors = validate(formValues);
     setFormErrors(errors);
     setIsSubmitted(true);
-
-    
-
+// 
     if (Object.keys(errors).length === 0) {
       const storedUsers = JSON.parse(localStorage.getItem("users"));
-    
+    const admin = AdminData.find(
+      (admin) => (admin.email === formValues.email ) &&
+      admin.password ===formValues.password
+    );
+    if (admin) {
+      localStorage.setItem("isAdmin", JSON.stringify(true));
+      localStorage.setItem("admin", JSON.stringify(admin));
+      // localStorage.setItem("currentUser", JSON.stringify(admin));
+      setCurrentUser(admin);
+      navigate("/adminhome");
+    return;
+    }
+//
 
       const existingUser = storedUsers.find((obj)=>{
         return obj.email === formValues.email
       })
-
 
 
       if (

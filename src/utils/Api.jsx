@@ -18,7 +18,8 @@ const Api = () => {
   }, [setProduct]); 
 
   return (
-    <div>Api</div>
+    <>
+    </>
   );
 };
 

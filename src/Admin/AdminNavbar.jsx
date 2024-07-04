@@ -4,8 +4,10 @@ import { RiAdminFill } from "react-icons/ri";
 import UserDetails from "./UserDetails";
 import ProductDetails from "./ProductDetails";
 import Dashboard from "./Dashboard";
+import { useNavigate } from "react-router-dom";
 
 const AdminNavbar = () => {
+  const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [adminDropdownOpen, setAdminDropdownOpen] = useState(false);
   const [currentView, setCurrentView] = useState("home");
@@ -19,18 +21,16 @@ const AdminNavbar = () => {
   };
 
   const handleLogout = () => {
-    // Implement logout logic here
-    // Example: clear localStorage, redirect to login page, etc.
-    console.log("Logging out...");
+    localStorage.removeItem("isAdmin");
+    localStorage.removeItem("admin");
+    navigate("/");
   };
 
   return (
     <div className="flex h-screen bg-gradient-to-r from-blue-50 to-indigo-100">
-      {/* Navigation Bar */}
       <nav className="bg-white shadow-lg fixed top-0 left-0 w-full z-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            {/* Logo and Brand */}
             <div className="flex items-center space-x-2 cursor-pointer">
               <GiRunningShoe className="text-red-700 text-3xl" />
               <span className="text-2xl font-serif font-bold text-gray-800">
@@ -60,7 +60,6 @@ const AdminNavbar = () => {
                 )}
               </div>
 
-              {/* Sidebar Toggle */}
               <button
                 onClick={toggleSidebar}
                 className="text-2xl text-gray-800 focus:outline-none"
@@ -68,12 +67,10 @@ const AdminNavbar = () => {
                 ☰
               </button>
             </div>
-            {/* Admin Dropdown */}
           </div>
         </div>
       </nav>
 
-      {/* Dark Overlay for Sidebar */}
       <div
         className={`fixed inset-0 bg-gray-800 bg-opacity-50 z-20 transition-opacity duration-300 ${
           sidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"

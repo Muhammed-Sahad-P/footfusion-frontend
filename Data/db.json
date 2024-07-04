@@ -2,14 +2,21 @@
   "users": [
     {
       "id": "1",
-      "fullName": "sa",
-      "email": "sah@example.com"
+      "name": "anas",
+      "email": "anas@example.com",
+      "password": "anas@example.com"
     },
     {
-      "id": "371a",
+      "id": "2",
       "name": "sahad",
       "email": "sahad44@gmail.com",
       "password": "sahad44@gmail.com"
+    },
+    {
+      "id": "3",
+      "name": "Abhi",
+      "email": "abhi@gmail.com",
+      "password": "abhi@gmail.com"
     }
   ],
   "products": [

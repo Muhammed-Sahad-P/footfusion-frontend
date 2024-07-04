@@ -25,7 +25,7 @@ const ProductDetails = () => {
             WOMEN
           </button>
           <button className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300">
-            COLLECTION
+           ALL COLLECTION
           </button>
         </div>
 

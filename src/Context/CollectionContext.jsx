@@ -8,7 +8,7 @@ export const CollectionProvider = (props) => {
   const [buyItems, setBuyItems] = useState({});
   const [product, setProduct] = useState(null);
   const productData = ProductData;
-  console.log(product);
+ 
 
   const addToCart = (itemId) => {
     const item = productData.find((item) => item.id === itemId);

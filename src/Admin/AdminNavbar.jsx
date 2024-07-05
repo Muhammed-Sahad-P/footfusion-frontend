@@ -12,6 +12,7 @@ const AdminNavbar = () => {
   const [adminDropdownOpen, setAdminDropdownOpen] = useState(false);
   const [currentView, setCurrentView] = useState("home");
 
+  const userAdmin = JSON.parse(localStorage.getItem("admin"));
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -37,8 +38,8 @@ const AdminNavbar = () => {
                 FootFusion
               </span>
             </div>
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center">
+            <div className="flex items-center space-x-4 relative">
+              <div className="flex items-center relative">
                 <button
                   onClick={toggleAdminDropdown}
                   className="text-gray-800 focus:outline-none"
@@ -46,13 +47,16 @@ const AdminNavbar = () => {
                   <RiAdminFill className="text-xl  cursor-pointer" />
                 </button>
                 {adminDropdownOpen && (
-                  <div className="absolute right-0 top-6 mt-10 w-48 bg-white border border-gray-200 shadow-lg  py-2">
-                    <p className="block px-4 py-2 text-gray-800 text-sm cursor-default">
-                      Admin Name
+                  <div className="absolute right-0 top-8 w-56 bg-white border border-gray-200 shadow-lg py-4 rounded-lg">
+                    <h3 className="block px-4 py-2 text-gray-800 text-sm font-medium">
+                      {userAdmin.name}
+                    </h3>
+                    <p className="block px-4 pb-2 text-gray-600 text-xs">
+                      {userAdmin.email}
                     </p>
                     <button
                       onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-gray-100"
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 transition duration-200"
                     >
                       Logout
                     </button>

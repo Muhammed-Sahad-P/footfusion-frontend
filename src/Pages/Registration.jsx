@@ -14,26 +14,29 @@ const Registration = () => {
     setFormValues({ ...formValues, [name]: inputValue });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
-    const errors = validate(formValues);
-    setFormErrors(errors);
-    setIsSubmitted(true);
+    const Signup = async ()=>{
+      try {
+        const response = await fetch("http://localhost:3000/users", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formValues),
+        });
+        if (response.ok) {
+          alert("Registration Successful");
+          localStorage.setItem("NewUser", JSON.stringify(formValues));
+          navigate("/login");
 
-    if (Object.keys(errors).length === 0) {
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-      users.push(formValues);
-      localStorage.setItem("users", JSON.stringify(users));
-      alert("Signed up successfully");
-      navigate('/login');
+        }
+    }catch(error){
+      console.log(error);
     }
-  };
-
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmitted) {
-      
+       
+     };
+     Signup();
     }
-  }, [formErrors, isSubmitted]);
+ 
 
   const validate = (values) => {
     const errors = {};
@@ -162,6 +165,7 @@ const Registration = () => {
       </div>
     </div>
   );
+
 };
 
 export default Registration;

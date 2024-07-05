@@ -10,6 +10,41 @@
       "name": "sahad",
       "email": "sahad44@gmail.com",
       "password": "sahad44@gmail.com"
+    },
+    {
+      "id": "b0f9"
+    },
+    {
+      "id": "34f8",
+      "fullName": "Sahad",
+      "email": "sahad@gmail.com",
+      "password": "ssss",
+      "confirmPassword": "ssss",
+      "termsAccepted": true
+    },
+    {
+      "id": "7d19",
+      "fullName": "Sahad",
+      "email": "sahad@gmail.com",
+      "password": "ssss",
+      "confirmPassword": "ssss",
+      "termsAccepted": true
+    },
+    {
+      "id": "0acc",
+      "fullName": "Basil",
+      "email": "basil@gmail.com",
+      "password": "bbbb",
+      "confirmPassword": "bbbb",
+      "termsAccepted": true
+    },
+    {
+      "id": "742c",
+      "fullName": "Anas",
+      "email": "anas@gmail.com",
+      "password": "q",
+      "confirmPassword": "q",
+      "termsAccepted": false
     }
   ],
   "products": [

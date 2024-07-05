@@ -27,41 +27,58 @@ const Login = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const errors = validate(formValues);
-    setFormErrors(errors);
-    setIsSubmitted(true);
-    //
-    if (Object.keys(errors).length === 0) {
-      const storedUsers = JSON.parse(localStorage.getItem("users"));
-      const admin = AdminData.find(
-        (admin) =>
-          admin.email === formValues.email &&
-          admin.password === formValues.password
-      );
-      if (admin) {
-        localStorage.setItem("isAdmin", JSON.stringify(true));
-        localStorage.setItem("admin", JSON.stringify(admin));
-        // localStorage.setItem("currentUser", JSON.stringify(admin));
-        setCurrentUser(admin);
-        navigate("/adminhome");
-        return;
+    const Login = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/users");
+        const users = await response.json();
+        const user = users.find((user)=>{
+          return user.email === formValues.email && user.password === formValues.password})
+          if(user){
+            localStorage.setItem("currentUser", JSON.stringify(user));
+            navigate("/profile");
+          // }else if(user.email === "admin" && user.password === "admin"){
+          //   navigate("/adminhome");
+          // }
       }
+  } catch (error) {
+    console.log(error);
+}
+    // e.preventDefault();
+    // const errors = validate(formValues);
+    // setFormErrors(errors);
+    // setIsSubmitted(true);
+    //
+    // if (Object.keys(errors).length === 0) {
+    //   const storedUsers = JSON.parse(localStorage.getItem("users"));
+    //   const admin = AdminData.find(
+    //     (admin) =>
+    //       admin.email === formValues.email &&
+    //       admin.password === formValues.password
+    //   );
+    //   if (admin) {
+    //     localStorage.setItem("isAdmin", JSON.stringify(true));
+    //     localStorage.setItem("admin", JSON.stringify(admin));
+    //     setCurrentUser(admin);
+    //     navigate("/adminhome");
+    //     return;
+    //   }
       //
 
-      const existingUser = storedUsers.find((obj) => {
-        return obj.email === formValues.email;
-      });
+  //     const existingUser = storedUsers.find((obj) => {
+  //       return obj.email === formValues.email;
+  //     });
 
-      if (existingUser.password === formValues.password) {
-        alert("Logged in successfully");
-        navigate("/");
-        localStorage.setItem("currentUser", JSON.stringify(existingUser));
-      } else {
-        setFormErrors({ ...errors, general: "Invalid email or password" });
-      }
-    }
+  //     if (existingUser.password === formValues.password) {
+  //       alert("Logged in successfully");
+  //       navigate("/");
+  //       localStorage.setItem("currentUser", JSON.stringify(existingUser));
+  //     } else {
+  //       setFormErrors({ ...errors, general: "Invalid email or password" });
+  //     }
+  //   }
   };
+  Login()
+}
 
   const validate = (values) => {
     const errors = {};
@@ -175,6 +192,6 @@ const Login = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Login;

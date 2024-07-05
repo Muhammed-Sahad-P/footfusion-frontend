@@ -12,7 +12,6 @@ import Profile from "../Pages/Profile";
 import Payment from "../Pages/Payment";
 import CartItemDetails from "../Pages/Cart/CartItemDetails";
 import Searchfield from "../Pages/Searchfield";
-import Api from "../utils/Api";
 import AdminHome from "../Admin/AdminHome/AdminHome";
 import Dashboard from "../Admin/Dashboard";
 import AdminProtect from "../Admin/AdminHome/AdminProtect";
@@ -22,7 +21,6 @@ import UserDetails from "../Admin/UserDetails";
 const RouterApp = () => {
   return (
     <div>
-      <Api />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

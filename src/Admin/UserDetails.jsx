@@ -1,17 +1,17 @@
-import { useContext } from 'react';
+
 import { Link } from 'react-router-dom';
-import { AdminContext } from './AdminContext/AdminContext';
 import { PiUserSquareThin } from "react-icons/pi";
+import useFetch from '../utils/useFetch';
 
 const UserDetails = () => {
-  const { userData } = useContext(AdminContext);
+ const {data, isPending, error} = useFetch('http://localhost:3000/users');
 
   return (
     <div className="w-full max-w-3xl mx-auto mt-12 px-4">
       <h1 className="text-4xl font-extrabold text-center mb-8 text-blue-600">Users List</h1>
-      {userData.length > 0 ? (
+      {data.length > 0 ? (
         <div className="grid gap-6">
-          {userData.map((item, id) => (
+          {data.map((item, id) => (
             <Link
               key={id}
               to={`/admin/user/${item.id}`}

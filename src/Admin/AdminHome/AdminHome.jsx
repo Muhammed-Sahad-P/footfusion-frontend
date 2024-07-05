@@ -4,6 +4,7 @@ const AdminHome = ({ children }) => {
   return (
     <div>
       <AdminNavbar />
+      <div>{children}</div>
     </div>
   );
 };

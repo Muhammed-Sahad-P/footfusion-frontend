@@ -1,10 +1,14 @@
+// import { data } from "autoprefixer";
 import { useParams } from "react-router-dom";
-import { ProductData } from "../../Components/Products/Product";
+import useFetch from "../../utils/useFetch";
+// import { ProductData } from "../../Components/Products/Product";
 
 const CartItemDetails = () => {
   const { id } = useParams();
   const productId = parseInt(id, 10);
-  const productDetails = ProductData.filter((item) => item.id === productId);
+  // const productDetails = ProductData.filter((item) => item.id === productId);
+  const {data} = useFetch("http://localhost:3000/products");
+   const productDetails = data.filter((item) => item.id === productId);
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">

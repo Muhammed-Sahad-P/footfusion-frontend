@@ -4,7 +4,7 @@ import { UserContext } from "../Context/UserContext";
 import { AdminData } from "../Admin/AdminData";
 
 const Login = () => {
-  const { isLoggedIn, setCurrentUser } = useContext(UserContext);
+  const { isLoggedIn,Login } = useContext(UserContext);
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -25,48 +25,36 @@ const Login = () => {
     setFormValues({ ...formValues, [name]: inputValue });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
     const errors = validate(formValues);
     setFormErrors(errors);
 
-    const admin = AdminData.find(
-      (admin) =>
-        admin.email === formValues.email &&
-        admin.password === formValues.password
-    );
-    if (admin) {
-      localStorage.setItem("isAdmin", JSON.stringify(true));
-      localStorage.setItem("admin", JSON.stringify(admin));
-      setCurrentUser(admin);
-      navigate("/adminhome");
-      return;
-    }
+    // const admin = AdminData.find(
+    //   (admin) =>
+    //     admin.email === formValues.email &&
+    //     admin.password === formValues.password
+    // );
+    // if (admin) {
+    //   localStorage.setItem("isAdmin", JSON.stringify(true));
+    //   localStorage.setItem("admin", JSON.stringify(admin));
+    //   setCurrentUser(admin);
+    //   navigate("/adminhome");
+    //   return;
+    // }
 
-    if (Object.keys(errors).length === 0) {
-      const login = async () => {
-        try {
-          const response = await fetch("http://localhost:3000/users");
-          const users = await response.json();
-          const user = users.find((user) => {
-            return (
-              user.email === formValues.email &&
-              user.password === formValues.password
-            );
-          });
-          if (user) {
-            localStorage.setItem("currentUser", JSON.stringify(user));
-            setCurrentUser(user);
-            navigate("/");
-          } else {
-            setFormErrors({ general: "Invalid email or password" });
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      login();
-    }
+    
+     const result = await Login(formValues)
+      if(result.success){
+        navigate("/");
+        console.log(result.message);
+      }else{
+        console.log(result.message);
+      }
+     
+
+     
+    
   };
 
   const validate = (values) => {

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { UserContext } from "../Context/UserContext";
 const Registration = () => {
+const {SignUp} = useContext(UserContext)
+
   const initialValues = { fullName: "", email: "", password: "", confirmPassword: "", termsAccepted: false };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -13,29 +15,20 @@ const Registration = () => {
     setFormValues({ ...formValues, [name]: inputValue });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validate(formValues);
     setFormErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      const signup = async () => {
-        try {
-          const response = await fetch("http://localhost:3000/users", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formValues),
-          });
-          if (response.ok) {
-            alert("Registration Successful");
-            localStorage.setItem("NewUser", JSON.stringify(formValues));
-            navigate("/login");
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      signup();
+
+      const result = await SignUp(formValues)
+      console.log(result);
+      if(result.success){
+        navigate("/login")
+      }
+    
+      
     }
   };
 

@@ -9,7 +9,11 @@ export const CollectionProvider = (props) => {
   const [product, setProduct] = useState(null);
   const productData = ProductData;
  
-
+const saveCardData = async() => {
+  const response = await fetch(`http://localhost:3000/users/curr`, {
+    
+  })
+}
   const addToCart = (itemId) => {
     const item = productData.find((item) => item.id === itemId);
 

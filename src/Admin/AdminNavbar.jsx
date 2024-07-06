@@ -12,7 +12,8 @@ const AdminNavbar = () => {
   const [adminDropdownOpen, setAdminDropdownOpen] = useState(false);
   const [currentView, setCurrentView] = useState("home");
 
-  const userAdmin = JSON.parse(localStorage.getItem("admin"));
+  const userAdmin = JSON.parse(localStorage.getItem("currentUser"));
+  console.log(userAdmin);
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };

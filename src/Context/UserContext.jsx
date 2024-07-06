@@ -7,19 +7,18 @@ export const UserContext = createContext();
 
 export const UserContextProvider = (props) => {
   const [newUser, setNewUser] = useState({});
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   //   const { setCartItems } = useContext(CollectionContext);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   //   const [currentUser, setCurrentUser] = useState(
   //     JSON.parse(localStorage.getItem("currentUser")) || null
   //   );
-   useEffect(()=>{
-    const userExists = localStorage.getItem("currentUser")
-    if(userExists){
-      setIsLoggedIn(JSON.parse(userExists))
+  useEffect(() => {
+    const userExists = localStorage.getItem("currentUser");
+    if (userExists) {
+      setIsLoggedIn(JSON.parse(userExists));
     }
-
-   },[])
+  }, []);
 
   const Login = async (formValues) => {
     try {
@@ -33,11 +32,35 @@ export const UserContextProvider = (props) => {
       });
       if (user) {
         localStorage.setItem("currentUser", JSON.stringify(user));
-        // setCurrentUser(user);
+
         setIsLoggedIn(user);
         return {
           success: true,
           message: "Login Successful",
+        };
+      } else if (
+        formValues.email === "sahad1212@gmail.com" &&
+        formValues.password === "1212"
+      ) {
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify({
+            name: "Sahad",
+            email: "sahad1212@gmail.com",
+            password: "1212",
+          })
+        );
+
+        setIsLoggedIn({
+          name: "Sahad",
+          email: "sahad1212@gmail.com",
+          password: "1212",
+        });
+        
+        return {
+          success: true,
+          admin: true,
+          message: "Admin Login Successful",
         };
       } else {
         return { success: false, message: "Invalid email or password" };

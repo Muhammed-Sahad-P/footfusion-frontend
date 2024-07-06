@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
-import { AdminData } from "../Admin/AdminData";
 
 const Login = () => {
   const { isLoggedIn,Login } = useContext(UserContext);
@@ -30,24 +29,18 @@ const Login = () => {
     const errors = validate(formValues);
     setFormErrors(errors);
 
-    // const admin = AdminData.find(
-    //   (admin) =>
-    //     admin.email === formValues.email &&
-    //     admin.password === formValues.password
-    // );
-    // if (admin) {
-    //   localStorage.setItem("isAdmin", JSON.stringify(true));
-    //   localStorage.setItem("admin", JSON.stringify(admin));
-    //   setCurrentUser(admin);
-    //   navigate("/adminhome");
-    //   return;
-    // }
-
-    
+   
      const result = await Login(formValues)
-      if(result.success){
+      if(result.success && !result.admin){
         navigate("/");
         console.log(result.message);
+
+      }else if (result.admin){
+        console.log("admin");
+        localStorage.setItem("isAdmin", true);
+        navigate("/adminhome");
+        console.log("result.message");
+
       }else{
         console.log(result.message);
       }

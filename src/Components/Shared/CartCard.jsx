@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 const CartCard = (props) => {
   const { removeFromCart, addToCart, cartItems } = useContext(CollectionContext);
+ 
 
   const totalPrice = Object.keys(cartItems).reduce((total, key) => {
     const { price, quantity } = cartItems[key];

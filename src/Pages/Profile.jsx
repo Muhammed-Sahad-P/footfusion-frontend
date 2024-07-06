@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 
 const Profile = () => {
-  const { handleLogout } = useContext(UserContext);
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const { handleLogout,isLoggedIn } = useContext(UserContext);
+//   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-200">
@@ -16,7 +16,7 @@ const Profile = () => {
           </h1>
           <CgProfile className="text-5xl mx-auto text-gray-700 mb-4" />
           <h2 className="text-2xl font-semibold text-gray-800">
-            {currentUser.fullName}
+            {isLoggedIn?.fullName}
           </h2>
         </div>
         <div className="mb-6">
@@ -25,7 +25,7 @@ const Profile = () => {
               Username:
             </label>
             <h2 className="text-xl font-medium text-gray-900">
-              {currentUser.fullName}
+              {isLoggedIn?.fullName}
             </h2>
           </div>
           <div>
@@ -33,7 +33,7 @@ const Profile = () => {
               Email:
             </label>
             <h2 className="text-xl font-medium text-gray-900">
-              {currentUser.email}
+              {isLoggedIn?.email}
             </h2>
           </div>
         </div>

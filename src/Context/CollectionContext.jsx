@@ -1,21 +1,18 @@
-import { createContext, useState } from "react";
-import { ProductData } from "../Components/Products/Product";
+import { createContext,  useState } from "react";
+import useFetch from "../utils/useFetch";
 
 export const CollectionContext = createContext();
 
 export const CollectionProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [buyItems, setBuyItems] = useState({});
-  const [product, setProduct] = useState(null);
-  const productData = ProductData;
- 
-const saveCardData = async() => {
-  const response = await fetch(`http://localhost:3000/users/curr`, {
-    
-  })
-}
+  const {data}= useFetch("http://localhost:3000/products");
+
+
   const addToCart = (itemId) => {
-    const item = productData.find((item) => item.id === itemId);
+    const item = data.find((item) => item.id === itemId);
+
+  
 
     setCartItems((prevCartItems) => {
       const existingItem = prevCartItems[itemId];
@@ -61,11 +58,9 @@ const saveCardData = async() => {
     addToCart,
     removeFromCart,
     cartItems,
-    productData,
     buyItems,
     setBuyItems,
     setCartItems,
-    setProduct,
   };
 
   return (

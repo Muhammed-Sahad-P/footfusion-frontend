@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 // import { CollectionContext } from "./CollectionContext";
@@ -13,14 +13,13 @@ export const UserContextProvider = (props) => {
   //   const [currentUser, setCurrentUser] = useState(
   //     JSON.parse(localStorage.getItem("currentUser")) || null
   //   );
+   useEffect(()=>{
+    const userExists = localStorage.getItem("currentUser")
+    if(userExists){
+      setIsLoggedIn(JSON.parse(userExists))
+    }
 
-  // useEffect(() => {
-  //   const userExists = JSON.parse(localStorage.getItem("currentUser"));
-  //   if (userExists) {
-  //     setCurrentUser(userExists);
-  //     setIsLoggedIn(true);
-  //   }
-  // }, []);
+   },[])
 
   const Login = async (formValues) => {
     try {

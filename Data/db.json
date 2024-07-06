@@ -6,7 +6,25 @@
       "email": "sahad@gmail.com",
       "password": "ssss",
       "confirmPassword": "ssss",
-      "termsAccepted": true
+      "termsAccepted": true,
+      "cart": {
+        "2": {
+          "id": "2",
+          "name": "Men’s Classic Blue",
+          "type": "men",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-019-600x600.jpg",
+          "price": "1699",
+          "quantity": 1
+        },
+        "3": {
+          "id": "3",
+          "name": "Men’s Classic Mint",
+          "type": "men",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-020-600x600.jpg",
+          "price": 1799,
+          "quantity": 1
+        }
+      }
     },
     {
       "id": "deb7",
@@ -14,7 +32,17 @@
       "email": "fasalu@gmail.com",
       "password": "ffff",
       "confirmPassword": "ffff",
-      "termsAccepted": true
+      "termsAccepted": true,
+      "cart": {
+        "9": {
+          "id": "9",
+          "name": "Women’s Blue Training",
+          "type": "women",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-003-600x600.jpg",
+          "price": 699,
+          "quantity": 1
+        }
+      }
     },
     {
       "id": "5413",
@@ -39,6 +67,127 @@
       "password": "ssss",
       "confirmPassword": "ssss",
       "termsAccepted": true
+    },
+    {
+      "id": "d222",
+      "fullName": "Anas",
+      "email": "anas@gmail.com",
+      "password": "aaaa",
+      "confirmPassword": "aaaa",
+      "termsAccepted": true,
+      "cart": {
+        "2": {
+          "id": "2",
+          "name": "Men’s Classic Blue",
+          "type": "men",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-019-600x600.jpg",
+          "price": "1699",
+          "quantity": 1
+        },
+        "3": {
+          "id": "3",
+          "name": "Men’s Classic Mint",
+          "type": "men",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-020-600x600.jpg",
+          "price": 1799,
+          "quantity": 1
+        }
+      }
+    },
+    {
+      "id": "2521",
+      "fullName": "basil",
+      "email": "iambasilp@gmail.com",
+      "password": "123456789",
+      "confirmPassword": "123456789",
+      "termsAccepted": true,
+      "cart": {
+        "2": {
+          "id": "2",
+          "name": "Men’s Classic Blue",
+          "type": "men",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-019-600x600.jpg",
+          "price": "1699",
+          "quantity": 1
+        },
+        "3": {
+          "id": "3",
+          "name": "Men’s Classic Mint",
+          "type": "men",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-020-600x600.jpg",
+          "price": 1799,
+          "quantity": 1
+        }
+      }
+    },
+    {
+      "id": "a8b4",
+      "fullName": "Abhi",
+      "email": "abhijith@gmail.com",
+      "password": "aaaa",
+      "confirmPassword": "aaaa",
+      "termsAccepted": true,
+      "cart": {}
+    },
+    {
+      "id": "568e",
+      "fullName": "irfan@gmail.com",
+      "email": "irfan@gmail.com",
+      "password": "1234",
+      "confirmPassword": "1234",
+      "termsAccepted": true,
+      "cart": {
+        "1": {
+          "name": "Men’s Black Running",
+          "price": "999",
+          "type": "men",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-005-400x400.jpg",
+          "id": "1",
+          "quantity": 1
+        },
+        "3": {
+          "id": "3",
+          "name": "Men’s Classic Mint",
+          "type": "men",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-020-600x600.jpg",
+          "price": 1799,
+          "quantity": 1
+        }
+      }
+    },
+    {
+      "id": "9626",
+      "fullName": "hamza",
+      "email": "hamsa@gmail.com",
+      "password": "1234",
+      "confirmPassword": "1234",
+      "termsAccepted": true
+    },
+    {
+      "id": "0262",
+      "fullName": "adilmubarak",
+      "email": "adilmubarak@gmail.com",
+      "password": "aaaa",
+      "confirmPassword": "aaaa",
+      "termsAccepted": true,
+      "cart": {
+        "2": {
+          "id": "2",
+          "name": "Men’s Classic Blue",
+          "type": "men",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-019-600x600.jpg",
+          "price": "1699",
+          "quantity": 1
+        },
+        "3": {
+          "id": "3",
+          "name": "Men’s Classic Mint",
+          "type": "men",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-020-600x600.jpg",
+          "price": 1799,
+          "quantity": 1
+        }
+      }
     }
   ],
   "products": [

@@ -1,18 +1,15 @@
 import { createContext, useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
-// import { CollectionContext } from "./CollectionContext";
 
 export const UserContext = createContext();
 
 export const UserContextProvider = (props) => {
   const [newUser, setNewUser] = useState({});
+  
   const navigate = useNavigate();
-  //   const { setCartItems } = useContext(CollectionContext);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
-  //   const [currentUser, setCurrentUser] = useState(
-  //     JSON.parse(localStorage.getItem("currentUser")) || null
-  //   );
+
   useEffect(() => {
     const userExists = localStorage.getItem("currentUser");
     if (userExists) {
@@ -32,6 +29,7 @@ export const UserContextProvider = (props) => {
       });
       if (user) {
         localStorage.setItem("currentUser", JSON.stringify(user));
+        
 
         setIsLoggedIn(user);
         return {
@@ -56,7 +54,7 @@ export const UserContextProvider = (props) => {
           email: "sahad1212@gmail.com",
           password: "1212",
         });
-        
+
         return {
           success: true,
           admin: true,
@@ -71,8 +69,9 @@ export const UserContextProvider = (props) => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("currentUser");
     setIsLoggedIn(null);
+    localStorage.removeItem("currentUser");
+
     navigate("/login");
   };
   const SignUp = async (formValues) => {
@@ -103,8 +102,6 @@ export const UserContextProvider = (props) => {
   return (
     <UserContext.Provider
       value={{
-        // currentUser,
-        // setCurrentUser,
         handleLogout,
         SignUp,
         newUser,

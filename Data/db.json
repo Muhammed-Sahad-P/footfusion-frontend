@@ -1,21 +1,7 @@
 {
   "users": [
     {
-      "id": "1",
-      "fullName": "sa",
-      "email": "sah@example.com"
-    },
-    {
-      "id": "371a",
-      "name": "sahad",
-      "email": "sahad44@gmail.com",
-      "password": "sahad44@gmail.com"
-    },
-    {
-      "id": "b0f9"
-    },
-    {
-      "id": "34f8",
+      "id": "f015",
       "fullName": "Sahad",
       "email": "sahad@gmail.com",
       "password": "ssss",
@@ -23,28 +9,12 @@
       "termsAccepted": true
     },
     {
-      "id": "7d19",
-      "fullName": "Sahad",
-      "email": "sahad@gmail.com",
-      "password": "ssss",
-      "confirmPassword": "ssss",
+      "id": "deb7",
+      "fullName": "fasalu",
+      "email": "fasalu@gmail.com",
+      "password": "ffff",
+      "confirmPassword": "ffff",
       "termsAccepted": true
-    },
-    {
-      "id": "0acc",
-      "fullName": "Basil",
-      "email": "basil@gmail.com",
-      "password": "bbbb",
-      "confirmPassword": "bbbb",
-      "termsAccepted": true
-    },
-    {
-      "id": "742c",
-      "fullName": "Anas",
-      "email": "anas@gmail.com",
-      "password": "q",
-      "confirmPassword": "q",
-      "termsAccepted": false
     }
   ],
   "products": [
@@ -189,14 +159,14 @@
       "price": 649
     },
     {
-      "id": 1720170024902,
+      "id": "1720170024902",
       "name": "Men's Modern",
       "price": "1999",
       "type": "men",
       "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRQ_zfLwkRJQkgWL6-t_unIa2_Ie3yQIfqozapDw9jwYN-IIjJlVpwRGrhc8BNXqExdSUfOQzk3sDbIiwSi6LV5CuvF3o2ePw9cwt_guxo"
     },
     {
-      "id": 1720171992191,
+      "id": "1720171992191",
       "name": "women's modern shoe",
       "price": "899",
       "type": "women",

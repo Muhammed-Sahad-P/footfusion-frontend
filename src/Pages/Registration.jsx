@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const initialValues = { fullName: "", email: "", password: "", confirmPassword: "", termsAccepted: false };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -14,29 +13,31 @@ const Registration = () => {
     setFormValues({ ...formValues, [name]: inputValue });
   };
 
-  const handleSubmit =  (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const Signup = async ()=>{
-      try {
-        const response = await fetch("http://localhost:3000/users", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formValues),
-        });
-        if (response.ok) {
-          alert("Registration Successful");
-          localStorage.setItem("NewUser", JSON.stringify(formValues));
-          navigate("/login");
+    const errors = validate(formValues);
+    setFormErrors(errors);
 
+    if (Object.keys(errors).length === 0) {
+      const signup = async () => {
+        try {
+          const response = await fetch("http://localhost:3000/users", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formValues),
+          });
+          if (response.ok) {
+            alert("Registration Successful");
+            localStorage.setItem("NewUser", JSON.stringify(formValues));
+            navigate("/login");
+          }
+        } catch (error) {
+          console.log(error);
         }
-    }catch(error){
-      console.log(error);
+      };
+      signup();
     }
-       
-     };
-     Signup();
-    }
- 
+  };
 
   const validate = (values) => {
     const errors = {};
@@ -165,7 +166,6 @@ const Registration = () => {
       </div>
     </div>
   );
-
 };
 
 export default Registration;

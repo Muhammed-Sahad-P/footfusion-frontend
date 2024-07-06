@@ -11,7 +11,6 @@ const Login = () => {
     termsAccepted: false,
   });
   const [formErrors, setFormErrors] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,58 +26,48 @@ const Login = () => {
   };
 
   const handleSubmit = (e) => {
-    const Login = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/users");
-        const users = await response.json();
-        const user = users.find((user)=>{
-          return user.email === formValues.email && user.password === formValues.password})
-          if(user){
+    e.preventDefault();
+    const errors = validate(formValues);
+    setFormErrors(errors);
+
+    const admin = AdminData.find(
+      (admin) =>
+        admin.email === formValues.email &&
+        admin.password === formValues.password
+    );
+    if (admin) {
+      localStorage.setItem("isAdmin", JSON.stringify(true));
+      localStorage.setItem("admin", JSON.stringify(admin));
+      setCurrentUser(admin);
+      navigate("/adminhome");
+      return;
+    }
+
+    if (Object.keys(errors).length === 0) {
+      const login = async () => {
+        try {
+          const response = await fetch("http://localhost:3000/users");
+          const users = await response.json();
+          const user = users.find((user) => {
+            return (
+              user.email === formValues.email &&
+              user.password === formValues.password
+            );
+          });
+          if (user) {
             localStorage.setItem("currentUser", JSON.stringify(user));
-            navigate("/profile");
-          // }else if(user.email === "admin" && user.password === "admin"){
-          //   navigate("/adminhome");
-          // }
-      }
-  } catch (error) {
-    console.log(error);
-}
-    // e.preventDefault();
-    // const errors = validate(formValues);
-    // setFormErrors(errors);
-    // setIsSubmitted(true);
-    //
-    // if (Object.keys(errors).length === 0) {
-    //   const storedUsers = JSON.parse(localStorage.getItem("users"));
-    //   const admin = AdminData.find(
-    //     (admin) =>
-    //       admin.email === formValues.email &&
-    //       admin.password === formValues.password
-    //   );
-    //   if (admin) {
-    //     localStorage.setItem("isAdmin", JSON.stringify(true));
-    //     localStorage.setItem("admin", JSON.stringify(admin));
-    //     setCurrentUser(admin);
-    //     navigate("/adminhome");
-    //     return;
-    //   }
-      //
-
-  //     const existingUser = storedUsers.find((obj) => {
-  //       return obj.email === formValues.email;
-  //     });
-
-  //     if (existingUser.password === formValues.password) {
-  //       alert("Logged in successfully");
-  //       navigate("/");
-  //       localStorage.setItem("currentUser", JSON.stringify(existingUser));
-  //     } else {
-  //       setFormErrors({ ...errors, general: "Invalid email or password" });
-  //     }
-  //   }
+            setCurrentUser(user);
+            navigate("/");
+          } else {
+            setFormErrors({ general: "Invalid email or password" });
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      login();
+    }
   };
-  Login()
-}
 
   const validate = (values) => {
     const errors = {};
@@ -97,12 +86,6 @@ const Login = () => {
     }
 
     return errors;
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleSubmit(e);
-    }
   };
 
   return (
@@ -127,7 +110,6 @@ const Login = () => {
                 placeholder="Email Address"
                 value={formValues.email}
                 onChange={handleChange}
-                onKeyDown={handleKeyDown}
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 mt-1"
               />
               <p className="text-red-600">{formErrors.email}</p>
@@ -146,7 +128,6 @@ const Login = () => {
                 placeholder="Password"
                 value={formValues.password}
                 onChange={handleChange}
-                onKeyDown={handleKeyDown}
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 mt-1"
               />
               <p className="text-red-600">{formErrors.password}</p>
@@ -165,7 +146,7 @@ const Login = () => {
                   {" "}
                   terms of use{" "}
                 </span>
-                &{" "}
+                &amp;
                 <span className="text-red-600 cursor-pointer hover:underline">
                   {" "}
                   privacy policy
@@ -185,13 +166,13 @@ const Login = () => {
               className="text-red-600 cursor-pointer hover:underline"
             >
               {" "}
-              SignUp{" "}
+              Sign Up{" "}
             </Link>
           </p>
         </form>
       </div>
     </div>
   );
-}
+};
 
 export default Login;

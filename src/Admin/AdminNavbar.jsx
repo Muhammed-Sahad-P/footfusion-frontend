@@ -131,7 +131,6 @@ const AdminNavbar = () => {
       >
         {currentView === "home" && (
           <div className="p-4 text-gray-800">
-            Welcome to the Admin Dashboard
             <Dashboard />
           </div>
         )}

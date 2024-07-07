@@ -91,7 +91,7 @@ const ProductDetails = () => {
         </div>
 
         <div className="flex justify-center mb-8">
-          <button onClick={() => setIsModalOpen(true)} className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition duration-300">
+          <button onClick={() => setIsModalOpen(true)} className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
             Add New Product
           </button>
         </div>

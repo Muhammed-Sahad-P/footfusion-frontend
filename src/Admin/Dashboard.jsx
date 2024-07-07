@@ -1,11 +1,17 @@
-import React from 'react';
-import useFetch from '../utils/useFetch';
+import useFetch from "../utils/useFetch";
 
 const Dashboard = () => {
-  const { data: users, isPending: usersPending, error: usersError } = useFetch('http://localhost:3000/users');
-  const { data: products, isPending: productsPending, error: productsError } = useFetch('http://localhost:3000/products');
+  const {
+    data: users,
+    isPending: usersPending,
+    error: usersError,
+  } = useFetch("http://localhost:3000/users");
+  const {
+    data: products,
+    isPending: productsPending,
+    error: productsError,
+  } = useFetch("http://localhost:3000/products");
 
-  // Hardcoded additional details
   const totalOrders = 1234;
   const totalRevenue = 567890;
   const avgProductRating = 4.5;
@@ -17,10 +23,10 @@ const Dashboard = () => {
       </header>
       <main className="flex-1 p-8 text-center">
         <h2 className="text-2xl font-bold mb-4">Dashboard Statistics</h2>
-        
+
         {(usersPending || productsPending) && <div>Loading...</div>}
         {(usersError || productsError) && <div>Error loading data</div>}
-        
+
         {users && products && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-lg">

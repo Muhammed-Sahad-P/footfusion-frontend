@@ -7,16 +7,7 @@
       "password": "ssss",
       "confirmPassword": "ssss",
       "termsAccepted": true,
-      "cart": {
-        "2": {
-          "id": "2",
-          "name": "Men’s Classic Blue",
-          "type": "men",
-          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-019-600x600.jpg",
-          "price": "1699",
-          "quantity": 1
-        }
-      }
+      "cart": {}
     },
     {
       "id": "f0ee",
@@ -255,9 +246,9 @@
       "id": "1720170024902"
     },
     {
-      "id": "1720171992191",
-      "name": "women's modern shoe",
-      "price": "899",
+      "id": 1720332692186,
+      "name": "women's new modern shoe",
+      "price": "1899",
       "type": "women",
       "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQ6PElq1Y2BxRNZgsMQpoHJ9LKoH3UQHkf2rO31NHrT5cAeRBq1afdlwkkYjkAOskJemP2G6EbN-1Oom_RgLAQaR-3QR4DbmWqFtXf0M50"
     }

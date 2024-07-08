@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import useFetch from "../utils/useFetch";
 
 const ProductDetails = () => {
-  const { data, isPending, error } = useFetch("http://localhost:3000/products");
+  const { data } = useFetch("http://localhost:3000/products");
   const [filteredData, setFilteredData] = useState(null);
   const [category, setCategory] = useState("all");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -79,19 +79,19 @@ const ProductDetails = () => {
     <div className="flex flex-col min-h-screen bg-gradient-to-r from-blue-50 to-indigo-100">
       <div className="flex-1 p-8">
         <div className="flex justify-center mb-8 gap-4">
-          <button onClick={() => setCategory("men")} className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+          <button onClick={() => setCategory("men")} className="bg-[#131842] text-white px-4 py-2 rounded-lg hover:bg-[#7077A1] transition duration-300">
             MEN
           </button>
-          <button onClick={() => setCategory("women")} className="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition duration-300">
+          <button onClick={() => setCategory("women")} className="bg-[#131842] text-white px-4 py-2 rounded-lg hover:bg-[#7077A1] transition duration-300">
             WOMEN
           </button>
-          <button onClick={() => setCategory("all")} className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300">
+          <button onClick={() => setCategory("all")} className="bg-[#131842] text-white px-4 py-2 rounded-lg hover:bg-[#7077A1] transition duration-300">
             ALL COLLECTION
           </button>
         </div>
 
         <div className="flex justify-center mb-8">
-          <button onClick={() => setIsModalOpen(true)} className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+          <button onClick={() => setIsModalOpen(true)} className="bg-[#131842] text-white px-4 py-2 rounded-lg hover:bg-[#7077A1] transition duration-300">
             Add New Product
           </button>
         </div>
@@ -104,10 +104,10 @@ const ProductDetails = () => {
               <p className="text-sm text-gray-500">{item.type}</p>
               <p className="text-xl text-gray-700 mt-2 mb-4">₹ {item.price}</p>
               <div className="flex justify-between gap-2">
-                <button onClick={() => handleEdit(item)} className="bg-blue-500 text-white w-full py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+                <button onClick={() => handleEdit(item)} className="bg-[#131842] text-white w-full py-2 rounded-lg hover:bg-[#7077A1] transition duration-300">
                   Edit
                 </button>
-                <button onClick={() => handleDelete(item.id)} className="bg-red-500 text-white w-full py-2 rounded-lg hover:bg-red-700 transition duration-300">
+                <button onClick={() => handleDelete(item.id)} className="bg-[#131842] text-white w-full py-2 rounded-lg hover:bg-[#7077A1] transition duration-300">
                   Delete
                 </button>
               </div>
@@ -161,7 +161,7 @@ const ProductDetails = () => {
                 <button type="button" onClick={() => { setIsModalOpen(false); setIsEditMode(false); }} className="bg-gray-500 text-white px-4 py-2 rounded-lg mr-2">
                   Cancel
                 </button>
-                <button type="button" onClick={handleAddOrEditProduct} className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+                <button type="button" onClick={handleAddOrEditProduct} className="bg-[#131842] text-white px-4 py-2 rounded-lg">
                   {isEditMode ? "Save Changes" : "Add Product"}
                 </button>
               </div>

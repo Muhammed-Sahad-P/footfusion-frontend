@@ -80,7 +80,7 @@ const {SignUp} = useContext(UserContext)
                 placeholder="Full Name"
                 value={formValues.fullName}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 mt-1"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C4E80] mt-1"
               />
               <p className="text-red-600">{formErrors.fullName}</p>
             </div>
@@ -95,7 +95,7 @@ const {SignUp} = useContext(UserContext)
                 placeholder="Email Address"
                 value={formValues.email}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 mt-1"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C4E80] mt-1"
               />
               <p className="text-red-600">{formErrors.email}</p>
             </div>
@@ -110,7 +110,7 @@ const {SignUp} = useContext(UserContext)
                 placeholder="Password"
                 value={formValues.password}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 mt-1"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C4E80] mt-1"
               />
               <p className="text-red-600">{formErrors.password}</p>
             </div>
@@ -125,7 +125,7 @@ const {SignUp} = useContext(UserContext)
                 placeholder="Confirm Password"
                 value={formValues.confirmPassword}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 mt-1"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C4E80] mt-1"
               />
               <p className="text-red-600">{formErrors.confirmPassword}</p>
             </div>
@@ -146,7 +146,7 @@ const {SignUp} = useContext(UserContext)
             </div>
             <p className="text-red-600">{formErrors.termsAccepted}</p>
           </div>
-          <button className="w-full bg-red-600 text-white py-3 mt-6 rounded-lg hover:bg-red-700 transition duration-300 text-lg font-medium">
+          <button className="w-full bg-[#131842] text-white py-3 mt-6 rounded-lg hover:bg-gray-800 transition duration-300 text-lg font-medium">
             Sign Up
           </button>
           <p className="text-center mt-4">

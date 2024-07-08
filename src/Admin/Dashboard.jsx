@@ -18,7 +18,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-50 to-indigo-100 flex flex-col">
-      <header className="bg-red-600 text-white p-4 text-center">
+      <header className="bg-[#0A2647] text-white p-4 text-center">
         <h1>Admin Dashboard</h1>
       </header>
       <main className="flex-1 p-8 text-center">

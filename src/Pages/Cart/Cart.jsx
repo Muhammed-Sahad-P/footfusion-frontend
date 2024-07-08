@@ -20,7 +20,7 @@ const {cartItems} = useContext(CollectionContext)
       <div>
         <Link
           to="/collection"
-          className="bg-red-500 text-white px-4 mr-10 py-2 mb-10 rounded-lg hover:bg-gray-800"
+          className="bg-[#131842] text-white px-4 mr-10 py-2 mb-10 rounded-lg hover:bg-gray-800"
         >
           Add More Items
         </Link>

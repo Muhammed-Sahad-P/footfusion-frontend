@@ -12,7 +12,7 @@ const CartCard = (props) => {
   }, 0);
 
   const handleDelete = (id) => {
-    removeFromCart(id, true); // Pass true to remove the item completely
+    removeFromCart(id, true); 
   };
 
   return (
@@ -37,14 +37,14 @@ const CartCard = (props) => {
           <div className="flex items-center mb-4">
             <button
               onClick={() => addToCart(item.id)}
-              className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-gray-800 mr-2"
+              className="bg-[#131842] text-white px-4 py-1 rounded-lg hover:bg-gray-800 mr-2"
             >
               +
             </button>
             <span className="text-xl font-semibold">{item.quantity}</span>
             <button
               onClick={() => removeFromCart(item.id)}
-              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-gray-800 ml-2"
+              className="bg-[#131842] text-white px-4 py-1 rounded-lg hover:bg-gray-800 ml-2"
             >
               -
             </button>
@@ -83,7 +83,7 @@ const CartCard = (props) => {
 
           <Link
             to="/payment"
-            className="block bg-red-500 mt-6 text-white px-4 py-2 rounded-lg hover:bg-gray-800"
+            className="block bg-[#131842] mt-6 text-white px-4 py-2 rounded-lg hover:bg-gray-800"
           >
             Proceed to Checkout
           </Link>

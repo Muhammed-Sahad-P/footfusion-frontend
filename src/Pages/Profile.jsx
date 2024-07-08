@@ -39,13 +39,13 @@ const Profile = () => {
         </div>
         <div className="flex justify-between">
           <Link to="/collection">
-            <button className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition-colors duration-300">
+            <button className="px-4 py-2 bg-[#131842] text-white rounded-lg shadow-md hover:bg-[#03506F] transition-colors duration-300">
               Go To Shop
             </button>
           </Link>
           <button
             onClick={handleLogout}
-            className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600 transition-colors duration-300"
+            className="px-4 py-2 bg-[#131842] text-white rounded-lg shadow-md hover:bg-red-600 transition-colors duration-300"
           >
             Logout
           </button>

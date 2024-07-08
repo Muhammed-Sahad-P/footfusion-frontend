@@ -18,11 +18,11 @@ const UserDetails = () => {
         <div className="bg-white shadow-lg p-6 rounded-xl">
           <button
             onClick={() => setSelectedUser(null)}
-            className="text-blue-600 hover:underline mb-4"
+            className="text-[#2f75c5] hover:underline mb-4"
           >
             Back to Users List
           </button>
-          <h1 className="text-4xl font-extrabold text-center mb-8 text-blue-600">
+          <h1 className="text-4xl font-extrabold text-center mb-8 text-[#0A2647]">
             {selectedUser.fullName}
           </h1>
           <p className="text-gray-600 mb-4">
@@ -45,7 +45,7 @@ const UserDetails = () => {
         </div>
       ) : (
         <>
-          <h1 className="text-4xl font-extrabold text-center mb-8 text-blue-600">
+          <h1 className="text-4xl font-extrabold text-center mb-8 text-[#0A2647]">
             Users List
           </h1>
           {data && data.length > 0 ? (
@@ -56,7 +56,7 @@ const UserDetails = () => {
                   className="block transition transform hover:scale-105"
                 >
                   <div className="bg-white shadow-lg p-6 rounded-xl flex items-center hover:bg-gray-100 transition duration-300 ease-in-out">
-                    <PiUserSquareThin className="h-20 w-20 text-blue-600 mr-6" />
+                    <PiUserSquareThin className="h-20 w-20 text-blue-400 mr-6" />
                     <div>
                       <h2 className="text-2xl font-semibold text-gray-800 mb-1">
                         {item.fullName}
@@ -64,7 +64,7 @@ const UserDetails = () => {
                       <p className="text-gray-600">{item.email}</p>
                       <button
                         onClick={() => handleViewDetails(item)}
-                        className="text-blue-600 hover:underline mt-2"
+                        className="text-[#0A2647] hover:underline mt-2"
                       >
                         View Details
                       </button>

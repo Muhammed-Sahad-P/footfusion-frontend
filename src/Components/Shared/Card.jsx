@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { CollectionContext } from "../../Context/CollectionContext";
 import { Link, useNavigate } from "react-router-dom";
+
 const Card = ({ data }) => {
   const { addToCart } = useContext(CollectionContext);
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
- 
 
   const navigate = useNavigate();
 
@@ -46,13 +46,13 @@ const Card = ({ data }) => {
           <div className="flex gap-5">
             <button
               onClick={() => handleAddToCart(item.id)}
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-gray-800"
+              className="bg-[#131842] text-white px-4 py-2 rounded-lg hover:bg-[#0f1236]"
             >
               Add To Cart
             </button>
             <button
               onClick={handleBuyNow}
-              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-gray-800"
+              className="bg-[#131842] text-white px-4 py-2 rounded-lg hover:bg-[#0f1236]"
             >
               Buy Now
             </button>

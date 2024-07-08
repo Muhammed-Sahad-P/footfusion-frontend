@@ -23,7 +23,7 @@ const Home = () => {
         <h1 className="reveal text-black text-3xl md:text-5xl font-bold mb-5 mt-28" style={{ fontFamily: "'Playfair Display', serif" }}>
           Love The Planet<br /> We Walk On
         </h1>
-        <Link to="/collection" className="reveal bg-white text-black px-4 py-2 rounded-lg hover:bg-green-300">
+        <Link to="/collection" className="reveal bg-[#131842] text-white px-4 py-2 rounded-lg hover:bg-[#2C4E80]">
           Shop Now
         </Link>
       </div>

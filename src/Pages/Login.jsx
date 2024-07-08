@@ -73,14 +73,14 @@ const Login = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <form onSubmit={handleSubmit}>
-          <h1 className="text-3xl font-bold mb-6 text-center text-gray-700">
+          <h1 className="text-3xl font-bold mb-6 text-center text-[#0A043C]">
             Login
           </h1>
           <div className="space-y-4">
             <div>
               <label
                 htmlFor="email"
-                className="block text-gray-600 font-medium"
+                className="block text-[#0A043C] font-medium"
               >
                 Email Address
               </label>
@@ -91,14 +91,14 @@ const Login = () => {
                 placeholder="Email Address"
                 value={formValues.email}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 mt-1"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C4E80] mt-1"
               />
               <p className="text-red-600">{formErrors.email}</p>
             </div>
             <div>
               <label
                 htmlFor="password"
-                className="block text-gray-600 font-medium"
+                className="block text-[#0A043C] font-medium"
               >
                 Password
               </label>
@@ -109,7 +109,7 @@ const Login = () => {
                 placeholder="Password"
                 value={formValues.password}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 mt-1"
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2C4E80] mt-1"
               />
               <p className="text-red-600">{formErrors.password}</p>
             </div>
@@ -121,7 +121,7 @@ const Login = () => {
                 onChange={handleChange}
                 className="mr-2"
               />
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-[#0A043C]">
                 By continuing, I agree to the
                 <span className="text-red-600 cursor-pointer hover:underline">
                   {" "}
@@ -137,10 +137,10 @@ const Login = () => {
             <p className="text-red-600">{formErrors.termsAccepted}</p>
             <p className="text-red-600">{formErrors.general}</p>
           </div>
-          <button className="w-full bg-red-600 text-white py-3 mt-6 rounded-lg hover:bg-red-700 transition duration-300 text-lg font-medium">
+          <button className="w-full bg-[#131842] text-white py-3 mt-6 rounded-lg hover:bg-gray-800 transition duration-300 text-lg font-medium">
             Continue
           </button>
-          <p className="text-center mt-4">
+          <p className="text-center-[#0A043C] mt-4">
             Don't have an Account?
             <Link
               to="/signup"

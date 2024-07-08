@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
-import { ProductData } from "../Components/Products/Product";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
+import useFetch from "../utils/useFetch";
 
 const SearchField = () => {
   const [value, setValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const { data } = useFetch("http://localhost:3000/products");
   const searchRef = useRef(null);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ const SearchField = () => {
     if (inputValue.trim() === "") {
       setSearchResults([]);
     } else {
-      const filteredResults = ProductData.filter((item) =>
+      const filteredResults = data.filter((item) =>
         item.name.toLowerCase().includes(inputValue.toLowerCase())
       );
       setSearchResults(filteredResults);

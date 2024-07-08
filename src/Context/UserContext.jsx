@@ -6,7 +6,7 @@ export const UserContext = createContext();
 
 export const UserContextProvider = (props) => {
   const [newUser, setNewUser] = useState({});
-  
+
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
@@ -29,7 +29,6 @@ export const UserContextProvider = (props) => {
       });
       if (user) {
         localStorage.setItem("currentUser", JSON.stringify(user));
-        
 
         setIsLoggedIn(user);
         return {

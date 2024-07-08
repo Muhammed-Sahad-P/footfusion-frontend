@@ -7,26 +7,23 @@ export const CollectionContext = createContext();
 export const CollectionProvider = (props) => {
   const { isLoggedIn } = useContext(UserContext);
   const [cartItems, setCartItems] = useState({});
-  console.log(cartItems);
+
   const [buyItems, setBuyItems] = useState({});
   const { data } = useFetch("http://localhost:3000/products");
 
   // take from server
   useEffect(() => {
     if (isLoggedIn) {
-
       setCart();
     }
   }, [isLoggedIn]);
 
-// store in to server
+  // store in to server
   useEffect(() => {
     if (isLoggedIn) {
-
       cartAdds();
     }
   }, [cartItems, isLoggedIn]);
-
 
   const setCart = async () => {
     try {
@@ -67,7 +64,10 @@ export const CollectionProvider = (props) => {
     setCartItems((prevCartItems) => {
       const existingItem = prevCartItems[itemId];
       if (existingItem) {
-        return {...prevCartItems, [itemId]: { ...existingItem, quantity: existingItem.quantity + 1 } };
+        return {
+          ...prevCartItems,
+          [itemId]: { ...existingItem, quantity: existingItem.quantity + 1 },
+        };
       } else {
         return {
           ...prevCartItems,

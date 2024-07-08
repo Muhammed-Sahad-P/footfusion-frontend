@@ -34,12 +34,14 @@ const UserDetails = () => {
               ? selectedUser.address.join(", ")
               : "No address found"}
           </p>
-          <p className="text-gray-600 mb-4">
+          <div className="text-gray-600 mb-4">
             <strong>Orders:</strong>{" "}
-            {selectedUser.orders
-              ? selectedUser.orders.join(", ")
-              : "No orders found"}
-          </p>
+            {selectedUser.orders && selectedUser.orders.map((order,index)=>(
+              <li key={index}>{order.name} x {order.quantity} </li>
+            ))
+             }
+             {!selectedUser.orders && "No orders found"}
+          </div>
         </div>
       ) : (
         <>

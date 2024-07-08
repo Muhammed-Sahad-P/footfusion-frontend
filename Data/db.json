@@ -7,7 +7,8 @@
       "password": "ssss",
       "confirmPassword": "ssss",
       "termsAccepted": true,
-      "cart": {}
+      "cart": {},
+      "orders": [{"name":"Men’s Black Running","quantity":2}]
     },
     {
       "id": "f0ee",
@@ -16,6 +17,7 @@
       "password": "aaaa",
       "confirmPassword": "aaaa",
       "termsAccepted": true,
+      "orders": [{"name":"Women’s Blue Training","quantity":2},{"name":"Men’s Black Running","quantity":2}],
       "cart": {
         "5": {
           "id": "5",
@@ -58,6 +60,7 @@
       "password": "bbbb",
       "confirmPassword": "bbbb",
       "termsAccepted": true,
+      "orders": [{"name":"Women’s Cream Suede","quantity":2}],
       "cart": {}
     },
     {
@@ -67,6 +70,7 @@
       "password": "aaaa",
       "confirmPassword": "aaaa",
       "termsAccepted": true,
+      "orders": [{"name":"Men’s Classic Mint","quantity":1}],
       "cart": {
         "1720171992191": {
           "id": "1720171992191",
@@ -231,13 +235,13 @@
     },
     {
       "name": "Men's Modern",
-      "price": "1899",
+      "price": "1599",
       "type": "men",
       "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRQ_zfLwkRJQkgWL6-t_unIa2_Ie3yQIfqozapDw9jwYN-IIjJlVpwRGrhc8BNXqExdSUfOQzk3sDbIiwSi6LV5CuvF3o2ePw9cwt_guxo",
       "id": "1720170024902"
     },
     {
-      "id": 1720332692186,
+      "id": "1720332692186",
       "name": "women's new modern shoe",
       "price": "1899",
       "type": "women",

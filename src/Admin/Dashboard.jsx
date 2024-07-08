@@ -12,7 +12,7 @@ const Dashboard = () => {
     error: productsError,
   } = useFetch("http://localhost:3000/products");
 
-  const totalOrders = NaN;
+  const totalOrders = 12;
   const totalRevenue = 567890;
   const avgProductRating = 4.5;
 

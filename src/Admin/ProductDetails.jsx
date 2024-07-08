@@ -52,7 +52,7 @@ const ProductDetails = () => {
   const handleAddOrEditProduct = () => {
     const method = isEditMode ? "PUT" : "POST";
     const url = isEditMode ? `http://localhost:3000/products/${editProductId}` : "http://localhost:3000/products";
-    const productData = isEditMode ? { ...productForm } : { ...productForm, id: Date.now() };
+    const productData = isEditMode ? { ...productForm } : { ...productForm, id: Date.now().toString() };
 
     fetch(url, {
       method: method,

@@ -11,7 +11,7 @@ const UserDetails = () => {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto mt-12 px-4">
+    <div className="w-full max-w-3xl mx-auto mt-12 px-4 ">
       {isPending && <div>Loading...</div>}
       {error && <div>{error}</div>}
       {selectedUser ? (

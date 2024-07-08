@@ -7,16 +7,7 @@
       "password": "ssss",
       "confirmPassword": "ssss",
       "termsAccepted": true,
-      "cart": {
-        "2": {
-          "id": "2",
-          "name": "Men’s Classic Blue",
-          "type": "men",
-          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-019-600x600.jpg",
-          "price": "1699",
-          "quantity": 1
-        }
-      },
+      "cart": {},
       "orders": [
         {
           "name": "Men’s Black Running",
@@ -106,7 +97,24 @@
       "password": "ffff",
       "confirmPassword": "ffff",
       "termsAccepted": true,
-      "cart": {}
+      "cart": {
+        "1720423654446": {
+          "id": "1720423654446",
+          "name": "Women's new pink Running",
+          "price": "1299",
+          "type": "women",
+          "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRI6q7Kew9aOqqnHt8QDl6jDMPdSZlJA8H17qsoI3X8O0FMJvh2vVEd32lXr6M0uBksAISvHfnI_xnMO0ujAbiheewSmfYjXyLsiagEqfhjRNy6KfQccxJH6g",
+          "quantity": 1
+        },
+        "1720412980935": {
+          "id": "1720412980935",
+          "name": "Men's modern classic shoe",
+          "price": "1699",
+          "type": "men",
+          "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSji84EE7uEKqlv85R177gn0dZ6pnLsLFSoBDvim6wNPByVJV-XeXpgbzJaBeW1aj5G1JnD3I5T__LCkKnDNwtemTgcSq3guU-6_XBWCZ_s",
+          "quantity": 2
+        }
+      }
     }
   ],
   "products": [
@@ -118,25 +126,11 @@
       "id": "1"
     },
     {
-      "id": "2",
-      "name": "Men’s Classic Blue",
-      "type": "men",
-      "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-019-600x600.jpg",
-      "price": "1699"
-    },
-    {
       "id": "3",
       "name": "Men’s Classic Mint",
       "type": "men",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-020-600x600.jpg",
       "price": 1799
-    },
-    {
-      "id": "4",
-      "name": "Men’s Earth-Tone Sneaker",
-      "type": "men",
-      "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-017-600x600.jpg",
-      "price": 749
     },
     {
       "id": "5",
@@ -244,11 +238,11 @@
       "price": 899
     },
     {
-      "id": "20",
       "name": "Women’s Tosca City Run",
+      "price": "999",
       "type": "women",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-012-600x600.jpg",
-      "price": 649
+      "id": "20"
     },
     {
       "name": "Men's Modern",
@@ -263,6 +257,20 @@
       "price": "1699",
       "type": "men",
       "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSji84EE7uEKqlv85R177gn0dZ6pnLsLFSoBDvim6wNPByVJV-XeXpgbzJaBeW1aj5G1JnD3I5T__LCkKnDNwtemTgcSq3guU-6_XBWCZ_s"
+    },
+    {
+      "id": "1720423654446",
+      "name": "Women's new pink Running",
+      "price": "1299",
+      "type": "women",
+      "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRI6q7Kew9aOqqnHt8QDl6jDMPdSZlJA8H17qsoI3X8O0FMJvh2vVEd32lXr6M0uBksAISvHfnI_xnMO0ujAbiheewSmfYjXyLsiagEqfhjRNy6KfQccxJH6g"
+    },
+    {
+      "id": "1720430025009",
+      "name": "Men's new shoe",
+      "price": "1299",
+      "type": "men",
+      "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRjsJrPDnT_er761HzwgF4Q6C7IxsGMm9o6ZOhdlkGKDH6Bk1w9DzXWG5VrpwLVXxmcGCUNPpyyE4q9bD__5Kg_x1CK4zfllPiVB-xL27Dp-ldqoAckCVL8OQ"
     }
   ]
 }

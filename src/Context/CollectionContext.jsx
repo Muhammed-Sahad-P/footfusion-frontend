@@ -18,7 +18,7 @@ export const CollectionProvider = (props) => {
     }
   }, [isLoggedIn]);
 
-  // store in to server
+  // store into server
   useEffect(() => {
     if (isLoggedIn) {
       cartAdds();
@@ -80,21 +80,27 @@ export const CollectionProvider = (props) => {
     });
   };
 
-  const removeFromCart = (itemId) => {
+  const removeFromCart = (itemId, removeCompletely = false) => {
     setCartItems((prevCartItems) => {
-      const existingItem = prevCartItems[itemId];
-      if (existingItem.quantity > 1) {
-        return {
-          ...prevCartItems,
-          [itemId]: {
-            ...existingItem,
-            quantity: existingItem.quantity - 1,
-          },
-        };
-      } else {
+      if (removeCompletely) {
         // eslint-disable-next-line no-unused-vars
         const { [itemId]: _, ...newCartItems } = prevCartItems;
         return newCartItems;
+      } else {
+        const existingItem = prevCartItems[itemId];
+        if (existingItem.quantity > 1) {
+          return {
+            ...prevCartItems,
+            [itemId]: {
+              ...existingItem,
+              quantity: existingItem.quantity - 1,
+            },
+          };
+        } else {
+          // eslint-disable-next-line no-unused-vars
+          const { [itemId]: _, ...newCartItems } = prevCartItems;
+          return newCartItems;
+        }
       }
     });
   };

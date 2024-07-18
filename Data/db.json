@@ -7,16 +7,7 @@
       "password": "ssss",
       "confirmPassword": "ssss",
       "termsAccepted": true,
-      "cart": {
-        "1": {
-          "name": "Men’s Black Running",
-          "price": "999",
-          "type": "men",
-          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-005-400x400.jpg",
-          "id": "1",
-          "quantity": 1
-        }
-      },
+      "cart": {},
       "orders": [
         {
           "name": "Men’s Black Running",

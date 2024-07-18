@@ -39,20 +39,20 @@ const Card = ({ data }) => {
               alt={item.name}
               className="w-full h-48 object-cover mb-4 rounded hover:scale-90 transition-all"
             />
-            <h2 className="text-lg font-semibold">{item.name}</h2>
+            <h2 className="text-lg font-poppins">{item.name}</h2>
             <p className="text-sm text-gray-500">{item.type}</p>
             <p className="text-xl text-gray-700 mt-2 mb-5">₹ {item.price}</p>
           </Link>
           <div className="flex gap-5">
             <button
               onClick={() => handleAddToCart(item.id)}
-              className="bg-[#131842] text-white px-4 py-2 rounded-lg hover:bg-[#0f1236]"
+              className="bg-[#131842] text-white px-4 py-2 rounded-lg font-poppins hover:bg-[#0f1236]"
             >
               Add To Cart
             </button>
             <button
               onClick={handleBuyNow}
-              className="bg-[#131842] text-white px-4 py-2 rounded-lg hover:bg-[#0f1236]"
+              className="bg-[#131842] text-white px-4 py-2 rounded-lg font-poppins hover:bg-[#0f1236]"
             >
               Buy Now
             </button>

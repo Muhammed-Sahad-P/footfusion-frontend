@@ -15,24 +15,24 @@ const Profile = () => {
             Profile
           </h1>
           <CgProfile className="text-5xl mx-auto text-gray-700 mb-4" />
-          <h2 className="text-2xl font-semibold text-gray-800">
+          <h2 className="text-2xl font-poppins text-gray-800">
             {isLoggedIn?.fullName}
           </h2>
         </div>
         <div className="mb-6">
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-poppins text-gray-600">
               Username:
             </label>
-            <h2 className="text-xl font-medium text-gray-900">
+            <h2 className="text-xl font-poppins text-gray-900">
               {isLoggedIn?.fullName}
             </h2>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-600">
+            <label className="block text-sm font-poppins text-gray-600">
               Email:
             </label>
-            <h2 className="text-xl font-medium text-gray-900">
+            <h2 className="text-xl font-poppins text-gray-900">
               {isLoggedIn?.email}
             </h2>
           </div>

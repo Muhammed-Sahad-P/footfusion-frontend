@@ -36,7 +36,7 @@ function Contact() {
           <h2 className="text-2xl font-bold mb-6 text-gray-800">Contact Us</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label htmlFor="name" className="block text-gray-700 font-semibold mb-1">
+              <label htmlFor="name" className="block text-gray-700 font-poppins mb-1">
                 Name
               </label>
               <input
@@ -50,7 +50,7 @@ function Contact() {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="email" className="block text-gray-700 font-semibold mb-1">
+              <label htmlFor="email" className="block text-gray-700 font-poppins mb-1">
                 Email
               </label>
               <input
@@ -64,7 +64,7 @@ function Contact() {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="subject" className="block text-gray-700 font-semibold mb-1">
+              <label htmlFor="subject" className="block text-gray-700 font-poppins mb-1">
                 Subject
               </label>
               <input
@@ -78,7 +78,7 @@ function Contact() {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="message" className="block text-gray-700 font-semibold mb-1">
+              <label htmlFor="message" className="block text-gray-700 font-poppins mb-1">
                 Message
               </label>
               <textarea
@@ -94,7 +94,7 @@ function Contact() {
             <div className="flex items-center justify-between">
               <button
                 type="submit"
-                className="bg-[#131842] hover:bg-blue-300 text-white font-semibold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 ease-in-out"
+                className="bg-[#131842] hover:bg-blue-300 text-white font-poppins py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 ease-in-out"
               >
                 Send
               </button>

@@ -70,7 +70,7 @@ const {SignUp} = useContext(UserContext)
         <form onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
-              <label htmlFor="fullName" className="block text-gray-600 font-medium">
+              <label htmlFor="fullName" className="block text-gray-600 font-poppins">
                 Full Name
               </label>
               <input
@@ -85,7 +85,7 @@ const {SignUp} = useContext(UserContext)
               <p className="text-red-600">{formErrors.fullName}</p>
             </div>
             <div>
-              <label htmlFor="email" className="block text-gray-600 font-medium">
+              <label htmlFor="email" className="block text-gray-600 font-poppins">
                 Email Address
               </label>
               <input
@@ -100,7 +100,7 @@ const {SignUp} = useContext(UserContext)
               <p className="text-red-600">{formErrors.email}</p>
             </div>
             <div>
-              <label htmlFor="password" className="block text-gray-600 font-medium">
+              <label htmlFor="password" className="block text-gray-600 font-poppins">
                 Password
               </label>
               <input
@@ -115,7 +115,7 @@ const {SignUp} = useContext(UserContext)
               <p className="text-red-600">{formErrors.password}</p>
             </div>
             <div>
-              <label htmlFor="confirmPassword" className="block text-gray-600 font-medium">
+              <label htmlFor="confirmPassword" className="block text-gray-600 font-poppins">
                 Confirm Password
               </label>
               <input
@@ -146,7 +146,7 @@ const {SignUp} = useContext(UserContext)
             </div>
             <p className="text-red-600">{formErrors.termsAccepted}</p>
           </div>
-          <button className="w-full bg-[#131842] text-white py-3 mt-6 rounded-lg hover:bg-gray-800 transition duration-300 text-lg font-medium">
+          <button className="w-full bg-[#131842] text-white py-3 mt-6 rounded-lg hover:bg-gray-800 transition duration-300 text-lg font-poppins">
             Sign Up
           </button>
           <p className="text-center mt-4">

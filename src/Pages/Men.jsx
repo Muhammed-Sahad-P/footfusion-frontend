@@ -11,7 +11,7 @@ const Men = () => {
       {error && <div>{error}</div>}
       {data && (
         <div className="p-4">
-          <h2 className="text-center text-3xl font-semibold mb-2 ">
+          <h2 className="text-center text-3xl font-poppins mb-2 ">
             Men Products
           </h2>
           <br />

@@ -33,17 +33,17 @@ const Navbar = () => {
     
     <>
     {!isAdmin && (
-      <nav className="bg-gray-100 fixed top-0 left-0 w-screen z-30">
+      <nav className="bg-white shadow-500 fixed top-0 left-0 w-screen z-30">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <GiRunningShoe className="text-red-700 text-3xl" />
-              <span className="text-2xl font-serif">FootFusion</span>
+              <GiRunningShoe className="text-[#131842] text-3xl" />
+              <span className="text-2xl font-poppins">FootFusion</span>
             </Link>
           </div>
 
-          <div className="hidden md:flex space-x-8 font-semibold">
+          <div className="hidden md:flex space-x-8 font-poppins">
             <Link to="/men" className="nav-link">MEN</Link>
             <Link to="/women" className="nav-link">WOMEN</Link>
             <Link to="/collection" className="nav-link">COLLECTION</Link>
@@ -55,8 +55,8 @@ const Navbar = () => {
             {isLoggedIn &&(
               <div className="relative">
                 <Link to="/cart" className="flex items-center">
-                  <FiShoppingCart className="text-3xl text-gray-700 hover:text-red-700" />
-                  <div className="absolute top-0 right-0 w-4 h-4 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">
+                  <FiShoppingCart className="text-3xl text-gray-700 hover:text-[#131842]" />
+                  <div className="absolute top-0 right-0 w-4 h-4 bg-[#131842] text-white text-xs rounded-full flex items-center justify-center">
                     {Object.keys(cartItems).length}
                   </div>
                 </Link>
@@ -80,7 +80,7 @@ const Navbar = () => {
 
         {menuOpen && (
           <div className="md:hidden">
-            <div className="flex flex-col space-y-4 py-2">
+            <div className="flex flex-col space-y-4 py-2 font-poppins">
               <Link to="/men" className="nav-link">MEN</Link>
               <Link to="/women" className="nav-link">WOMEN</Link>
               <Link to="/collection" className="nav-link">COLLECTION</Link>

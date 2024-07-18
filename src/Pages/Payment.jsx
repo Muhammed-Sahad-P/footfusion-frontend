@@ -33,10 +33,10 @@ const Payment = () => {
 
   return (
     <div className="max-w-md mx-auto p-4 pt-6 pb-8 bg-white rounded-lg shadow-lg my-10 mt-40">
-      <h2 className="text-lg font-bold mb-4">Payment Information</h2>
+      <h2 className="text-lg font-poppins mb-4">Payment Information</h2>
       <form>
         <div className="mb-4">
-          <label htmlFor="paymentMethod" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="paymentMethod" className="block text-sm font-poppins text-gray-700 mb-2">
             Payment Method
           </label>
           <select
@@ -57,7 +57,7 @@ const Payment = () => {
         </div>
         
         <div className="mb-4">
-          <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="cardNumber" className="block text-sm font-poppins text-gray-700 mb-2">
             Card Number
           </label>
           <input
@@ -75,7 +75,7 @@ const Payment = () => {
 
         <button
           type="submit"
-          className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-orange-500 hover:bg-orange-700 text-white font-poppins py-2 px-4 rounded"
           onClick={handlePayment}
         >
           Pay Now

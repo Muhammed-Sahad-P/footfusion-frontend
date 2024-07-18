@@ -15,12 +15,12 @@ const {cartItems} = useContext(CollectionContext)
 
   return (
     <div className="p-4 mt-24">
-      <h2 className="text-center text-3xl font-semibold mb-2">My Cart</h2>
+      <h2 className="text-center text-3xl font-poppins mb-2">My Cart</h2>
       <br />
       <div>
         <Link
           to="/collection"
-          className="bg-[#131842] text-white px-4 mr-10 py-2 mb-10 rounded-lg hover:bg-gray-800"
+          className="bg-[#131842] text-white px-4 mr-10 py-2 mb-10 rounded-lg hover:bg-gray-800 font-poppins"
         >
           Add More Items
         </Link>

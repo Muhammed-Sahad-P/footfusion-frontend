@@ -17,8 +17,8 @@ const Home = () => {
 
   return (
     <div className="bg-[#F7F7F7] h-screen bg-cover bg-center grid md:grid-cols-2 justify-items-center gap-30 font-poppins">
-      <div className=" left-10 text-left space-y-4 md:ml-52">
-        <h1 className="reveal text-black text-3xl md:text-5xl font-bold mb-5 mt-28 font-poppins">
+      <div className=" left-10 text-left space-y-4 md:ml-52 mr-24">
+        <h1 className="reveal text-black text-3xl md:text-5xl font-bold mb-5 mt-28 font-poppins mt-40">
           Love The Planet
           <p>We Walk On</p>
         </h1>
@@ -29,7 +29,7 @@ const Home = () => {
           Shop Now
         </Link>
       </div>
-      <div className="align-self-start ">
+      <div className="align-self-start mt-24 ">
         <img
           src={img}
           alt="hero"

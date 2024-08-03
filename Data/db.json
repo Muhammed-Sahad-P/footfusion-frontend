@@ -98,6 +98,41 @@
           "quantity": 2
         }
       }
+    },
+    {
+      "id": "281e",
+      "fullName": "basil",
+      "email": "basil@gmail.com",
+      "password": "2222",
+      "confirmPassword": "2222",
+      "termsAccepted": true,
+      "cart": {}
+    },
+    {
+      "id": "7aad",
+      "fullName": "Sahad",
+      "email": "sahad@gmail.com",
+      "password": "ssss",
+      "confirmPassword": "ssss",
+      "termsAccepted": true
+    },
+    {
+      "id": "cfd6",
+      "fullName": "adilmubarak",
+      "email": "adil@gmail.com",
+      "password": "aaaa",
+      "confirmPassword": "aaaa",
+      "termsAccepted": true,
+      "cart": {
+        "3": {
+          "id": "3",
+          "name": "Men’s Classic Mint",
+          "type": "men",
+          "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-020-600x600.jpg",
+          "price": 1799,
+          "quantity": 1
+        }
+      }
     }
   ],
   "products": [

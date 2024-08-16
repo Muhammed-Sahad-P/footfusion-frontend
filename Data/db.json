@@ -133,6 +133,15 @@
           "quantity": 1
         }
       }
+    },
+    {
+      "id": "a896",
+      "fullName": "maqshood razim",
+      "email": "razim@gmail.com",
+      "password": "rrrr",
+      "confirmPassword": "rrrr",
+      "termsAccepted": true,
+      "cart": {}
     }
   ],
   "products": [

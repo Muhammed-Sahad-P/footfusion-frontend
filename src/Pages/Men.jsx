@@ -2,8 +2,7 @@ import Card from "../Components/Shared/Card";
 import useFetch from "../utils/useFetch";
 
 const Men = () => {
-  const { data, isPending, error } = useFetch("http://localhost:3000/products");
-  const menProducts = data ? data.filter((item) => item.type === "men") : [];
+  const { data, isPending, error } = useFetch("http://localhost:5000/users/products/men");
 
   return (
     <div className="mt-24 text-center">
@@ -16,7 +15,7 @@ const Men = () => {
           </h2>
           <br />
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <Card data={menProducts} />
+            <Card data={data} />
           </div>
         </div>
       )}

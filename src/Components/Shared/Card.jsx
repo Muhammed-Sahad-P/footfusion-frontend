@@ -33,7 +33,7 @@ const Card = ({ data }) => {
           key={item.id}
           className="bg-white p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
         >
-          <Link to={`/collection/${item.id}`}>
+          <Link to={`/collection/${item._id}`}>
             <img
               src={item.image}
               alt={item.name}

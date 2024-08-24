@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 
 const Login = () => {
-  const { isLoggedIn,Login } = useContext(UserContext);
+  const { isLoggedIn, Login } = useContext(UserContext);
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -24,30 +24,31 @@ const Login = () => {
     setFormValues({ ...formValues, [name]: inputValue });
   };
 
-  const handleSubmit =async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validate(formValues);
     setFormErrors(errors);
 
-   
-     const result = await Login(formValues)
-      if(result.success && !result.admin){
-        navigate("/");
-        console.log(result.message);
-
-      }else if (result.admin){
-        console.log("admin");
-        localStorage.setItem("isAdmin", true);
-        navigate("/adminhome");
-        console.log("result.message");
-
-      }else{
-        console.log(result.message);
+    if (Object.keys(errors).length === 0) {
+      try {
+        const result = await Login(formValues);
+        if (result.success && !result.admin) {
+          navigate("/");
+          console.log(result.message);
+        } else if (result.admin) {
+          console.log("Admin");
+          localStorage.setItem("isAdmin", true);
+          navigate("/adminhome");
+          console.log(result.message);
+        } else {
+          setFormErrors({ general: result.message });
+          console.log(result.message);
+        }
+      } catch (error) {
+        setFormErrors({ general: "Login failed. Please try again." });
+        console.error("Login error:", error);
       }
-     
-
-     
-    
+    }
   };
 
   const validate = (values) => {

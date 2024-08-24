@@ -5,7 +5,12 @@ import { UserContext } from "../Context/UserContext";
 
 const Profile = () => {
   const { handleLogout,isLoggedIn } = useContext(UserContext);
-//   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  console.log(isLoggedIn);
+  
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  console.log(currentUser);
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-200">
@@ -16,7 +21,7 @@ const Profile = () => {
           </h1>
           <CgProfile className="text-5xl mx-auto text-gray-700 mb-4" />
           <h2 className="text-2xl font-poppins text-gray-800">
-            {isLoggedIn?.fullName}
+            {currentUser.user.fullName}
           </h2>
         </div>
         <div className="mb-6">
@@ -25,7 +30,7 @@ const Profile = () => {
               Username:
             </label>
             <h2 className="text-xl font-poppins text-gray-900">
-              {isLoggedIn?.fullName}
+              {currentUser.user.fullName}
             </h2>
           </div>
           <div>
@@ -33,7 +38,7 @@ const Profile = () => {
               Email:
             </label>
             <h2 className="text-xl font-poppins text-gray-900">
-              {isLoggedIn?.email}
+              {currentUser.user.email}
             </h2>
           </div>
         </div>

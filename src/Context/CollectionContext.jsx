@@ -6,60 +6,67 @@ export const CollectionContext = createContext();
 
 export const CollectionProvider = (props) => {
   const { isLoggedIn } = useContext(UserContext);
+  const userId = isLoggedIn?.id;
   const [cartItems, setCartItems] = useState({});
-
   const [buyItems, setBuyItems] = useState({});
-  const { data } = useFetch("http://localhost:3000/products");
+  const { data: products } = useFetch("http://localhost:5000/products");
 
   // take from server
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn && userId) {
       setCart();
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn,userId]);
 
   // store into server
   useEffect(() => {
-    if (isLoggedIn) {
-      cartAdds();
+    if (isLoggedIn && userId && Object.keys(cartItems).length > 0) {
+      const timer = setTimeout(() => {
+        cartAdds();
+      }, 500); 
+      return () => clearTimeout(timer);
     }
-  }, [cartItems, isLoggedIn]);
+  }, [cartItems, isLoggedIn, userId]);
 
   const setCart = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/users/${isLoggedIn.id}`
-      );
+      const response = await fetch(`http://localhost:5000/users/${userId}/cart`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch cart data");
+      }
       const data = await response.json();
       if (data.cart) {
         setCartItems(data.cart || {});
       }
     } catch (error) {
-      console.log("Error", error);
+      console.error("Error fetching cart", error);
     }
   };
 
   const cartAdds = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/users/${isLoggedIn.id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ cart: cartItems }),
-        }
-      );
+      const response = await fetch(`http://localhost:5000/users/${userId}/cart`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ cart: cartItems }),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to update cart data");
+      }
       const data = await response.json();
-      console.log(data);
+      console.log("Cart updated:", data);
     } catch (error) {
-      console.log(error);
+      console.error("Error updating cart", error);
     }
   };
 
   const addToCart = (itemId) => {
-    const item = data.find((item) => item.id === itemId);
+    if (!products || products.length === 0) return;
+
+    const item = products.find((item) => item.id === itemId);
+    if (!item) return; // Handle case where item is not found
 
     setCartItems((prevCartItems) => {
       const existingItem = prevCartItems[itemId];
@@ -80,6 +87,7 @@ export const CollectionProvider = (props) => {
     });
   };
 
+
   const removeFromCart = (itemId, removeCompletely = false) => {
     setCartItems((prevCartItems) => {
       if (removeCompletely) {
@@ -88,7 +96,7 @@ export const CollectionProvider = (props) => {
         return newCartItems;
       } else {
         const existingItem = prevCartItems[itemId];
-        if (existingItem.quantity > 1) {
+        if (existingItem && existingItem.quantity > 1) {
           return {
             ...prevCartItems,
             [itemId]: {

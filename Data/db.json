@@ -142,6 +142,15 @@
       "confirmPassword": "rrrr",
       "termsAccepted": true,
       "cart": {}
+    },
+    {
+      "id": "babb",
+      "fullName": "abu",
+      "email": "abu@gmail.com",
+      "password": "aaaa",
+      "confirmPassword": "aaaa",
+      "termsAccepted": true,
+      "cart": {}
     }
   ],
   "products": [

@@ -1,49 +1,84 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CollectionContext } from "../../Context/CollectionContext";
 import { Link } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 
 const CartCard = (props) => {
-  const { removeFromCart, addToCart, cartItems } = useContext(CollectionContext);
+  const [cart, setCart] = useState([]);
+
+  const { removeFromCart, addToCart, cartItems } =
+    useContext(CollectionContext);
 
   const totalPrice = Object.keys(cartItems).reduce((total, key) => {
     const { price, quantity } = cartItems[key];
     return total + price * quantity;
   }, 0);
 
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+  const userId = user.user._id;
+
+  useEffect(() => {
+    const getToCart = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/users/cart/${userId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to add cart data");
+        }
+        const data = await response.json();
+        setCart(data.products || []);
+        console.log("Cart added:", data);
+      } catch (error) {
+        console.error("Error adding cart", error);
+      }
+    };
+    getToCart(userId);
+  }, [userId]);
+
+  console.log("cart", cart);
+
   const handleDelete = (id) => {
-    removeFromCart(id, true); 
+    removeFromCart(id, true);
   };
 
   return (
     <>
-      {props.cartData.map((item) => (
+      {cart.map((item) => (
         <div
-          key={item.id}
+          key={item.productId._id}
           className="bg-white p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
         >
           <img
-            src={item.image}
+            src={item.productId.image}
             alt={item.name}
             className="w-full h-48 object-cover mb-4 rounded-lg hover:scale-90 transition-transform duration-300"
           />
           <div className="flex justify-between items-center mb-2">
-            <h2 className="text-lg font-semibold">{item.name}</h2>
+            <h2 className="text-lg font-semibold">{item.productId.name}</h2>
             <p className="text-gray-700 text-xl font-semibold">
-              ₹ {item.price}
+              ₹ {item.productId.price}
             </p>
           </div>
-          <p className="text-sm text-gray-500 mb-2">{item.type}</p>
+          <p className="text-sm text-gray-500 mb-2">{item.productId.type}</p>
           <div className="flex items-center mb-4">
             <button
-              onClick={() => addToCart(item.id)}
+              onClick={() => addToCart(item.productId._id)}
               className="bg-[#131842] text-white px-4 py-1 rounded-lg hover:bg-gray-800 mr-2"
             >
               +
             </button>
-            <span className="text-xl font-semibold">{item.quantity}</span>
+            <span className="text-xl font-semibold">{item.productId.quantity}</span>
             <button
-              onClick={() => removeFromCart(item.id)}
+              onClick={() => removeFromCart(item.productId._id)}
               className="bg-[#131842] text-white px-4 py-1 rounded-lg hover:bg-gray-800 ml-2"
             >
               -
@@ -51,13 +86,13 @@ const CartCard = (props) => {
             <div className="ml-auto">
               <MdDelete
                 className="text-2xl cursor-pointer"
-                onClick={() => handleDelete(item.id)}
+                onClick={() => handleDelete(item.productId._id)}
               />
             </div>
           </div>
           <div className="text-center mt-2">
             <p className="text-xl font-semibold">
-              Item Total: ₹ {item.price * item.quantity}
+              Item Total: ₹ {item.productId.price * item.quantity}
             </p>
           </div>
         </div>

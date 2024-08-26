@@ -2,7 +2,7 @@ import Card from "../Components/Shared/Card";
 import useFetch from "../utils/useFetch";
 
 const Collection = () => {
-  const { data, isPending, error } = useFetch("http://localhost:5000/users/products");
+  const { data, isPending, error } = useFetch("http://localhost:3000/users/products");
 
   return (
     <div className="mt-24 text-center">

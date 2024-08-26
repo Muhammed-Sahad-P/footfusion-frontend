@@ -3,7 +3,7 @@ import useFetch from "../../utils/useFetch";
 
 const CartItemDetails = () => {
   const { id } = useParams();
-  const { data: productDetails, isPending, error } = useFetch(`http://localhost:5000/users/product/${id}`);
+  const { data: productDetails, isPending, error } = useFetch(`http://localhost:3000/users/product/${id}`);
   
 
   return (
@@ -17,7 +17,7 @@ const CartItemDetails = () => {
               src={productDetails.image}
               alt={productDetails.name}
               className="w-full h-auto object-cover mb-4 rounded-lg hover:scale-105 transition-transform duration-300"
-              style={{ maxWidth: "100%", maxHeight: "300px" }}
+              style={{ maxWidth: "100%", maxHeight: "250px" }}
             />
             <h2 className="text-2xl font-poppins mb-2">{productDetails.name}</h2>
             <p className="text-sm text-gray-700 mb-2">{productDetails.type}</p>

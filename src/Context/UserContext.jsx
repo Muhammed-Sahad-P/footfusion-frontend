@@ -18,12 +18,13 @@ export const UserContextProvider = (props) => {
 
   const Login = async (formValues) => {
     try {
-      const response = await fetch("http://localhost:5000/auth/login", {
+      const response = await fetch("http://localhost:3000/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formValues),
+        credentials: "include",
       });
 
       const data = await response.json();
@@ -62,7 +63,7 @@ export const UserContextProvider = (props) => {
 
   const SignUp = async (formValues) => {
     try {
-      const response = await fetch("http://localhost:5000/auth/register", {
+      const response = await fetch("http://localhost:3000/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formValues),

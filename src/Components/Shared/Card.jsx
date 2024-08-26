@@ -30,7 +30,7 @@ const Card = ({ data }) => {
     <>
       {data.map((item) => (
         <div
-          key={item.id}
+          key={item._id}
           className="bg-white p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
         >
           <Link to={`/collection/${item._id}`}>
@@ -45,7 +45,7 @@ const Card = ({ data }) => {
           </Link>
           <div className="flex gap-5">
             <button
-              onClick={() => handleAddToCart(item.id)}
+              onClick={() => handleAddToCart(item._id)}
               className="bg-[#131842] text-white px-4 py-2 rounded-lg font-poppins hover:bg-[#0f1236]"
             >
               Add To Cart

@@ -2,7 +2,7 @@ import Card from "../Components/Shared/Card";
 import useFetch from "../utils/useFetch";
 
 const Women = () => {
-  const { data, isPending, error } = useFetch("http://localhost:5000/users/products/women");
+  const { data, isPending, error } = useFetch("http://localhost:3000/users/products/women");
   
   return (
     <div className="mt-24 text-center">

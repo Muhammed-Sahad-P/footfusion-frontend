@@ -3,11 +3,10 @@ import { CollectionContext } from "../../Context/CollectionContext";
 import { Link } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 
-const CartCard = (props) => {
+const CartCard = () => {
   const [cart, setCart] = useState([]);
 
-  const { removeFromCart, addToCart, cartItems } =
-    useContext(CollectionContext);
+  const { removeFromCart, cartItems } = useContext(CollectionContext);
 
   const totalPrice = Object.keys(cartItems).reduce((total, key) => {
     const { price, quantity } = cartItems[key];
@@ -17,6 +16,7 @@ const CartCard = (props) => {
   const user = JSON.parse(localStorage.getItem("currentUser"));
   const userId = user.user._id;
 
+  // get cart data from server
   useEffect(() => {
     const getToCart = async () => {
       try {
@@ -44,17 +44,93 @@ const CartCard = (props) => {
     getToCart(userId);
   }, [userId]);
 
-  console.log("cart", cart);
+  //update cart data in server increment
+  const handleIncrement = async (productId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/users/cart/${userId}/${productId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ action: "increment" }), // Specify the action to increment
+          credentials: "include",
+        }
+      );
 
-  const handleDelete = (id) => {
-    removeFromCart(id, true);
+      if (!response.ok) {
+        throw new Error("Failed to update cart quantity");
+      }
+
+      const data = await response.json();
+      setCart(data.cart.products || []); // Update the cart state with the new product data
+      console.log("Cart updated:", data);
+    } catch (error) {
+      console.error("Error updating cart", error);
+    }
+  };
+
+  //decrement cart data in server
+  const handleDecrement = async (productId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/users/cart/${userId}/${productId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ action: "decrement" }), // Specify the action to decrement
+          credentials: "include",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update cart quantity");
+      }
+
+      const data = await response.json();
+      setCart(data.cart.products || []); // Update the cart state with the new product data
+      console.log("Cart updated:", data);
+    } catch (error) {
+      console.error("Error updating cart", error);
+    }
+  };
+
+  //delete cart data from server
+  const handleDelete = async (productId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/users/cart/${userId}/${productId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
+
+      if (!response.ok) {
+        // Check the response status and error message
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to delete cart item");
+      }
+
+      const data = await response.json();
+      setCart(data.cart.products || []); // Update the cart state with the new product data
+      console.log("Cart updated:", data);
+    } catch (error) {
+      console.error("Error updating cart", error);
+    }
   };
 
   return (
     <>
-      {cart.map((item) => (
+      {cart.map((item, index) => (
         <div
-          key={item.productId._id}
+          key={index}
           className="bg-white p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
         >
           <img
@@ -71,14 +147,14 @@ const CartCard = (props) => {
           <p className="text-sm text-gray-500 mb-2">{item.productId.type}</p>
           <div className="flex items-center mb-4">
             <button
-              onClick={() => addToCart(item.productId._id)}
+              onClick={() => handleIncrement(item.productId._id)}
               className="bg-[#131842] text-white px-4 py-1 rounded-lg hover:bg-gray-800 mr-2"
             >
               +
             </button>
-            <span className="text-xl font-semibold">{item.productId.quantity}</span>
+            <span className="text-xl font-semibold">{item.quantity}</span>
             <button
-              onClick={() => removeFromCart(item.productId._id)}
+              onClick={() => handleDecrement(item.productId._id)}
               className="bg-[#131842] text-white px-4 py-1 rounded-lg hover:bg-gray-800 ml-2"
             >
               -

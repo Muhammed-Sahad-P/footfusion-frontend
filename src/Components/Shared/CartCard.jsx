@@ -6,7 +6,7 @@ import { MdDelete } from "react-icons/md";
 const CartCard = () => {
   const [cart, setCart] = useState([]);
 
-  const { removeFromCart, cartItems } = useContext(CollectionContext);
+  const { cartItems } = useContext(CollectionContext);
 
   const totalPrice = Object.keys(cartItems).reduce((total, key) => {
     const { price, quantity } = cartItems[key];
@@ -18,7 +18,7 @@ const CartCard = () => {
 
   // get cart data from server
   useEffect(() => {
-    const getToCart = async () => {
+    const getCart = async () => {
       try {
         const response = await fetch(
           `http://localhost:3000/users/cart/${userId}`,
@@ -41,7 +41,7 @@ const CartCard = () => {
         console.error("Error adding cart", error);
       }
     };
-    getToCart(userId);
+    getCart(userId);
   }, [userId]);
 
   //update cart data in server increment

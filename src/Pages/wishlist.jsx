@@ -1,6 +1,7 @@
 import { useContext } from "react";
+import { FiShoppingCart } from "react-icons/fi";
+import { MdDelete } from "react-icons/md";
 import { CollectionContext } from "../Context/CollectionContext";
-import { FiHeart } from "react-icons/fi";
 import { Link, Navigate } from "react-router-dom";
 
 const Wishlist = () => {
@@ -40,12 +41,12 @@ const Wishlist = () => {
                 <div className="flex items-center justify-between mt-4">
                   <button
                     onClick={() => removeFromWishlist(item._id)}
-                    className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+                    className="text-2xl py-2 px-4 rounded"
                   >
-                    Remove from Wishlist
+                    <MdDelete />
                   </button>
                   <Link to={"/cart"} onClick={() => handleAddToCart(item._id)}>
-                    <FiHeart className="text-2xl cursor-pointer mb-2 text-red-500" />
+                    <FiShoppingCart className="text-2xl cursor-pointer mb-2 mr-4 text-red-500" />
                   </Link>
                 </div>
               </div>

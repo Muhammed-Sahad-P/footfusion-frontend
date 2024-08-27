@@ -18,33 +18,53 @@ const Home = () => {
   return (
     <div className="bg-[#F7F7F7] font-poppins">
       {/* Hero Section */}
-      <div className="grid md:grid-cols-2 gap-8 p-8">
-        <div className="text-left space-y-4">
-          <h1 className="reveal text-black text-3xl md:text-5xl font-bold mb-5 mt-28">
-            Love The Planet
-            <p>We Walk On</p>
-          </h1>
-          <Link
-            to="/collection"
-            className="reveal bg-[#131842] text-white px-4 py-2 rounded-lg hover:bg-[#2C4E80]"
-          >
-            Shop Now
-          </Link>
-        </div>
-        <div className="flex justify-center items-center mt-24">
+      {/* Highlighted Text and Button Section */}
+      <section className="py-16 bg-[#131842] text-white">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+          <div className="md:w-1/2 md:pr-8 mb-8 md:mb-0">
+            <h2 className="text-4xl font-bold mb-4">
+              Discover Our Collection
+            </h2>
+            <p className="text-lg mb-6">
+              Explore the latest trends in fashion and find your new favorite pieces. From stylish shoes to elegant accessories, we have everything you need to step up your wardrobe game.
+            </p>
+            <Link
+              to="/collection"
+              className="bg-yellow-500 text-black px-6 py-3 rounded-lg hover:bg-yellow-600 transition duration-300 ease-in-out"
+            >
+              Browse Collection
+            </Link>
+          </div>
+          <div className="md:w-1/2 flex justify-center">
           <img
             src={img}
             alt="hero"
             className="w-full h-auto max-w-lg object-cover object-center"
           />
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Caption Section */}
+      <section className="relative py-16 bg-[#F7F7F7] overflow-hidden">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-transparent to-[#00000080]"></div>
+        </div>
+        <div className="relative max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-4 transition-transform transform hover:scale-105 hover:text-yellow-500">
+            Discover the Latest Trends in Footwear
+          </h2>
+          <p className="text-xl text-gray-600">
+            Elevate your style with our new collection
+          </p>
+        </div>
+      </section>
 
       {/* Featured Products Section */}
       <section className="py-12 bg-gradient-to-b from-transparent to-black text-white">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-bold mb-6 text-center">
-            UpComing Products
+            Upcoming Products
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Product Card */}

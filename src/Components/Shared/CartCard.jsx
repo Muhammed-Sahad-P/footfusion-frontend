@@ -8,8 +8,9 @@ const CartCard = () => {
 
   const { cartItems } = useContext(CollectionContext);
 
-  const totalPrice = Object.keys(cartItems).reduce((total, key) => {
-    const { price, quantity } = cartItems[key];
+  const totalPrice = cart.reduce((total, item) => {
+    const price = parseFloat(item.productId.price) || 0;
+    const quantity = parseFloat(item.quantity,10) || 0;
     return total + price * quantity;
   }, 0);
 

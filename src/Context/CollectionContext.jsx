@@ -32,34 +32,9 @@ export const CollectionProvider = (props) => {
     }
   };
 
-  const removeFromCart = (itemId, removeCompletely = false) => {
-    setCartItems((prevCartItems) => {
-      if (removeCompletely) {
-        // eslint-disable-next-line no-unused-vars
-        const { [itemId]: _, ...newCartItems } = prevCartItems;
-        return newCartItems;
-      } else {
-        const existingItem = prevCartItems[itemId];
-        if (existingItem && existingItem.quantity > 1) {
-          return {
-            ...prevCartItems,
-            [itemId]: {
-              ...existingItem,
-              quantity: existingItem.quantity - 1,
-            },
-          };
-        } else {
-          // eslint-disable-next-line no-unused-vars
-          const { [itemId]: _, ...newCartItems } = prevCartItems;
-          return newCartItems;
-        }
-      }
-    });
-  };
 
   const contextValue = {
     addToCart,
-    removeFromCart,
     cartItems,
     buyItems,
     setBuyItems,

@@ -66,6 +66,9 @@ const Navbar = () => {
                 <Link to="/collection" className="nav-link">
                   COLLECTION
                 </Link>
+                <Link to="/wishlist" className="nav-link">
+                  WISHLIST
+                </Link>
                 <Link to="/contact" className="nav-link">
                   CONTACT
                 </Link>
@@ -110,6 +113,9 @@ const Navbar = () => {
                   </Link>
                   <Link to="/collection" className="nav-link">
                     COLLECTION
+                  </Link>
+                  <Link to="/wishlist" className="nav-link">
+                    WISHLIST
                   </Link>
                   <Link to="/contact" className="nav-link">
                     CONTACT

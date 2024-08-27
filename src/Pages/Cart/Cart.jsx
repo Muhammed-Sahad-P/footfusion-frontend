@@ -4,14 +4,11 @@ import CartCard from "../../Components/Shared/CartCard";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
-  
-const {cartItems} = useContext(CollectionContext)
+  const { cartItems } = useContext(CollectionContext);
   const cartItemsArray = Object.keys(cartItems).map((key) => ({
     id: key,
     ...cartItems[key],
   }));
-
-  
 
   return (
     <div className="p-4 mt-24">

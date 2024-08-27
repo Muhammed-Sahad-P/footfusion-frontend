@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { CollectionContext } from "../../Context/CollectionContext";
 import { Link, useNavigate } from "react-router-dom";
+import { FiHeart } from "react-icons/fi";
 
 const Card = ({ data }) => {
   const { addToCart } = useContext(CollectionContext);
@@ -13,16 +14,16 @@ const Card = ({ data }) => {
       addToCart(itemId);
     } else {
       alert("You need to log in to add items to the cart");
-      navigate('/login');
+      navigate("/login");
     }
   };
 
   const handleBuyNow = () => {
     if (currentUser) {
-      navigate('/payment');
+      navigate("/payment");
     } else {
       alert("You need to log in to proceed with the purchase");
-      navigate('/login');
+      navigate("/login");
     }
   };
 
@@ -31,7 +32,7 @@ const Card = ({ data }) => {
       {data.map((item) => (
         <div
           key={item._id}
-          className="bg-white p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+          className="bg-white p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 relative"
         >
           <Link to={`/collection/${item._id}`}>
             <img
@@ -43,7 +44,16 @@ const Card = ({ data }) => {
             <p className="text-sm text-gray-500">{item.type}</p>
             <p className="text-xl text-gray-700 mt-2 mb-5">₹ {item.price}</p>
           </Link>
-          <div className="flex gap-5">
+
+          {/* Wishlist Icon */}
+          <button
+            onClick={() => handleAddToWishlist(item._id)}
+            className="absolute top-6 right-6 text-gray-700 hover:text-red-500 transition-colors"
+          >
+            <FiHeart size={24} />
+          </button>
+
+          <div className="flex gap-5 mt-4">
             <button
               onClick={() => handleAddToCart(item._id)}
               className="bg-[#131842] text-white px-4 py-2 rounded-lg font-poppins hover:bg-[#0f1236]"

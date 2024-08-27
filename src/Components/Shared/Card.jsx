@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FiHeart } from "react-icons/fi";
 
 const Card = ({ data }) => {
-  const { addToCart } = useContext(CollectionContext);
+  const { addToCart,addToWishlist } = useContext(CollectionContext);
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   const navigate = useNavigate();
@@ -23,6 +23,15 @@ const Card = ({ data }) => {
       navigate("/payment");
     } else {
       alert("You need to log in to proceed with the purchase");
+      navigate("/login");
+    }
+  };
+
+  const handleAddToWishlist = (itemId) => {
+    if (currentUser) {
+      addToWishlist(itemId);
+    } else {
+      alert("You need to log in to add items to the cart");
       navigate("/login");
     }
   };

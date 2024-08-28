@@ -42,7 +42,7 @@ export const CollectionProvider = (props) => {
         const data = await response.json();
         setWishlist(data.products || []);
       } catch (error) {
-        setAlert({ message: "Error fetching wishlist", type: "error" });
+        console.error("Error fetching wishlist:", error);
       }
     };
     fetchWishlist();
@@ -122,7 +122,7 @@ export const CollectionProvider = (props) => {
         data,
       });
     } catch (error) {
-      setAlert({ message: "Error removing from Cart", type: "error" });
+      setAlert({ message: "Error occured Cart", type: "error" });
     }
   };
 

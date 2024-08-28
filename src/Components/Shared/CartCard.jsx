@@ -1,12 +1,12 @@
-import { useContext, useEffect, useState } from "react";
-import { CollectionContext } from "../../Context/CollectionContext";
+import { useEffect, useState } from "react";
+// import { CollectionContext } from "../../Context/CollectionContext";
 import { Link } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 
 const CartCard = () => {
   const [cart, setCart] = useState([]);
 
-  const { cartItems } = useContext(CollectionContext);
+  // const { cartItems } = useContext(CollectionContext);
 
   const totalPrice = cart.reduce((total, item) => {
     const price = parseFloat(item.productId.price) || 0;

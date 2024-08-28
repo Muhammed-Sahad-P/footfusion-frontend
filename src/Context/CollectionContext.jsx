@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
+import { data } from "autoprefixer";
 
 export const CollectionContext = createContext();
 
@@ -31,15 +32,12 @@ export const CollectionProvider = (props) => {
         }
         const data = await response.json();
         setWishlist(data.products || []);
-        console.log("Wishlist fetched:", data);
       } catch (error) {
         console.error("Error fetching wishlist", error);
       }
     };
-    if (userId) {
-      fetchWishlist();
-    }
-  }, [userId]);
+    fetchWishlist();
+  }, [userId,data.products]);
 
   //add to wishlist
   const addToWishlist = async (itemId) => {
@@ -57,8 +55,7 @@ export const CollectionProvider = (props) => {
         throw new Error("Failed to add data to wishlist");
       }
       const data = await response.json();
-      setWishlist((prevWishlist) => [...prevWishlist, data.wishlist]); // Update the wishlist state immediately
-      console.log("Wishlist added:", data);
+      setWishlist( data.wishlist.products); // Update the wishlist state immediately
     } catch (error) {
       console.error("Error adding to wishlist", error);
     }

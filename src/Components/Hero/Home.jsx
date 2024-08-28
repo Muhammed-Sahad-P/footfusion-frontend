@@ -20,9 +20,9 @@ const Home = () => {
       {/* Hero Section */}
       {/* Highlighted Text and Button Section */}
       <section className="py-16 bg-[#131842] text-white h-[100vh] flex items-center justify-center">
-        <div className="container mx-8  h-full px-4 flex flex-col md:flex-row items-center justify-between">
+        <div className="container mx-8  h-full px-4 flex flex-col md:flex-row items-center justify-evenly">
           <div className="md:w-1/2 md:pr-8 mb-8 md:mb-0 ">
-            <h2 className="text-7xl font-bold mb-4 animate-text-float">
+            <h2 className="text-5xl md:text-7xl font-bold mb-4 animate-text-float">
               Discover Our Collection
             </h2>
             <p className="text-xl mb-6 animate-text-slide">
@@ -41,19 +41,19 @@ const Home = () => {
             <img
               src={img}
               alt="hero"
-              className="w-full h-auto max-w-lg mt-6 object-cover object-center"
+              className="w-full mb-10 h-full max-w-lg mt-6 object-contain object-center"
             />
           </div>
         </div>
       </section>
 
       {/* Caption Section */}
-      <section className="relative py-16 bg-[#131842] overflow-hidden">
+      <section className="relative py-16 pt-10 bg-[#131842] overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-b from-transparent to-[#00000080]"></div>
         </div>
         <div className="relative max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 transition-transform transform hover:scale-105 hover:text-yellow-500">
+          <h2 className="text-3xl mt-10 md:text-5xl font-bold text-white mb-4 transition-transform transform hover:scale-105 hover:text-yellow-500">
             Discover the Latest Trends in Footwear
           </h2>
           <p className="text-xl text-[#a9a7a7]">

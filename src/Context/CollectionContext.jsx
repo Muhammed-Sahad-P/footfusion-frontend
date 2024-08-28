@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
 import { data } from "autoprefixer";
+import Alert from "../Components/Alert";
 
 export const CollectionContext = createContext();
 
@@ -11,6 +12,14 @@ export const CollectionProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [buyItems, setBuyItems] = useState({});
   const [wishlist, setWishlist] = useState([]);
+  const [alert, setAlert] = useState(null);
+
+  useEffect(() => {
+    if (alert) {
+      const timer = setTimeout(() => setAlert(null), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [alert]);
 
   //fetch/view wishlist
   useEffect(() => {
@@ -33,11 +42,11 @@ export const CollectionProvider = (props) => {
         const data = await response.json();
         setWishlist(data.products || []);
       } catch (error) {
-        console.error("Error fetching wishlist", error);
+        setAlert({ message: "Error fetching wishlist", type: "error" });
       }
     };
     fetchWishlist();
-  }, [userId,data.products]);
+  }, [userId, data.products]);
 
   //add to wishlist
   const addToWishlist = async (itemId) => {
@@ -51,13 +60,20 @@ export const CollectionProvider = (props) => {
         credentials: "include",
       });
 
+      if (response.status === 400) {
+        const errorData = await response.json();
+        setAlert({ message: errorData.message, type: "error" });
+        return;
+      }
+
       if (!response.ok) {
         throw new Error("Failed to add data to wishlist");
       }
       const data = await response.json();
-      setWishlist( data.wishlist.products); // Update the wishlist state immediately
+      setWishlist(data.wishlist.products);
+      setAlert({ message: "Product added to wishlist", type: "success" });
     } catch (error) {
-      console.error("Error adding to wishlist", error);
+      setAlert({ message: "Error adding to wishlist", type: "error" });
     }
   };
 
@@ -74,13 +90,13 @@ export const CollectionProvider = (props) => {
       if (response.ok) {
         setWishlist((prevWishlist) =>
           prevWishlist.filter((item) => item._id !== itemId)
-        ); // Update the wishlist state immediately
-        console.log("Product removed from wishlist");
+        );
+        setAlert({ message: "Product removed from wishlist", type: "error" });
       } else {
         throw new Error("Failed to remove from wishlist");
       }
     } catch (error) {
-      console.error("Error removing from wishlist", error);
+      setAlert({ message: "Error removing from wishlist", type: "error" });
     }
   };
 
@@ -100,9 +116,13 @@ export const CollectionProvider = (props) => {
         throw new Error("Failed to add cart data");
       }
       const data = await response.json();
-      console.log("Cart added:", data);
+      setAlert({
+        message: "Product added to cart successfully",
+        type: "success",
+        data,
+      });
     } catch (error) {
-      console.error("Error adding cart", error);
+      setAlert({ message: "Error removing from Cart", type: "error" });
     }
   };
 
@@ -121,6 +141,13 @@ export const CollectionProvider = (props) => {
   return (
     <CollectionContext.Provider value={contextValue}>
       {props.children}
+      {alert && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          onClose={() => setAlert(null)}
+        />
+      )}
     </CollectionContext.Provider>
   );
 };

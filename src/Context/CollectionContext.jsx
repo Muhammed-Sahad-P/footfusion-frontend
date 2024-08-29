@@ -13,6 +13,7 @@ export const CollectionProvider = (props) => {
   const [buyItems, setBuyItems] = useState({});
   const [wishlist, setWishlist] = useState([]);
   const [alert, setAlert] = useState(null);
+  const [viewCart, setViewcart] = useState([]);
 
   useEffect(() => {
     if (alert) {
@@ -72,20 +73,20 @@ export const CollectionProvider = (props) => {
 
       const data = await response.json();
 
-    // Determine the action based on the response message
-    const isRemoved = data.message.includes("removed");
-    const alertMessage = isRemoved 
-      ? "Product removed from wishlist" 
-      : "Product added to wishlist";
-    const alertType = isRemoved ? "error" : "success"; // Set type for alert
+      // Determine the action based on the response message
+      const isRemoved = data.message.includes("removed");
+      const alertMessage = isRemoved
+        ? "Product removed from wishlist"
+        : "Product added to wishlist";
+      const alertType = isRemoved ? "error" : "success"; // Set type for alert
 
-    // Update the wishlist state
-    setWishlist(data.wishlist.products);
-    setAlert({ message: alertMessage, type: alertType });
-  } catch (error) {
-    setAlert({ message: "Error updating wishlist", type: "error" });
-  }
-};
+      // Update the wishlist state
+      setWishlist(data.wishlist.products);
+      setAlert({ message: alertMessage, type: alertType });
+    } catch (error) {
+      setAlert({ message: "Error updating wishlist", type: "error" });
+    }
+  };
 
   //remove from wishlist
   const removeFromWishlist = async (itemId) => {
@@ -131,10 +132,39 @@ export const CollectionProvider = (props) => {
         type: "success",
         data,
       });
+      setViewcart(data.products);
     } catch (error) {
       setAlert({ message: "Error occured Cart", type: "error" });
     }
   };
+
+  //fetch/view cart
+  useEffect(() => {
+    const getCart = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/users/cart/${userId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to add cart data");
+        }
+        const data = await response.json();
+        const newData = data.products || [];
+        setViewcart(newData);
+      } catch (error) {
+        console.error("Error adding cart", error);
+      }
+    };
+    getCart(userId);
+  }, [userId]);
 
   const contextValue = {
     addToCart,
@@ -146,6 +176,8 @@ export const CollectionProvider = (props) => {
     buyItems,
     setBuyItems,
     setCartItems,
+    viewCart,
+    setViewcart,
   };
 
   return (

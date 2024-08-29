@@ -13,7 +13,6 @@ const Navbar = () => {
   const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
   const isLoggedIn = JSON.parse(localStorage.getItem("currentUser"));
   const navigate = useNavigate();
-  const { cartItems } = useContext(CollectionContext);
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -42,6 +41,9 @@ const Navbar = () => {
   const handleClick = () => {
     navigate(isLoggedIn ? "/profile" : "/login");
   };
+
+
+  const {viewCart} = useContext(CollectionContext);
 
   return (
     <>
@@ -81,7 +83,7 @@ const Navbar = () => {
                     <Link to="/cart" className="flex items-center">
                       <FiShoppingCart className="text-3xl text-gray-700 hover:text-[#131842]" />
                       <div className="absolute top-0 right-0 w-4 h-4 bg-[#131842] text-white text-xs rounded-full flex items-center justify-center">
-                        {Object.keys(cartItems).length}
+                        {viewCart.length}
                       </div>
                     </Link>
                   </div>

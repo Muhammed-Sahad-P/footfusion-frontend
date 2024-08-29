@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
-// import { CollectionContext } from "../../Context/CollectionContext";
+import { useContext } from "react";
+import { CollectionContext } from "../../Context/CollectionContext";
 import { Link } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 
 const CartCard = () => {
-  const [cart, setCart] = useState([]);
+  const { viewCart,setViewcart } = useContext(CollectionContext);
+  
 
-  // const { cartItems } = useContext(CollectionContext);
-
-  const totalPrice = cart.reduce((total, item) => {
+  const totalPrice = viewCart.reduce((total, item) => {
     const price = parseFloat(item.productId.price) || 0;
     const quantity = parseFloat(item.quantity,10) || 0;
     return total + price * quantity;
@@ -16,34 +15,6 @@ const CartCard = () => {
 
   const user = JSON.parse(localStorage.getItem("currentUser"));
   const userId = user.user._id;
-
-  // get cart data from server
-  useEffect(() => {
-    const getCart = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/users/cart/${userId}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to add cart data");
-        }
-        const data = await response.json();
-        setCart(data.products || []);
-        console.log("Cart added:", data);
-      } catch (error) {
-        console.error("Error adding cart", error);
-      }
-    };
-    getCart(userId);
-  }, [userId]);
 
   //update cart data in server increment
   const handleIncrement = async (productId) => {
@@ -65,7 +36,7 @@ const CartCard = () => {
       }
 
       const data = await response.json();
-      setCart(data.cart.products || []); // Update the cart state with the new product data
+      setViewcart(data.cart.products || []); // Update the cart state with the new product data
       console.log("Cart updated:", data);
     } catch (error) {
       console.error("Error updating cart", error);
@@ -92,7 +63,7 @@ const CartCard = () => {
       }
 
       const data = await response.json();
-      setCart(data.cart.products || []); // Update the cart state with the new product data
+      setViewcart(data.cart.products || []); // Update the cart state with the new product data
       console.log("Cart updated:", data);
     } catch (error) {
       console.error("Error updating cart", error);
@@ -120,7 +91,7 @@ const CartCard = () => {
       }
 
       const data = await response.json();
-      setCart(data.cart.products || []); // Update the cart state with the new product data
+      setViewcart (data.cart.products || []); // Update the cart state with the new product data
       console.log("Cart updated:", data);
     } catch (error) {
       console.error("Error updating cart", error);
@@ -129,7 +100,7 @@ const CartCard = () => {
 
   return (
     <>
-      {cart.map((item, index) => (
+      {viewCart.map((item, index) => (
         <div
           key={index}
           className="bg-white p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"

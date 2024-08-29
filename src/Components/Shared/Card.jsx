@@ -1,12 +1,20 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CollectionContext } from "../../Context/CollectionContext";
 import { Link, useNavigate } from "react-router-dom";
 import { FiHeart } from "react-icons/fi";
 
 const Card = ({ data }) => {
-  const { addToCart, addToWishlist } = useContext(CollectionContext);
+  const { addToCart, addToWishlist, wishlist } = useContext(CollectionContext);
+  const [wishlistItems, setWishlistItems] = useState([]);
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Update wishlist state when the wishlist context changes
+    if (wishlist) {
+      setWishlistItems(wishlist.map(item => item._id));
+    }
+  }, [wishlist]);
 
   const handleAddToCart = (itemId) => {
     if (currentUser) {
@@ -30,7 +38,7 @@ const Card = ({ data }) => {
     if (currentUser) {
       addToWishlist(itemId);
     } else {
-      alert("You need to log in to add items to the cart");
+      alert("You need to log in to add items to the wishlist");
       navigate("/login");
     }
   };
@@ -63,9 +71,13 @@ const Card = ({ data }) => {
           {/* Wishlist Icon */}
           <button
             onClick={() => handleAddToWishlist(item._id)}
-            className="absolute top-4 right-4 text-gray-700 hover:text-red-500 transition-colors"
+            className="absolute top-4 right-4 transition-colors"
           >
-            <FiHeart size={24} />
+            <FiHeart
+              size={24}
+              style={{ fill: wishlistItems.includes(item._id) ? 'red' : 'none' }}
+              className={`transition-colors ${wishlistItems.includes(item._id) ? 'text-red-500' : 'text-gray-700'}`}
+            />
           </button>
 
           <div className="flex gap-4 p-6">

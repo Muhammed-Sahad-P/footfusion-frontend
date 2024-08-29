@@ -67,15 +67,25 @@ export const CollectionProvider = (props) => {
       }
 
       if (!response.ok) {
-        throw new Error("Failed to add data to wishlist");
+        throw new Error("Failed to update wishlist");
       }
+
       const data = await response.json();
-      setWishlist(data.wishlist.products);
-      setAlert({ message: "Product added to wishlist", type: "success" });
-    } catch (error) {
-      setAlert({ message: "Error adding to wishlist", type: "error" });
-    }
-  };
+
+    // Determine the action based on the response message
+    const isRemoved = data.message.includes("removed");
+    const alertMessage = isRemoved 
+      ? "Product removed from wishlist" 
+      : "Product added to wishlist";
+    const alertType = isRemoved ? "error" : "success"; // Set type for alert
+
+    // Update the wishlist state
+    setWishlist(data.wishlist.products);
+    setAlert({ message: alertMessage, type: alertType });
+  } catch (error) {
+    setAlert({ message: "Error updating wishlist", type: "error" });
+  }
+};
 
   //remove from wishlist
   const removeFromWishlist = async (itemId) => {

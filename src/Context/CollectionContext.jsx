@@ -72,9 +72,6 @@ export const CollectionProvider = (props) => {
         return;
       }
 
-      console.log(response);
-      
-
       if (!response.ok) {
         throw new Error("Failed to update wishlist");
       }

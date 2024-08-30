@@ -36,9 +36,6 @@ const Payment = () => {
       const token = localStorage.getItem("token");
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-      console.log("Token:", token);
-      console.log("Current User:", currentUser);
-
       const response = await fetch("http://localhost:3000/users/orders", {
         method: "POST",
         headers: {
@@ -53,8 +50,6 @@ const Payment = () => {
         }),
         credentials: "include",
       });
-
-      console.log("Response:", response);
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -97,7 +92,7 @@ const Payment = () => {
 
             alert("Payment successful!");
             setCartItems({});
-            navigate("/");
+            navigate("/orders");
           } catch (error) {
             console.error("Payment Verification Error:", error);
             alert("Payment verification failed. Please try again.");

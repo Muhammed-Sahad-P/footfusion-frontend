@@ -6,7 +6,7 @@ import useFetch from "../utils/useFetch";
 const SearchField = () => {
   const [value, setValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const { data } = useFetch("http://localhost:3000/products");
+  const { data } = useFetch("http://localhost:3000/users/products");
   const searchRef = useRef(null);
 
   useEffect(() => {

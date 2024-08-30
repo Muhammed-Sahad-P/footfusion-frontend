@@ -18,6 +18,7 @@ import AdminProtect from "../Admin/AdminHome/AdminProtect";
 import ProductDetails from "../Admin/ProductDetails";
 import UserDetails from "../Admin/UserDetails";
 import Wishlist from "../Pages/wishlist";
+import Orders from "../Pages/Orders";
 
 const RouterApp = () => {
   return (
@@ -37,6 +38,7 @@ const RouterApp = () => {
         <Route path="/payment" element={<Payment />} />
         <Route path="/searchfield" element={<Searchfield />} />
         <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/orders" element={<Orders />} />
 
         <Route
           path="/adminhome"

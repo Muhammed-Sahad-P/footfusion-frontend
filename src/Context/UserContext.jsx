@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const UserContext = createContext();
 
 export const UserContextProvider = (props) => {
+  const [currentUser,setCurrentUser] = useState(null);
   const [newUser, setNewUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ export const UserContextProvider = (props) => {
   useEffect(() => {
     const userExists = localStorage.getItem("currentUser");
     if (userExists) {
+      setCurrentUser(JSON.parse(userExists));
       setIsLoggedIn(JSON.parse(userExists));
     }
   }, []);
@@ -36,8 +38,7 @@ export const UserContextProvider = (props) => {
         localStorage.setItem("token", token);
         localStorage.setItem("isAdmin", isAdmin);
         localStorage.setItem("currentUser", JSON.stringify({ id, isAdmin, user })); 
-    
-        
+        setCurrentUser({ id, isAdmin, user });
         setIsLoggedIn({ id, isAdmin });
 
         return {
@@ -54,6 +55,7 @@ export const UserContextProvider = (props) => {
     }
   };
   const handleLogout = () => {
+    setCurrentUser(null);
     setIsLoggedIn(null);
     localStorage.removeItem("currentUser");
     localStorage.removeItem("token");
@@ -102,6 +104,7 @@ export const UserContextProvider = (props) => {
         newUser,
         Login,
         isLoggedIn,
+        currentUser,
       }}
     >
       {props.children}

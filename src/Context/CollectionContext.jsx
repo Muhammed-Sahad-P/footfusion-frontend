@@ -1,14 +1,17 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
-import { data } from "autoprefixer";
 import Alert from "../Components/Alert";
 
 export const CollectionContext = createContext();
 
 export const CollectionProvider = (props) => {
-  const { isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn,currentUser } = useContext(UserContext);
+  console.log(currentUser);
+  
 
   const userId = isLoggedIn?.user?._id;
+  console.log(userId);
+  
   const [cartItems, setCartItems] = useState({});
   const [buyItems, setBuyItems] = useState({});
   const [wishlist, setWishlist] = useState([]);
@@ -27,7 +30,7 @@ export const CollectionProvider = (props) => {
     const fetchWishlist = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/users/wishlist/${userId}`,
+          `http://localhost:3000/users/wishlist/${currentUser?.user?._id}`,
           {
             method: "GET",
             headers: {
@@ -47,7 +50,7 @@ export const CollectionProvider = (props) => {
       }
     };
     fetchWishlist();
-  }, [userId, data.products]);
+  }, [currentUser]);
 
   //add to wishlist
   const addToWishlist = async (itemId) => {
@@ -57,15 +60,20 @@ export const CollectionProvider = (props) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId: userId, productId: itemId }),
+        body: JSON.stringify({ userId: currentUser?.user?._id, productId: itemId }),
         credentials: "include",
       });
+      console.log(userId);
+      
 
       if (response.status === 400) {
         const errorData = await response.json();
         setAlert({ message: errorData.message, type: "error" });
         return;
       }
+
+      console.log(response);
+      
 
       if (!response.ok) {
         throw new Error("Failed to update wishlist");
@@ -119,7 +127,7 @@ export const CollectionProvider = (props) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId: userId, productId: itemId }),
+        body: JSON.stringify({ userId: currentUser?.user?._id, productId: itemId }),
         credentials: "include",
       });
 
@@ -143,7 +151,7 @@ export const CollectionProvider = (props) => {
     const getCart = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/users/cart/${userId}`,
+          `http://localhost:3000/users/cart/${currentUser?.user?._id}`,
           {
             method: "GET",
             headers: {
@@ -163,8 +171,8 @@ export const CollectionProvider = (props) => {
         console.error("Error adding cart", error);
       }
     };
-    getCart(userId);
-  }, [userId]);
+    getCart(currentUser?.user?._id);
+  }, [currentUser]);
 
   const contextValue = {
     addToCart,

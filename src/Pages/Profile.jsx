@@ -2,15 +2,16 @@ import { useContext } from "react";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
+import { CollectionContext } from "../Context/CollectionContext";
 
 const Profile = () => {
-  const { handleLogout,isLoggedIn } = useContext(UserContext);
+  const { handleLogout, isLoggedIn } = useContext(UserContext);
+  const { setWishlist, setViewcart } = useContext(CollectionContext);
 
   console.log(isLoggedIn);
-  
+
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   console.log(currentUser);
-  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-200">
@@ -49,7 +50,11 @@ const Profile = () => {
             </button>
           </Link>
           <button
-            onClick={handleLogout}
+            onClick={() => {
+              setWishlist([]);
+              setViewcart([]);
+              handleLogout();
+            }}
             className="px-4 py-2 bg-[#131842] text-white rounded-lg shadow-md hover:bg-red-600 transition-colors duration-300"
           >
             Logout

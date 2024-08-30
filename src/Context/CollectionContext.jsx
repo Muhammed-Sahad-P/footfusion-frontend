@@ -100,7 +100,7 @@ export const CollectionProvider = (props) => {
   const removeFromWishlist = async (itemId) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/users/wishlist/${userId}/${itemId}`,
+        `http://localhost:3000/users/wishlist/${currentUser?.user?._id}/${itemId}`,
         {
           method: "DELETE",
           credentials: "include",

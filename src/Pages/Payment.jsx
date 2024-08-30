@@ -6,7 +6,7 @@ const Payment = () => {
   const [mobileNumber, setMobileNumber] = useState("");
   const [address, setAddress] = useState("");
   const [name, setName] = useState("");
-  const { setCartItems } = useContext(CollectionContext);
+  const { setViewcart } = useContext(CollectionContext);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -90,8 +90,8 @@ const Payment = () => {
               throw new Error(`Failed to verify payment: ${verifyErrorData.message || "Unknown error"}`);
             }
 
+            setViewcart([]);
             alert("Payment successful!");
-            setCartItems({});
             navigate("/orders");
           } catch (error) {
             console.error("Payment Verification Error:", error);

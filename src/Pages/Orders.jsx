@@ -38,7 +38,7 @@ const Orders = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="max-w-3xl mx-auto p-4 mt-12">
+    <div className="max-w-3xl mx-auto p-4 mt-20">
       <h2 className="text-xl font-semibold mb-4">Your Orders</h2>
       {orders.length === 0 ? (
         <p>No orders found.</p>
@@ -51,14 +51,30 @@ const Orders = () => {
             <h3 className="text-lg font-medium mb-2">Order ID: {order._id}</h3>
             <p className="text-sm text-gray-600 mb-1">
               <strong>Date:</strong>{" "}
-              {new Date(order.createdAt).toLocaleDateString()}
+              {new Date(order.createdAt).toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </p>
+            <p className="text-sm text-gray-600 mb-1">
+              <strong>Time:</strong>{" "}
+              {new Date(order.createdAt).toLocaleTimeString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+              })}
             </p>
             <p className="text-sm text-gray-600 mb-4">
               <strong>Total:</strong> ₹ {order.totalPrice.toFixed(2)}
             </p>
             <div className="flex flex-wrap -mx-2">
               {order.products.map((product) => (
-                <div key={product.productId._id} className="w-full sm:w-1/2 lg:w-1/3 px-2 mb-4">
+                <div
+                  key={product.productId._id}
+                  className="w-full sm:w-1/2 lg:w-1/3 px-2 mb-4"
+                >
                   <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
                     <img
                       src={product.productId.image}
@@ -76,7 +92,8 @@ const Orders = () => {
                         <strong>Quantity:</strong> {product.quantity}
                       </p>
                       <p className="text-sm">
-                        <strong>Price:</strong> ₹ {product.productId.price.toFixed(2)}
+                        <strong>Price:</strong> ₹{" "}
+                        {product.productId.price.toFixed(2)}
                       </p>
                     </div>
                   </div>

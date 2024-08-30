@@ -20,7 +20,6 @@ const Navbar = () => {
     setCurrentUser(user);
   }, []);
 
-  // Outside click handler to close mobile menu
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -52,7 +51,7 @@ const Navbar = () => {
   return (
     <>
       {!isAdmin && (
-        <nav className="bg-white shadow-500 fixed top-0 left-0 w-screen z-30">
+        <nav className="bg-white shadow-md fixed top-0 left-0 w-full z-30">
           <div className="mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
               <div className="flex items-center">
@@ -65,7 +64,7 @@ const Navbar = () => {
               <div className="hidden md:flex space-x-8 font-poppins">
                 <Link to="/men" className="nav-link">MEN</Link>
                 <Link to="/women" className="nav-link">WOMEN</Link>
-                <Link to="/collection" className="nav-link">COLLECTION</Link>
+                <Link to="/collection" className="nav-link">COLLECTIONS</Link>
                 <Link to="/orders" className="nav-link">ORDERS</Link>
                 <Link to="/contact" className="nav-link">CONTACT</Link>
               </div>
@@ -90,11 +89,14 @@ const Navbar = () => {
                         </div>
                       </Link>
                     </div>
-                    <div className="hidden md:flex items-center">
-                      <FaUserCircle onClick={handleClick} className="text-4xl" />
-                    </div>
                   </>
                 )}
+                <div className="flex items-center">
+                  <FaUserCircle 
+                    onClick={handleClick} 
+                    className="text-4xl text-gray-700 cursor-pointer hover:text-[#131842]" 
+                  />
+                </div>
               </div>
 
               <div className="md:hidden flex items-center">
@@ -112,7 +114,7 @@ const Navbar = () => {
               <div ref={menuRef} className="md:hidden absolute top-12 right-0 w-48 bg-white shadow-lg rounded-lg z-40">
                 <button onClick={() => handleMenuItemClick("/men")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">MEN</button>
                 <button onClick={() => handleMenuItemClick("/women")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">WOMEN</button>
-                <button onClick={() => handleMenuItemClick("/collection")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">COLLECTION</button>
+                <button onClick={() => handleMenuItemClick("/collection")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">COLLECTIONS</button>
                 <button onClick={() => handleMenuItemClick("/orders")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">ORDERS</button>
                 <button onClick={() => handleMenuItemClick("/contact")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">CONTACT</button>
                 {isLoggedIn && (

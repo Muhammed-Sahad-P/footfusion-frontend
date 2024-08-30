@@ -6,11 +6,11 @@ export const CollectionContext = createContext();
 
 export const CollectionProvider = (props) => {
   const { isLoggedIn,currentUser } = useContext(UserContext);
-  console.log(currentUser);
+  // console.log(currentUser);
   
 
   const userId = isLoggedIn?.user?._id;
-  console.log(userId);
+  // console.log(userId);
   
   const [cartItems, setCartItems] = useState({});
   const [buyItems, setBuyItems] = useState({});

@@ -67,7 +67,7 @@ const SearchField = () => {
           {searchResults.map((item) => (
             <Link
               key={item.id}
-              to={`/collection/${item.id}`}
+              to={`/collection/${item._id}`}
               className="block p-2 hover:bg-[#e0e1f6] hover:text-[#131842] transition-all duration-200 ease-in-out"
             >
               <div className="flex items-center">

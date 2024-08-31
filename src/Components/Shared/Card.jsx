@@ -25,15 +25,6 @@ const Card = ({ data }) => {
     }
   };
 
-  const handleBuyNow = () => {
-    if (currentUser) {
-      navigate("/payment");
-    } else {
-      alert("You need to log in to proceed with the purchase");
-      navigate("/login");
-    }
-  };
-
   const handleAddToWishlist = (itemId) => {
     if (currentUser) {
       addToWishlist(itemId);
@@ -80,18 +71,12 @@ const Card = ({ data }) => {
             />
           </button>
 
-          <div className="flex gap-4 p-6">
+          <div className="flex justify-center p-6">
             <button
               onClick={() => handleAddToCart(item._id)}
               className="bg-gradient-to-r from-[#ff7e5f] to-[#feb47b] text-white px-5 py-2 rounded-lg font-semibold shadow-lg hover:from-[#ff6f5e] hover:to-[#fe9f6b] transition-colors duration-300"
             >
               Add To Cart
-            </button>
-            <button
-              onClick={handleBuyNow}
-              className="bg-gradient-to-r from-[#4a90e2] to-[#357ABD] text-white px-5 py-2 rounded-lg font-semibold shadow-lg hover:from-[#3f8cbb] hover:to-[#2f6a99] transition-colors duration-300"
-            >
-              Buy Now
             </button>
           </div>
         </div>

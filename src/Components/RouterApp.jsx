@@ -13,10 +13,7 @@ import Payment from "../Pages/Payment";
 import CartItemDetails from "../Pages/Cart/CartItemDetails";
 import Searchfield from "../Pages/Searchfield";
 import AdminHome from "../Admin/AdminHome/AdminHome";
-import Dashboard from "../Admin/Dashboard";
 import AdminProtect from "../Admin/AdminHome/AdminProtect";
-import ProductDetails from "../Admin/ProductDetails";
-import UserDetails from "../Admin/UserDetails";
 import Wishlist from "../Pages/wishlist";
 import Orders from "../Pages/Orders";
 import NotFound from "../Pages/NotFound";
@@ -42,44 +39,11 @@ const RouterApp = () => {
         <Route path="/orders" element={<Orders />} />
         <Route path="*" element={<NotFound />} />
 
-
         <Route
           path="/adminhome"
           element={
             <AdminProtect>
               <AdminHome />
-            </AdminProtect>
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={
-            <AdminProtect>
-              <AdminHome>
-                <Dashboard />
-              </AdminHome>
-            </AdminProtect>
-          }
-        />
-
-        <Route
-          path="/productdetails"
-          element={
-            <AdminProtect>
-              <AdminHome>
-                <ProductDetails />
-              </AdminHome>
-            </AdminProtect>
-          }
-        />
-
-        <Route
-          path="/userdetails"
-          element={
-            <AdminProtect>
-              <AdminHome>
-                <UserDetails />
-              </AdminHome>
             </AdminProtect>
           }
         />

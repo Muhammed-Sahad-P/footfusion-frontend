@@ -162,6 +162,38 @@ const AdmProducts = () => {
     }
   };
 
+  // delete product
+  const handleDelete = async (productId) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        throw new Error("You are not authenticated. Please log in.");
+      }
+
+      const response = await fetch(
+        `http://localhost:3000/admin/product/${productId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          credentials: "include",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete product");
+      }
+
+      setProducts((prev) =>
+        prev.filter((product) => product._id !== productId)
+      );
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   return (
     <div className="p-4 max-w-6xl mx-auto">
       <div className="flex justify-between items-center mb-6">
@@ -227,9 +259,7 @@ const AdmProducts = () => {
                   <td className="border border-gray-300 p-2 text-center">
                     <FiTrash2
                       className="text-red-500 cursor-pointer hover:text-red-600"
-                      onClick={() =>
-                        navigate(`/admin/delete-product/${product._id}`)
-                      }
+                      onClick={() => handleDelete(product._id)}
                     />
                   </td>
                 </tr>

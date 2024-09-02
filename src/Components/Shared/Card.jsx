@@ -54,7 +54,7 @@ const Card = ({ data }) => {
             </div>
             <div className="p-6 text-center">
               <h2 className="text-2xl font-semibold text-gray-800 mt-4">{item.name}</h2>
-              <p className="text-base text-gray-500 mt-1">{item.type}</p>
+              <h4 className="text-base text-gray-500 mt-1">{item.category}</h4>
               <p className="text-xl font-semibold text-gray-900 mt-2">₹ {item.price}</p>
             </div>
           </Link>

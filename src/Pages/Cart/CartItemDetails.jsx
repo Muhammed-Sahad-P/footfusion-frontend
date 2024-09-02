@@ -20,7 +20,8 @@ const CartItemDetails = () => {
               style={{ maxWidth: "100%", maxHeight: "300px" }}
             />
             <h2 className="text-4xl font-bold text-gray-800 mb-2">{productDetails.name}</h2>
-            <p className="text-sm text-gray-600 mb-4">{productDetails.type}</p>
+            <h4 className="text-sm text-black mb-4">{productDetails.category}</h4>
+            <p className="text-sm text-gray-600 mb-4">{productDetails.description}</p>
             <p className="text-2xl font-semibold text-blue-600">₹ {productDetails.price}</p>
           </div>
         )}

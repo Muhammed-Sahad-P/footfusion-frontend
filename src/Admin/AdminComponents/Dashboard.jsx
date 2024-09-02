@@ -50,7 +50,7 @@ const Dashboard = () => {
       </div>
       <div className="bg-white p-4 rounded shadow-md">
         <h3 className="text-lg font-semibold">Total Revenue</h3>
-        <p className="text-2xl font-bold">${stats.totalRevenue.toFixed(2)}</p>
+        {/* <p className="text-2xl font-bold">${stats.totalRevenue.toFixed(2)}</p> */}
       </div>
     </div>
   );

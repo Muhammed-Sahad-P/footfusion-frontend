@@ -1,20 +1,15 @@
 import { useState } from "react";
 import { GiRunningShoe } from "react-icons/gi";
 import { RiAdminFill } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login"); 
-  };
+  
 
   return (
     <nav className="bg-white shadow-md p-4">
@@ -25,14 +20,7 @@ const Navbar = () => {
             FootFusion
           </span>
         </div>
-        <div className="hidden md:flex items-center space-x-4">
-          <button
-            onClick={handleLogout}
-            className="text-gray-800 hover:text-gray-600"
-          >
-            <RiAdminFill className="text-xl" />
-          </button>
-        </div>
+     
         <button
           onClick={toggleMenu}
           className="md:hidden text-gray-800 focus:outline-none"

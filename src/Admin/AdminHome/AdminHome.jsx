@@ -1,4 +1,3 @@
-// import Dashboard from "../AdminComponents/Dashboard";
 import Navbar from "../AdminComponents/Navbar"; // Ensure this path matches where your Navbar component is located
 import Sidebar from "../AdminComponents/SideBar";
 
@@ -7,10 +6,7 @@ const AdminHome = ({ children }) => {
     <div className="admin-home">
       <Navbar />
       <Sidebar />
-      <main className="content p-4">
-        {/* <Dashboard /> */}
-        {children}
-      </main>
+      <main className="content p-4">{children}</main>
     </div>
   );
 };

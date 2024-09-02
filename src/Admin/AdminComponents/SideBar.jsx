@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaBars, FaHome, FaSignOutAlt } from "react-icons/fa";
 import { GrDeliver } from "react-icons/gr";
 import { FaUsers } from "react-icons/fa";
 import { AiFillProduct } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../Context/UserContext";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { handleLogout } = useContext(UserContext);
   const navigate = useNavigate();
+
 
   return (
     <div className="flex">
@@ -24,7 +27,7 @@ const Sidebar = () => {
         </button>
         <div className="mt-16">
           <div
-            onClick={() => navigate("/home")}
+            onClick={() => navigate("/dashboard")}
             className={`flex items-center py-2 px-4 cursor-pointer text-gray-800 hover:bg-gray-100 rounded ${
               isOpen ? "justify-start" : "justify-center"
             }`}
@@ -33,7 +36,7 @@ const Sidebar = () => {
             {isOpen && <span className="text-lg">Home</span>}
           </div>
           <div
-            onClick={() => navigate("/products")}
+            onClick={() => navigate("/adminProducts")}
             className={`flex items-center py-2 px-4 cursor-pointer text-gray-800 hover:bg-gray-100 rounded ${
               isOpen ? "justify-start" : "justify-center"
             }`}
@@ -42,7 +45,7 @@ const Sidebar = () => {
             {isOpen && <span className="text-lg">Products</span>}
           </div>
           <div
-            onClick={() => navigate("/settings")}
+            onClick={() => navigate("/adminUsers")}
             className={`flex items-center py-2 px-4 cursor-pointer text-gray-800 hover:bg-gray-100 rounded ${
               isOpen ? "justify-start" : "justify-center"
             }`}
@@ -51,7 +54,7 @@ const Sidebar = () => {
             {isOpen && <span className="text-lg">Users</span>}
           </div>
           <div
-            onClick={() => navigate("/settings")}
+            onClick={() => navigate("/adminOrders")}
             className={`flex items-center py-2 px-4 cursor-pointer text-gray-800 hover:bg-gray-100 rounded ${
               isOpen ? "justify-start" : "justify-center"
             }`}
@@ -60,12 +63,12 @@ const Sidebar = () => {
             {isOpen && <span className="text-lg">Orders</span>}
           </div>
           <div
-            onClick={() => navigate("/logout")}
+            onClick={() => navigate("/login")}
             className={`flex items-center py-2 px-4 cursor-pointer text-gray-800 hover:bg-gray-100 rounded ${
               isOpen ? "justify-start" : "justify-center"
             }`}
           >
-            <FaSignOutAlt className="mr-3 text-xl" />
+            <FaSignOutAlt className="mr-3 text-xl" onClick={handleLogout} />
             {isOpen && <span className="text-lg">Logout</span>}
           </div>
         </div>

@@ -38,7 +38,7 @@ const Login = () => {
         } else if (result.admin) {
           console.log("Admin");
           localStorage.setItem("isAdmin", true);
-          navigate("/adminhome");
+          navigate("/dashboard");
           console.log(result.message);
         } else {
           setFormErrors({ general: result.message });

@@ -17,6 +17,10 @@ import AdminProtect from "../Admin/AdminHome/AdminProtect";
 import Wishlist from "../Pages/wishlist";
 import Orders from "../Pages/Orders";
 import NotFound from "../Pages/NotFound";
+import AdmProducts from "../Admin/Pages/AdmProducts";
+import AdmOrders from "../Admin/Pages/AdmOrders";
+import AdmUsers from "../Admin/Pages/AdmUsers";
+import Dashboard from "../Admin/AdminComponents/Dashboard";
 
 const RouterApp = () => {
   return (
@@ -44,6 +48,46 @@ const RouterApp = () => {
           element={
             <AdminProtect>
               <AdminHome />
+            </AdminProtect>
+          }
+        />
+        <Route
+          path="/adminProducts"
+          element={
+            <AdminProtect>
+              <AdminHome>
+                <AdmProducts />
+              </AdminHome>
+            </AdminProtect>
+          }
+        />
+        <Route
+          path="/adminUsers"
+          element={
+            <AdminProtect>
+              <AdminHome>
+                <AdmUsers />
+              </AdminHome>
+            </AdminProtect>
+          }
+        />
+        <Route
+          path="/adminOrders"
+          element={
+            <AdminProtect>
+              <AdminHome>
+                <AdmOrders />
+              </AdminHome>
+            </AdminProtect>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <AdminProtect>
+              <AdminHome>
+                <Dashboard />
+              </AdminHome>
             </AdminProtect>
           }
         />

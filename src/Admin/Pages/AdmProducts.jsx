@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { FiTrash2, FiPlus, FiX } from "react-icons/fi";
 import { MdOutlineModeEdit } from "react-icons/md";
-
-import { useNavigate } from "react-router-dom";
 import Spinner from "../../Components/Spinner";
 import Pagination from "../../Components/Pagination";
 const AdmProducts = () => {
@@ -23,7 +21,6 @@ const AdmProducts = () => {
   });
   const [editProduct, setEditProduct] = useState(null);
   const [popupError, setPopupError] = useState("");
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { FaBars, FaHome, FaSignOutAlt } from "react-icons/fa";
 import { GrDeliver } from "react-icons/gr";
 import { FaUsers } from "react-icons/fa";
@@ -10,18 +10,36 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { handleLogout } = useContext(UserContext);
   const navigate = useNavigate();
+  const menuRef = useRef(null);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div className="flex">
       <div
+        ref={menuRef}
         className={`bg-white text-gray-800 fixed top-0 right-0 h-screen transition-transform duration-300 ease-in-out border-r border-gray-300 ${
           isOpen ? "w-64" : "w-16"
         }`}
       >
         <button
           className="absolute top-4 left-4 text-2xl text-gray-800"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={toggleSidebar}
         >
           <FaBars />
         </button>
@@ -32,8 +50,10 @@ const Sidebar = () => {
               isOpen ? "justify-start" : "justify-center"
             }`}
           >
-            <FaHome className="mr-3 text-xl" />
-            {isOpen && <span className="text-lg">Home</span>}
+            <FaHome className={`mt-10 mr-4 text-xl ${isOpen ? 'text-[#0A043C]' : 'text-gray-800'}`} />
+            <div className={`flex flex-col ${isOpen ? 'mt-2' : 'mt-0'}`}>
+              {isOpen && <span className="mt-10 text-lg font-semibold text-gray-700">Home</span>}
+            </div>
           </div>
           <div
             onClick={() => navigate("/adminProducts")}
@@ -41,8 +61,10 @@ const Sidebar = () => {
               isOpen ? "justify-start" : "justify-center"
             }`}
           >
-            <AiFillProduct className="mr-3 text-xl" />
-            {isOpen && <span className="text-lg">Products</span>}
+            <AiFillProduct className={`mt-4 mr-4 text-xl ${isOpen ? 'text-[#0A043C]' : 'text-gray-800'}`} />
+            <div className={`flex flex-col ${isOpen ? 'mt-2' : 'mt-0'}`}>
+              {isOpen && <span className="mt-4 text-lg font-semibold text-gray-700">Products</span>}
+            </div>
           </div>
           <div
             onClick={() => navigate("/adminUsers")}
@@ -50,8 +72,10 @@ const Sidebar = () => {
               isOpen ? "justify-start" : "justify-center"
             }`}
           >
-            <FaUsers className="mr-3 text-xl" />
-            {isOpen && <span className="text-lg">Users</span>}
+            <FaUsers className={`mt-4 mr-4 text-xl ${isOpen ? 'text-[#0A043C]' : 'text-gray-800'}`} />
+            <div className={`flex flex-col ${isOpen ? 'mt-2' : 'mt-0'}`}>
+              {isOpen && <span className="mt-4 text-lg font-semibold text-gray-700">Users</span>}
+            </div>
           </div>
           <div
             onClick={() => navigate("/adminOrders")}
@@ -59,17 +83,24 @@ const Sidebar = () => {
               isOpen ? "justify-start" : "justify-center"
             }`}
           >
-            <GrDeliver className="mr-3 text-xl" />
-            {isOpen && <span className="text-lg">Orders</span>}
+            <GrDeliver className={`mt-4 mr-4 text-xl ${isOpen ? 'text-[#0A043C]' : 'text-gray-800'}`} />
+            <div className={`flex flex-col ${isOpen ? 'mt-2' : 'mt-0'}`}>
+              {isOpen && <span className="mt-4 text-lg font-semibold text-gray-700">Orders</span>}
+            </div>
           </div>
           <div
-            onClick={() => navigate("/login")}
+            onClick={() => {
+              handleLogout();
+              navigate("/login");
+            }}
             className={`flex items-center py-2 px-4 cursor-pointer text-gray-800 hover:bg-gray-100 rounded ${
               isOpen ? "justify-start" : "justify-center"
             }`}
           >
-            <FaSignOutAlt className="mr-3 text-xl" onClick={handleLogout} />
-            {isOpen && <span className="text-lg">Logout</span>}
+            <FaSignOutAlt className={`mt-4 mr-4 text-xl ${isOpen ? 'text-[#0A043C]' : 'text-gray-800'}`} />
+            <div className={`flex flex-col ${isOpen ? 'mt-2' : 'mt-0'}`}>
+              {isOpen && <span className="mt-4 text-lg font-semibold text-gray-700">Logout</span>}
+            </div>
           </div>
         </div>
       </div>

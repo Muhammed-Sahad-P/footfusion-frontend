@@ -1,4 +1,4 @@
-import Navbar from "../AdminComponents/Navbar"; // Ensure this path matches where your Navbar component is located
+import Navbar from "../AdminComponents/Navbar"; 
 import Sidebar from "../AdminComponents/SideBar";
 
 const AdminHome = ({ children }) => {

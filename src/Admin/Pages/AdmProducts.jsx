@@ -194,7 +194,7 @@ const AdmProducts = () => {
   return (
     <div className="p-4 max-w-6xl mx-auto">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Admin Products</h1>
+        <h1 className="text-2xl font-bold">All Products</h1>
         <button
           onClick={() => setIsAddPopupOpen(true)}
           className="flex items-center gap-2 bg-[#0A043C] text-white px-4 py-2 rounded hover:bg-[#0A043C]/90"

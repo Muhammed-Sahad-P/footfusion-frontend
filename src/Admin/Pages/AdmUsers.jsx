@@ -87,7 +87,7 @@ const AdmUsers = () => {
                       </td>
                       <td className="border border-gray-300 p-2">{user._id}</td>
                       <td className="border border-gray-300 p-2">
-                        {user.name}
+                        {user.fullName}
                       </td>
                       <td className="border border-gray-300 p-2">
                         {user.email}

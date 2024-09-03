@@ -1,168 +1,118 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import Pagination from "../../Components/Pagination";
+import Spinner from "../../Components/Spinner";
 
 const AdmUsers = () => {
   const [users, setUsers] = useState([]);
-  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
-  const [editing, setEditing] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [usersPerPage] = useState(5);
 
+  // Fetch all users
   useEffect(() => {
-    // Fetch users on component mount
     const fetchUsers = async () => {
       try {
-        const response = await fetch('/api/users');
-        const data = await response.json();
-        if (response.ok) {
-          setUsers(data.users);
-        } else {
-          console.error('Error fetching users:', data);
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          throw new Error("You are not authenticated. Please log in.");
         }
+
+        const response = await fetch("http://localhost:3000/admin/users", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          credentials: "include",
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch users");
+        }
+
+        const data = await response.json();
+        setUsers(data.users);
       } catch (error) {
-        console.error('Error fetching users:', error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchUsers();
   }, []);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  // Pagination logic
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      if (editing) {
-        // Update user
-        const response = await fetch(`/api/users/${editing}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-        const data = await response.json();
-        if (response.ok) {
-          setUsers(users.map(user => user._id === editing ? { ...user, ...data.updatedUser } : user));
-          setEditing(null);
-        } else {
-          console.error('Error updating user:', data);
-        }
-      } else {
-        // Create user
-        const response = await fetch('/api/users', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-        const data = await response.json();
-        if (response.ok) {
-          setUsers([...users, data.user]);
-        } else {
-          console.error('Error creating user:', data);
-        }
-      }
-      setFormData({ name: '', email: '', password: '' });
-    } catch (error) {
-      console.error('Error handling form submission:', error);
-    }
-  };
-
-  const handleEdit = (user) => {
-    setFormData({
-      name: user.name,
-      email: user.email,
-      password: '', // Password should not be pre-filled for security reasons
-    });
-    setEditing(user._id);
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      const response = await fetch(`/api/users/${id}`, {
-        method: 'DELETE',
-      });
-      if (response.ok) {
-        setUsers(users.filter(user => user._id !== id));
-      } else {
-        const data = await response.json();
-        console.error('Error deleting user:', data);
-      }
-    } catch (error) {
-      console.error('Error deleting user:', error);
-    }
-  };
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const nextPage = () =>
+    setCurrentPage((prev) =>
+      Math.min(prev + 1, Math.ceil(users.length / usersPerPage))
+    );
+  const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Users Management</h1>
+    <div className="p-4 max-w-6xl mx-auto">
+      <h1 className="text-2xl flex justify-center font-bold mb-6 text-gray-800">All Users</h1>
 
-      <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow-md mb-6">
-        <h2 className="text-xl font-semibold mb-2">{editing ? 'Edit User' : 'Add User'}</h2>
-        <div className="mb-4">
-          <label className="block text-gray-700">Name:</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="mt-1 block w-full border border-gray-300 rounded p-2"
-            required
-          />
+      {loading && (
+        <div className="flex justify-center items-center h-screen">
+          <Spinner />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="mt-1 block w-full border border-gray-300 rounded p-2"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="mt-1 block w-full border border-gray-300 rounded p-2"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        >
-          {editing ? 'Update User' : 'Add User'}
-        </button>
-      </form>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {users.map(user => (
-          <div key={user._id} className="bg-white p-4 rounded shadow-md">
-            <h2 className="text-xl font-semibold mb-2">{user.name}</h2>
-            <p className="mb-2">Email: {user.email}</p>
-            <div className="flex justify-between">
-              <button
-                onClick={() => handleEdit(user)}
-                className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(user._id)}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-              >
-                Delete
-              </button>
+      )}
+      {error && <p className="text-red-500 text-center">{error}</p>}
+      {!loading && !error && (
+        <>
+          {currentUsers.length > 0 ? (
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse border border-gray-300 text-sm">
+                <thead>
+                  <tr className="bg-gray-200">
+                    <th className="border border-gray-300 p-2">Serial No</th>
+                    <th className="border border-gray-300 p-2">ID</th>
+                    <th className="border border-gray-300 p-2">Name</th>
+                    <th className="border border-gray-300 p-2">Email</th>
+                    <th className="border border-gray-300 p-2">Role</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentUsers.map((user, index) => (
+                    <tr key={user._id} className="hover:bg-gray-100">
+                      <td className="border border-gray-300 p-2 text-center">
+                        {indexOfFirstUser + index + 1}
+                      </td>
+                      <td className="border border-gray-300 p-2">{user._id}</td>
+                      <td className="border border-gray-300 p-2">
+                        {user.name}
+                      </td>
+                      <td className="border border-gray-300 p-2">
+                        {user.email}
+                      </td>
+                      <td className="border border-gray-300 p-2">
+                        {user.isAdmin ? "Admin" : "User"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <Pagination
+                itemsPerPage={usersPerPage}
+                totalItems={users.length}
+                paginate={paginate}
+                currentPage={currentPage}
+                nextPage={nextPage}
+                prevPage={prevPage}
+              />
             </div>
-          </div>
-        ))}
-      </div>
+          ) : (
+            <p className="text-center text-gray-500">No users found</p>
+          )}
+        </>
+      )}
     </div>
   );
 };

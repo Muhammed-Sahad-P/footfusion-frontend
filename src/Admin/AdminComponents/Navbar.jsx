@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { GiRunningShoe } from "react-icons/gi";
 import { RiAdminFill } from "react-icons/ri";
 
@@ -14,12 +15,12 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-md p-4">
       <div className="container mx-auto flex items-center justify-between">
-        <div className="flex items-center">
+        <Link to="/dashboard" className="flex items-center">
           <GiRunningShoe className="text-red-700 text-3xl" />
           <span className="text-2xl font-serif font-bold text-gray-800 ml-2">
             FootFusion
           </span>
-        </div>
+        </Link>
      
         <button
           onClick={toggleMenu}

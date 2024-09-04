@@ -191,7 +191,7 @@ const AdmProducts = () => {
   };
 
   return (
-    <div className="p-6 max-w-7xl ml-20 mt-16 bg-white rounded-lg shadow-lg">
+    <div className="p-6 max-w-7xl ml-20 mt-10 bg-white rounded-lg shadow-lg">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-900">Product Management</h1>
         <button

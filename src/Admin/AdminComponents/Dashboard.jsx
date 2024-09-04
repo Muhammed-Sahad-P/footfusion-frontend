@@ -123,8 +123,7 @@ const Dashboard = () => {
   return (
     <div className="p-6 bg-gray-100 min-h-screen ml-10 rounded-lg border border-gray-300">
       <h1 className="text-3xl font-extrabold mb-6 text-gray-800 text-center">Dashboard</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Statistics Boxes */}
+      <div className="grid grid-cols-1 gap-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="bg-gradient-to-r from-blue-100 to-blue-200 p-5 rounded-lg shadow-lg border border-gray-300">
             <h3 className="text-lg font-semibold mb-2 text-gray-700">Total Orders</h3>
@@ -145,7 +144,7 @@ const Dashboard = () => {
         </div>
 
         {/* Charts */}
-        <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-300 flex flex-col gap-6 items-center">
+        <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-300 flex justify-around gap-6 items-center">
           {/* Bar Chart */}
           <div className="w-[400px] h-[400px] bg-gray-50 p-4 rounded-lg shadow-lg border border-gray-300 flex items-center justify-center">
             <Bar data={barChartData} options={barChartOptions} />

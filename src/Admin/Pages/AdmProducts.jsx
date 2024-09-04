@@ -3,6 +3,7 @@ import { FiTrash2, FiPlus, FiX } from "react-icons/fi";
 import { MdOutlineModeEdit } from "react-icons/md";
 import Spinner from "../../Components/Spinner";
 import Pagination from "../../Components/Pagination";
+
 const AdmProducts = () => {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -119,7 +120,6 @@ const AdmProducts = () => {
     }
   };
 
-  // edit product
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -159,7 +159,6 @@ const AdmProducts = () => {
     }
   };
 
-  // delete product
   const handleDelete = async (productId) => {
     try {
       const token = localStorage.getItem("token");
@@ -192,9 +191,9 @@ const AdmProducts = () => {
   };
 
   return (
-    <div className="p-4 max-w-6xl mx-auto">
+    <div className="p-6 max-w-7xl mx-auto bg-white rounded-lg shadow-lg">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">All Products</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Product Management</h1>
         <button
           onClick={() => setIsAddPopupOpen(true)}
           className="flex items-center gap-2 bg-[#0A043C] text-white px-4 py-2 rounded hover:bg-[#0A043C]/90"
@@ -211,51 +210,58 @@ const AdmProducts = () => {
         className="mb-4 p-2 border border-gray-300 rounded w-full max-w-md mx-auto block"
       />
 
-      {loading && <Spinner loading={loading} />}
+      {loading && (
+        <div className="flex justify-center items-center h-screen">
+          <Spinner />
+        </div>
+      )}
       {error && <p className="text-red-500 text-center">{error}</p>}
 
       {!loading && !error && currentProducts.length > 0 && (
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse border border-gray-300 text-sm">
+          <table className="w-full border-collapse border border-gray-200 text-sm">
             <thead>
-              <tr className="bg-gray-200">
-                <th className="border border-gray-300 p-2">Image</th>
-                <th className="border border-gray-300 p-2">Name</th>
-                <th className="border border-gray-300 p-2">Price</th>
-                <th className="border border-gray-300 p-2">Category</th>
-                <th className="border border-gray-300 p-2">Edit</th>
-                <th className="border border-gray-300 p-2">Delete</th>
+              <tr className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white uppercase text-xs leading-normal">
+                <th className="border border-gray-200 p-2">Image</th>
+                <th className="border border-gray-200 p-2">Name</th>
+                <th className="border border-gray-200 p-2">Price</th>
+                <th className="border border-gray-200 p-2">Category</th>
+                <th className="border border-gray-200 p-2">Edit</th>
+                <th className="border border-gray-200 p-2">Delete</th>
               </tr>
             </thead>
             <tbody>
               {currentProducts.map((product) => (
-                <tr key={product._id} className="hover:bg-gray-100">
-                  <td className="border border-gray-300 p-2 text-center">
+                <tr
+                  key={product._id}
+                  className="hover:bg-gray-50 transition-all duration-200 ease-in-out"
+                >
+                  <td className="border border-gray-200 p-2 text-center">
                     <img
                       src={product.image}
                       alt={product.name}
                       className="w-12 h-12 object-cover rounded"
                     />
                   </td>
-                  <td className="border border-gray-300 p-2">{product.name}</td>
-                  <td className="border border-gray-300 p-2">
+                  <td className="border border-gray-200 p-2">{product.name}</td>
+                  <td className="border border-gray-200 p-2">
                     ₹{product.price.toFixed(2)}
                   </td>
-                  <td className="border border-gray-300 p-2">
+                  <td className="border border-gray-200 p-2">
                     {product.category}
                   </td>
-                  <td className="border border-gray-300 p-2 text-center">
+                  <td className="border border-gray-200 p-2 text-center">
                     <MdOutlineModeEdit
-                      className="text-[#238737] cursor-pointer hover:bg-gray-400"
+                      className="text-[#238737] cursor-pointer hover:text-[#1f8c1f] text-xl"
                       onClick={() => {
                         setEditProduct(product);
                         setIsEditPopupOpen(true);
                       }}
                     />
                   </td>
-                  <td className="border border-gray-300 p-2 text-center">
+                  <td className="border border-gray-200 p-2 text-center">
                     <FiTrash2
-                      className="text-red-500 cursor-pointer hover:text-red-600"
+                      className="text-red-600 cursor-pointer hover:text-red-800 text-xl"
                       onClick={() => handleDelete(product._id)}
                     />
                   </td>
@@ -263,92 +269,99 @@ const AdmProducts = () => {
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {currentProducts.length === 0 && !loading && !error && (
+        <p className="text-center text-gray-600">No products found</p>
+      )}
+
+      {products.length > productsPerPage && (
+        <div className="mt-4 flex justify-center">
           <Pagination
-            productsPerPage={productsPerPage}
-            totalProducts={products.length}
-            paginate={paginate}
+            itemsPerPage={productsPerPage}
+            totalItems={products.length}
             currentPage={currentPage}
+            paginate={paginate}
             nextPage={nextPage}
             prevPage={prevPage}
           />
         </div>
       )}
 
-      {!loading && !error && currentProducts.length === 0 && (
-        <p className="text-center text-gray-500">No products found</p>
-      )}
-
       {isAddPopupOpen && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded shadow-lg w-full max-w-md">
-            <h2 className="text-lg font-bold mb-4">Add Product</h2>
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg w-full max-w-md">
+            <h2 className="text-2xl font-bold mb-4">Add New Product</h2>
             {popupError && <p className="text-red-500 mb-4">{popupError}</p>}
             <form onSubmit={handleAddSubmit}>
-              <label className="block mb-2">
-                Name:
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-1">Name</label>
                 <input
                   type="text"
                   name="name"
                   value={newProduct.name}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded mt-1"
+                  className="w-full border border-gray-300 p-2 rounded"
                   required
                 />
-              </label>
-              <label className="block mb-2">
-                Description:
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-1">
+                  Description
+                </label>
                 <textarea
                   name="description"
                   value={newProduct.description}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded mt-1"
+                  className="w-full border border-gray-300 p-2 rounded"
                   required
                 />
-              </label>
-              <label className="block mb-2">
-                Price:
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-1">Price</label>
                 <input
                   type="number"
                   name="price"
                   value={newProduct.price}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded mt-1"
+                  className="w-full border border-gray-300 p-2 rounded"
                   required
                 />
-              </label>
-              <label className="block mb-2">
-                Category:
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-1">Category</label>
                 <input
                   type="text"
                   name="category"
                   value={newProduct.category}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded mt-1"
+                  className="w-full border border-gray-300 p-2 rounded"
                   required
                 />
-              </label>
-              <label className="block mb-4">
-                Image URL:
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-1">Image URL</label>
                 <input
                   type="text"
                   name="image"
                   value={newProduct.image}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded mt-1"
+                  className="w-full border border-gray-300 p-2 rounded"
                   required
                 />
-              </label>
-              <div className="flex justify-end gap-2">
+              </div>
+              <div className="flex justify-between">
                 <button
                   type="button"
                   onClick={() => setIsAddPopupOpen(false)}
-                  className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                  className="bg-gray-300 text-black px-4 py-2 rounded hover:bg-red-500 hover:text-white"
                 >
-                  <FiX /> Cancel
+                  <FiX className="inline" /> Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-[#0A043C] text-white rounded hover:bg-[#0A043C]/90"
+                  className="bg-[#0A043C] text-white px-4 py-2 rounded hover:bg-[#0A043C]/90"
                 >
                   Add Product
                 </button>
@@ -359,76 +372,78 @@ const AdmProducts = () => {
       )}
 
       {isEditPopupOpen && editProduct && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded shadow-lg w-full max-w-md">
-            <h2 className="text-lg font-bold mb-4">Edit Product</h2>
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg w-full max-w-md">
+            <h2 className="text-2xl font-bold mb-4">Edit Product</h2>
             {popupError && <p className="text-red-500 mb-4">{popupError}</p>}
             <form onSubmit={handleEditSubmit}>
-              <label className="block mb-2">
-                Name:
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-1">Name</label>
                 <input
                   type="text"
                   name="name"
                   value={editProduct.name}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded mt-1"
+                  className="w-full border border-gray-300 p-2 rounded"
                   required
                 />
-              </label>
-              <label className="block mb-2">
-                Description:
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-1">
+                  Description
+                </label>
                 <textarea
                   name="description"
                   value={editProduct.description}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded mt-1"
+                  className="w-full border border-gray-300 p-2 rounded"
                   required
                 />
-              </label>
-              <label className="block mb-2">
-                Price:
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-1">Price</label>
                 <input
                   type="number"
                   name="price"
                   value={editProduct.price}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded mt-1"
+                  className="w-full border border-gray-300 p-2 rounded"
                   required
                 />
-              </label>
-              <label className="block mb-2">
-                Category:
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-1">Category</label>
                 <input
                   type="text"
                   name="category"
                   value={editProduct.category}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded mt-1"
+                  className="w-full border border-gray-300 p-2 rounded"
                   required
                 />
-              </label>
-              <label className="block mb-4">
-                Image URL:
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-1">Image URL</label>
                 <input
                   type="text"
                   name="image"
                   value={editProduct.image}
                   onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded mt-1"
+                  className="w-full border border-gray-300 p-2 rounded"
                   required
                 />
-              </label>
-              <div className="flex justify-end gap-2">
+              </div>
+              <div className="flex justify-between">
                 <button
                   type="button"
                   onClick={() => setIsEditPopupOpen(false)}
-                  className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                  className="bg-gray-300 text-black px-4 py-2 rounded hover:bg-red-500 hover:text-white"
                 >
-                  <FiX /> Cancel
+                  <FiX className="inline" /> Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-[#0A043C] text-white rounded hover:bg-[#0A043C]/90"
+                  className="bg-[#0A043C] text-white px-4 py-2 rounded hover:bg-[#0A043C]/90"
                 >
                   Update Product
                 </button>

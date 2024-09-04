@@ -56,8 +56,10 @@ const AdmUsers = () => {
   const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
 
   return (
-    <div className="p-4 max-w-6xl mx-auto">
-      <h1 className="text-2xl flex justify-center font-bold mb-6 text-gray-800">All Users</h1>
+    <div className="p-6 max-w-7xl mx-auto mt-5 bg-white rounded-lg shadow-lg">
+      <h1 className="text-3xl flex justify-center font-bold mb-8 text-gray-900">
+        User Management
+      </h1>
 
       {loading && (
         <div className="flex justify-center items-center h-screen">
@@ -69,31 +71,54 @@ const AdmUsers = () => {
         <>
           {currentUsers.length > 0 ? (
             <div className="overflow-x-auto">
-              <table className="w-full border-collapse border border-gray-300 text-sm">
+              <table className="w-full border-collapse border border-gray-200 text-sm">
                 <thead>
-                  <tr className="bg-gray-200">
-                    <th className="border border-gray-300 p-2">Serial No</th>
-                    <th className="border border-gray-300 p-2">ID</th>
-                    <th className="border border-gray-300 p-2">Name</th>
-                    <th className="border border-gray-300 p-2">Email</th>
-                    <th className="border border-gray-300 p-2">Role</th>
+                  <tr className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white uppercase text-xs leading-normal">
+                    <th className="border border-gray-200 p-4 text-center">
+                      #
+                    </th>
+                    <th className="border border-gray-200 p-4 text-left">
+                      ID
+                    </th>
+                    <th className="border border-gray-200 p-4 text-left">
+                      Name
+                    </th>
+                    <th className="border border-gray-200 p-4 text-left">
+                      Email
+                    </th>
+                    <th className="border border-gray-200 p-4 text-left">
+                      Role
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {currentUsers.map((user, index) => (
-                    <tr key={user._id} className="hover:bg-gray-100">
-                      <td className="border border-gray-300 p-2 text-center">
+                    <tr
+                      key={user._id}
+                      className="hover:bg-gray-50 transition-all duration-200 ease-in-out"
+                    >
+                      <td className="border border-gray-200 p-4 text-center">
                         {indexOfFirstUser + index + 1}
                       </td>
-                      <td className="border border-gray-300 p-2">{user._id}</td>
-                      <td className="border border-gray-300 p-2">
+                      <td className="border border-gray-200 p-4 font-medium text-gray-900">
+                        {user._id}
+                      </td>
+                      <td className="border border-gray-200 p-4">
                         {user.fullName}
                       </td>
-                      <td className="border border-gray-300 p-2">
+                      <td className="border border-gray-200 p-4">
                         {user.email}
                       </td>
-                      <td className="border border-gray-300 p-2">
-                        {user.isAdmin ? "Admin" : "User"}
+                      <td className="border border-gray-200 p-4">
+                        <span
+                          className={`px-3 py-1 inline-block rounded-full text-xs font-semibold ${
+                            user.isAdmin
+                              ? "bg-green-100 text-green-700"
+                              : "bg-blue-100 text-blue-700"
+                          }`}
+                        >
+                          {user.isAdmin ? "Admin" : "User"}
+                        </span>
                       </td>
                     </tr>
                   ))}

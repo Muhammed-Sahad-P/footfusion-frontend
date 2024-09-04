@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
+import { Pie, Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
 import Spinner from '../../Components/Spinner';
+
+ChartJS.register(ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
 const Dashboard = () => {
   const [orders, setOrders] = useState([]);
@@ -9,26 +13,52 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Fetch orders
+  // Fetch data functions
   useEffect(() => {
-    const fetchOrders = async () => {
+    const fetchData = async () => {
       setLoading(true);
       try {
         const token = localStorage.getItem("token");
         if (!token) throw new Error("You are not authenticated. Please log in.");
 
-        const response = await fetch("http://localhost:3000/admin/orders", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          credentials: "include",
-        });
+        const [ordersRes, productsRes, usersRes, revenueRes] = await Promise.all([
+          fetch("http://localhost:3000/admin/orders", {
+            method: "GET",
+            headers: { Authorization: `Bearer ${token}` },
+            credentials: "include",
+          }),
+          fetch("http://localhost:3000/admin/products", {
+            method: "GET",
+            headers: { Authorization: `Bearer ${token}` },
+            credentials: "include",
+          }),
+          fetch("http://localhost:3000/admin/users", {
+            method: "GET",
+            headers: { Authorization: `Bearer ${token}` },
+            credentials: "include",
+          }),
+          fetch("http://localhost:3000/admin/revenue", {
+            method: "GET",
+            headers: { Authorization: `Bearer ${token}` },
+            credentials: "include",
+          }),
+        ]);
 
-        if (!response.ok) throw new Error("Failed to fetch orders");
+        if (!ordersRes.ok || !productsRes.ok || !usersRes.ok || !revenueRes.ok) {
+          throw new Error("Failed to fetch data");
+        }
 
-        const data = await response.json();
-        setOrders(data.orders);
+        const [ordersData, productsData, usersData, revenueData] = await Promise.all([
+          ordersRes.json(),
+          productsRes.json(),
+          usersRes.json(),
+          revenueRes.json(),
+        ]);
+
+        setOrders(ordersData.orders);
+        setProducts(productsData.products);
+        setUsers(usersData.users);
+        setRevenue(revenueData.revenue || 0);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -36,125 +66,95 @@ const Dashboard = () => {
       }
     };
 
-    fetchOrders();
+    fetchData();
   }, []);
-
-  // Fetch products
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) throw new Error("You are not authenticated. Please log in.");
-
-        const response = await fetch("http://localhost:3000/admin/products", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          credentials: "include",
-        });
-
-        if (!response.ok) throw new Error("Failed to fetch products");
-
-        const data = await response.json();
-        setProducts(data.products);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  // Fetch users
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) throw new Error("You are not authenticated. Please log in.");
-
-        const response = await fetch("http://localhost:3000/admin/users", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          credentials: "include",
-        });
-
-        if (!response.ok) throw new Error("Failed to fetch users");
-
-        const data = await response.json();
-        setUsers(data.users);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUsers();
-  }, []);
-
-  // Fetch total revenue
-  useEffect(() => {
-    const fetchRevenue = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) throw new Error("You are not authenticated. Please log in.");
-
-        const response = await fetch("http://localhost:3000/admin/revenue", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          credentials: "include",
-        });
-
-        if (!response.ok) throw new Error("Failed to fetch revenue");
-
-        const data = await response.json();
-        setRevenue(data.revenue || 0); 
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchRevenue();
-  }, []);
-
-
 
   if (loading) {
-    return <Spinner />; 
+    return <Spinner />;
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div className="text-red-600 font-semibold text-center">Error: {error}</div>;
   }
 
+  // Data for Pie Chart
+  const pieChartData = {
+    labels: ['Orders', 'Products', 'Users', 'Revenue'],
+    datasets: [
+      {
+        data: [orders.length, products.length, users.length, revenue],
+        backgroundColor: ['#4B6A9B', '#FF7F7F', '#4CAF50', '#FFC107'],
+        hoverOffset: 4,
+      },
+    ],
+  };
+
+  // Data for Bar Chart
+  const barChartData = {
+    labels: ['Orders', 'Products', 'Users', 'Revenue'],
+    datasets: [
+      {
+        label: 'Counts',
+        data: [orders.length, products.length, users.length, revenue],
+        backgroundColor: '#4B6A9B',
+        borderRadius: 6,
+        borderSkipped: false,
+      },
+    ],
+  };
+
+  const barChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            return context.label + ': ' + context.raw;
+          },
+        },
+      },
+    },
+  };
+
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-        <div className="bg-white p-4 rounded shadow-md">
-          <h3 className="text-lg font-semibold">Total Orders</h3>
-          <p className="text-2xl font-bold">{orders.length}</p>
+    <div className="p-6 bg-gray-100 min-h-screen rounded-lg border border-gray-300">
+      <h1 className="text-3xl font-extrabold mb-6 text-gray-800 text-center">Dashboard</h1>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Statistics Boxes */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="bg-gradient-to-r from-blue-100 to-blue-200 p-5 rounded-lg shadow-lg border border-gray-300">
+            <h3 className="text-lg font-semibold mb-2 text-gray-700">Total Orders</h3>
+            <p className="text-2xl font-bold text-gray-900">{orders.length}</p>
+          </div>
+          <div className="bg-gradient-to-r from-green-100 to-green-200 p-5 rounded-lg shadow-lg border border-gray-300">
+            <h3 className="text-lg font-semibold mb-2 text-gray-700">Total Products</h3>
+            <p className="text-2xl font-bold text-gray-900">{products.length}</p>
+          </div>
+          <div className="bg-gradient-to-r from-yellow-100 to-yellow-200 p-5 rounded-lg shadow-lg border border-gray-300">
+            <h3 className="text-lg font-semibold mb-2 text-gray-700">Total Users</h3>
+            <p className="text-2xl font-bold text-gray-900">{users.length}</p>
+          </div>
+          <div className="bg-gradient-to-r from-red-100 to-red-200 p-5 rounded-lg shadow-lg border border-gray-300">
+            <h3 className="text-lg font-semibold mb-2 text-gray-700">Total Revenue</h3>
+            <p className="text-2xl font-bold text-gray-900">₹{revenue.toFixed(2)}</p>
+          </div>
         </div>
-        <div className="bg-white p-4 rounded shadow-md">
-          <h3 className="text-lg font-semibold">Total Products</h3>
-          <p className="text-2xl font-bold">{products.length}</p>
-        </div>
-        <div className="bg-white p-4 rounded shadow-md">
-          <h3 className="text-lg font-semibold">Total Users</h3>
-          <p className="text-2xl font-bold">{users.length}</p>
-        </div>
-        <div className="bg-white p-4 rounded shadow-md">
-          <h3 className="text-lg font-semibold">Total Revenue</h3>
-          <p className="text-2xl font-bold">₹{revenue.toFixed(2)}</p>
+
+        {/* Charts */}
+        <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-300 flex flex-col gap-6 items-center">
+          {/* Bar Chart */}
+          <div className="w-[400px] h-[400px] bg-gray-50 p-4 rounded-lg shadow-lg border border-gray-300 flex items-center justify-center">
+            <Bar data={barChartData} options={barChartOptions} />
+          </div>
+
+          {/* Pie Chart */}
+          <div className="w-[400px] h-[400px] bg-gray-50 p-4 rounded-lg shadow-lg border border-gray-300 flex items-center justify-center">
+            <Pie data={pieChartData} />
+          </div>
         </div>
       </div>
     </div>

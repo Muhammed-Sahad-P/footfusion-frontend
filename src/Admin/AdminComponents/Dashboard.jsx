@@ -121,7 +121,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen rounded-lg border border-gray-300">
+    <div className="p-6 bg-gray-100 min-h-screen ml-10 rounded-lg border border-gray-300">
       <h1 className="text-3xl font-extrabold mb-6 text-gray-800 text-center">Dashboard</h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Statistics Boxes */}

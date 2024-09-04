@@ -6,7 +6,7 @@ const AdminHome = ({ children }) => {
     <div className="admin-home">
       <Navbar />
       <Sidebar />
-      <main className="content p-4">{children}</main>
+      <main className="content p-4 mt-20 ml-10">{children}</main>
     </div>
   );
 };

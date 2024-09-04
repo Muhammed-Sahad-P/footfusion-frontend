@@ -191,14 +191,14 @@ const AdmProducts = () => {
   };
 
   return (
-    <div className="p-6 max-w-7xl mx-auto bg-white rounded-lg shadow-lg">
+    <div className="p-6 max-w-7xl ml-20 mt-16 bg-white rounded-lg shadow-lg">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-900">Product Management</h1>
         <button
           onClick={() => setIsAddPopupOpen(true)}
-          className="flex items-center gap-2 bg-[#0A043C] text-white px-4 py-2 rounded hover:bg-[#0A043C]/90"
+          className="flex items-center gap-1 bg-[#0A043C] text-white px-4 py-2 rounded hover:bg-[#0A043C]/90"
         >
-          <FiPlus className="text-white" /> Add Product
+          <FiPlus className="text-white" /> Product
         </button>
       </div>
 

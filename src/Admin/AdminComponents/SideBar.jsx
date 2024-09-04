@@ -33,26 +33,37 @@ const Sidebar = () => {
     <div className="flex">
       <div
         ref={menuRef}
-        className={`bg-white text-gray-800 fixed top-0 right-0 h-screen transition-transform duration-300 ease-in-out border-r border-gray-300 ${
+        className={`bg-white text-gray-800 fixed top-0 left-0 h-screen transition-transform duration-300 ease-in-out border-r border-gray-300 ${
           isOpen ? "w-64" : "w-16"
         }`}
       >
-        <button
-          className="absolute top-4 left-4 text-2xl text-gray-800"
-          onClick={toggleSidebar}
-        >
-          <FaBars />
-        </button>
-        <div className="mt-16">
+        <div className="mt-24">
+          <div>
+            <button
+              className="absolute mr-4 text-2xl text-gray-800"
+              onClick={toggleSidebar}
+            >
+              <FaBars />
+            </button>
+          </div>
+
           <div
             onClick={() => navigate("/dashboard")}
             className={`flex items-center py-2 px-4 cursor-pointer text-gray-800 hover:bg-gray-100 rounded ${
               isOpen ? "justify-start" : "justify-center"
             }`}
           >
-            <FaHome className={`mt-10 mr-4 text-xl ${isOpen ? 'text-[#0A043C]' : 'text-gray-800'}`} />
-            <div className={`flex flex-col ${isOpen ? 'mt-2' : 'mt-0'}`}>
-              {isOpen && <span className="mt-10 text-lg font-semibold text-gray-700">Home</span>}
+            <FaHome
+              className={`mt-10 mr-4 text-xl ${
+                isOpen ? "text-[#0A043C]" : "text-gray-800"
+              }`}
+            />
+            <div className={`flex flex-col ${isOpen ? "mt-2" : "mt-0"}`}>
+              {isOpen && (
+                <span className="mt-10 text-lg font-semibold text-gray-700">
+                  Home
+                </span>
+              )}
             </div>
           </div>
           <div
@@ -61,9 +72,17 @@ const Sidebar = () => {
               isOpen ? "justify-start" : "justify-center"
             }`}
           >
-            <AiFillProduct className={`mt-4 mr-4 text-xl ${isOpen ? 'text-[#0A043C]' : 'text-gray-800'}`} />
-            <div className={`flex flex-col ${isOpen ? 'mt-2' : 'mt-0'}`}>
-              {isOpen && <span className="mt-4 text-lg font-semibold text-gray-700">Products</span>}
+            <AiFillProduct
+              className={`mt-4 mr-4 text-xl ${
+                isOpen ? "text-[#0A043C]" : "text-gray-800"
+              }`}
+            />
+            <div className={`flex flex-col ${isOpen ? "mt-2" : "mt-0"}`}>
+              {isOpen && (
+                <span className="mt-4 text-lg font-semibold text-gray-700">
+                  Products
+                </span>
+              )}
             </div>
           </div>
           <div
@@ -72,9 +91,17 @@ const Sidebar = () => {
               isOpen ? "justify-start" : "justify-center"
             }`}
           >
-            <FaUsers className={`mt-4 mr-4 text-xl ${isOpen ? 'text-[#0A043C]' : 'text-gray-800'}`} />
-            <div className={`flex flex-col ${isOpen ? 'mt-2' : 'mt-0'}`}>
-              {isOpen && <span className="mt-4 text-lg font-semibold text-gray-700">Users</span>}
+            <FaUsers
+              className={`mt-4 mr-4 text-xl ${
+                isOpen ? "text-[#0A043C]" : "text-gray-800"
+              }`}
+            />
+            <div className={`flex flex-col ${isOpen ? "mt-2" : "mt-0"}`}>
+              {isOpen && (
+                <span className="mt-4 text-lg font-semibold text-gray-700">
+                  Users
+                </span>
+              )}
             </div>
           </div>
           <div
@@ -83,9 +110,17 @@ const Sidebar = () => {
               isOpen ? "justify-start" : "justify-center"
             }`}
           >
-            <GrDeliver className={`mt-4 mr-4 text-xl ${isOpen ? 'text-[#0A043C]' : 'text-gray-800'}`} />
-            <div className={`flex flex-col ${isOpen ? 'mt-2' : 'mt-0'}`}>
-              {isOpen && <span className="mt-4 text-lg font-semibold text-gray-700">Orders</span>}
+            <GrDeliver
+              className={`mt-4 mr-4 text-xl ${
+                isOpen ? "text-[#0A043C]" : "text-gray-800"
+              }`}
+            />
+            <div className={`flex flex-col ${isOpen ? "mt-2" : "mt-0"}`}>
+              {isOpen && (
+                <span className="mt-4 text-lg font-semibold text-gray-700">
+                  Orders
+                </span>
+              )}
             </div>
           </div>
           <div
@@ -97,9 +132,17 @@ const Sidebar = () => {
               isOpen ? "justify-start" : "justify-center"
             }`}
           >
-            <FaSignOutAlt className={`mt-4 mr-4 text-xl ${isOpen ? 'text-[#0A043C]' : 'text-gray-800'}`} />
-            <div className={`flex flex-col ${isOpen ? 'mt-2' : 'mt-0'}`}>
-              {isOpen && <span className="mt-4 text-lg font-semibold text-gray-700">Logout</span>}
+            <FaSignOutAlt
+              className={`mt-4 mr-4 text-xl ${
+                isOpen ? "text-[#0A043C]" : "text-gray-800"
+              }`}
+            />
+            <div className={`flex flex-col ${isOpen ? "mt-2" : "mt-0"}`}>
+              {isOpen && (
+                <span className="mt-4 text-lg font-semibold text-gray-700">
+                  Logout
+                </span>
+              )}
             </div>
           </div>
         </div>

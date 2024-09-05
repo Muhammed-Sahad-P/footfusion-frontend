@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import useFetch from "../../utils/useFetch";
+import Spinner from "../../Components/Spinner";
 
 const CartItemDetails = () => {
   const { id } = useParams();
@@ -8,7 +9,7 @@ const CartItemDetails = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-white">
       <div className="max-w-md w-full bg-white p-6 rounded-3xl shadow-lg">
-        {isPending && <div className="text-center text-lg text-gray-500">Loading...</div>}
+        {isPending && <div className="flex justify-center items-center h-screen"><Spinner/></div>}
         {error && <div className="text-center text-lg text-red-500">{error}</div>}
         
         {productDetails && (

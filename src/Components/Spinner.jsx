@@ -1,6 +1,6 @@
 import { SyncLoader } from "react-spinners";
 
-const Spinner = ({ loading, size = 150, color = "#123abc" }) => {
+const Spinner = ({ loading, size = 150, color = "#131842" }) => {
   return (
     <div className="flex justify-center items-center h-full">
       <SyncLoader color={color} loading={loading} height={size} />

@@ -1,4 +1,5 @@
 import Card from "../Components/Shared/Card";
+import Spinner from "../Components/Spinner";
 import useFetch from "../utils/useFetch";
 
 const Men = () => {
@@ -6,7 +7,7 @@ const Men = () => {
 
   return (
     <div className="mt-24 text-center">
-      {isPending && <div>Loading...</div>}
+      {isPending && <div className="flex justify-center items-center h-screen"><Spinner/></div>}
       {error && <div>{error}</div>}
       {data && (
         <div className="p-4">

@@ -62,9 +62,7 @@ const AdmUsers = () => {
       </h1>
 
       {loading && (
-        <div className="flex justify-center items-center h-screen">
-          <Spinner />
-        </div>
+        <div className="flex justify-center items-center h-screen"><Spinner/></div>
       )}
       {error && <p className="text-red-500 text-center">{error}</p>}
       {!loading && !error && (

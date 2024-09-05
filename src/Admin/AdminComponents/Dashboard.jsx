@@ -70,7 +70,7 @@ const Dashboard = () => {
   }, []);
 
   if (loading) {
-    return <Spinner />;
+    return <div className="flex justify-center items-center h-screen"><Spinner/></div>
   }
 
   if (error) {

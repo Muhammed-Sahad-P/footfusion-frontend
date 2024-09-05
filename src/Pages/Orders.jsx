@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Spinner from "../Components/Spinner";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -34,7 +35,7 @@ const Orders = () => {
     fetchOrders();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <div className="flex justify-center items-center h-screen"><Spinner/></div>
   if (error) return <p>{error}</p>;
 
   return (

@@ -131,7 +131,7 @@ const AdmOrders = () => {
     }
   };
 
-  if (loading) return <Spinner />;
+  if (loading) return <div className="flex justify-center items-center h-screen"><Spinner/></div>
   if (error) return <div className="text-center mt-20 text-red-600 text-lg font-medium">{error}</div>;
 
   return (

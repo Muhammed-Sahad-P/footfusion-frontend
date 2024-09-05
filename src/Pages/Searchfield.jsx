@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useFetch from "../utils/useFetch";
+import Spinner from "../Components/Spinner";
 
 const SearchField = () => {
   const [value, setValue] = useState("");
@@ -38,7 +39,7 @@ const SearchField = () => {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="flex justify-center items-center h-screen"><Spinner/></div>;
   if (error) return <div>Error: {error}</div>;
 
   return (

@@ -1,6 +1,7 @@
-import  { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CollectionContext } from "../Context/CollectionContext";
+import Alert from "../Components/Alert";
 
 const Payment = () => {
   const [mobileNumber, setMobileNumber] = useState("");
@@ -8,7 +9,15 @@ const Payment = () => {
   const [name, setName] = useState("");
   const { setViewcart } = useContext(CollectionContext);
   const [errors, setErrors] = useState({});
+  const [alert, setAlert] = useState({ message: "", type: "" }); // Alert state
   const navigate = useNavigate();
+
+  const showAlert = (message, type) => {
+    setAlert({ message, type });
+    setTimeout(() => {
+      setAlert({ message: "", type: "" });
+    }, 3000); // Alert will disappear after 3 seconds
+  };
 
   const handlePayment = async (event) => {
     event.preventDefault();
@@ -91,11 +100,11 @@ const Payment = () => {
             }
 
             setViewcart([]);
-            alert("Payment successful!");
+            showAlert("Payment successful!", "success");
             navigate("/orders");
           } catch (error) {
             console.error("Payment Verification Error:", error);
-            alert("Payment verification failed. Please try again.");
+            showAlert("Payment verification failed. Please try again.", "error");
           }
         },
         prefill: {
@@ -113,7 +122,7 @@ const Payment = () => {
       rzp.open();
     } catch (error) {
       console.error("Order Creation Error:", error);
-      alert("Failed to create order. Please try again.");
+      showAlert("Failed to create order. Please try again.", "error");
     }
   };
 
@@ -194,6 +203,13 @@ const Payment = () => {
           Place Order
         </button>
       </form>
+      {alert.message && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          onClose={() => setAlert({ message: "", type: "" })}
+        />
+      )}
     </div>
   );
 };

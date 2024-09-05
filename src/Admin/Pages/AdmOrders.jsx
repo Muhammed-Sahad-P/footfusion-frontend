@@ -1,5 +1,7 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "../../Components/Spinner";
+import Pagination from "../../Components/Pagination";
+import { IoMdClose } from "react-icons/io";
 
 const AdmOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -7,12 +9,58 @@ const AdmOrders = () => {
   const [error, setError] = useState(null);
   const [orderDetails, setOrderDetails] = useState(null);
   const [editOrder, setEditOrder] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [ordersPerPage] = useState(10);
+  const [totalOrders, setTotalOrders] = useState(0);
 
-  // Fetch all orders
+  const fetchOrders = async (page = 1) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:3000/admin/orders?page=${page}&limit=${ordersPerPage}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setOrders(data.orders || []);
+        setTotalOrders(data.totalOrders || 0); 
+      } else {
+        const data = await response.json();
+        setError(data.message || "Failed to fetch orders.");
+      }
+    } catch (error) {
+      setError("Failed to fetch orders.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchOrders = async () => {
+    fetchOrders(currentPage);
+  }, [currentPage]);
+
+  const handlePageChange = async (pageNumber) => {
+    if (pageNumber > 0 && pageNumber <= Math.ceil(totalOrders / ordersPerPage)) {
+      setCurrentPage(pageNumber);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = async () => {
+    const nextPage = currentPage + 1;
+    if (nextPage <= Math.ceil(totalOrders / ordersPerPage)) {
+      setLoading(true);
       try {
-        const response = await fetch("http://localhost:3000/admin/orders", {
+        const response = await fetch(`http://localhost:3000/admin/orders?page=${nextPage}&limit=${ordersPerPage}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -22,7 +70,10 @@ const AdmOrders = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setOrders(data.orders || []); // Adjust according to API response structure
+          if (data.orders.length > 0) {
+            setOrders(data.orders);
+            setCurrentPage(nextPage);
+          }
         } else {
           const data = await response.json();
           setError(data.message || "Failed to fetch orders.");
@@ -32,11 +83,9 @@ const AdmOrders = () => {
       } finally {
         setLoading(false);
       }
-    };
-    fetchOrders();
-  }, []);
+    }
+  };
 
-  // Handle updating an order
   const updateOrder = async (orderId, updatedData) => {
     try {
       const response = await fetch(`http://localhost:3000/admin/orders/${orderId}`, {
@@ -63,7 +112,6 @@ const AdmOrders = () => {
     }
   };
 
-  // Handle deleting an order
   const deleteOrder = async (orderId) => {
     try {
       const response = await fetch(`http://localhost:3000/admin/orders/${orderId}`, {
@@ -84,142 +132,150 @@ const AdmOrders = () => {
   };
 
   if (loading) return <Spinner />;
-  if (error) return <div className="text-center mt-20 text-red-500">{error}</div>;
+  if (error) return <div className="text-center mt-20 text-red-600 text-lg font-medium">{error}</div>;
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6 text-center">Admin Orders</h1>
+    <div className="p-6 max-w-7xl mx-auto mt-5 bg-white rounded-lg shadow-lg">
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-900">Order Management</h1>
 
       {/* Orders Table */}
       {orders.length ? (
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-            <thead className="bg-gray-100 text-gray-600 text-left">
+          <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
+            <thead className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white uppercase text-xs leading-normal">
               <tr>
-                <th className="py-3 px-4">Order ID</th>
-                <th className="py-3 px-4">User</th>
-                <th className="py-3 px-4">Total Price</th>
-                <th className="py-3 px-4">Status</th>
-                <th className="py-3 px-4">Actions</th>
+                <th className="py-3 px-6 text-left">Order ID</th>
+                <th className="py-3 px-6 text-left">User</th>
+                <th className="py-3 px-6 text-left">Total Price</th>
+                <th className="py-3 px-6 text-left">Status</th>
+                <th className="py-3 px-6 text-left">Actions</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="text-gray-700">
               {orders.map((order) => (
-                <tr key={order._id} className="border-b">
-                  <td className="py-3 px-4">{order._id}</td>
-                  <td className="py-3 px-4">{order.userId?.fullName || "Unknown"}</td>
-                  <td className="py-3 px-4">₹{order.totalPrice}</td>
-                  <td className="py-3 px-4">{order.status}</td>
-                  <td className="py-3 px-4 flex space-x-2">
-                    <button
-                      className="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600"
+                <tr key={order._id} className="border-b hover:bg-gray-50 transition duration-200 ease-in-out">
+                  <td className="py-4 px-6">{order._id}</td>
+                  <td className="py-4 px-6">{order.userId?.fullName || "Unknown"}</td>
+                  <td className="py-4 px-6 text-green-600 font-semibold">₹{order.totalPrice}</td>
+                  <td className="py-4 px-6 capitalize">{order.status}</td>
+                  <td className="py-4 px-6 flex space-x-2">
+                    <span
+                      className="px-3 py-1 inline-block rounded-full text-xs font-semibold bg-blue-100 text-blue-700 cursor-pointer hover:bg-blue-200 transition-colors"
                       onClick={() => setOrderDetails(order)}
+                      title="View"
                     >
                       View
-                    </button>
-                    <button
-                      className="bg-yellow-500 text-white px-4 py-1 rounded hover:bg-yellow-600"
+                    </span>
+                    <span
+                      className="px-3 py-1 inline-block rounded-full text-xs font-semibold bg-yellow-100 text-yellow-700 cursor-pointer hover:bg-yellow-200 transition-colors"
                       onClick={() => setEditOrder(order)}
+                      title="Edit"
                     >
                       Edit
-                    </button>
-                    <button
-                      className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600"
+                    </span>
+                    <span
+                      className="px-3 py-1 inline-block rounded-full text-xs font-semibold bg-red-100 text-red-700 cursor-pointer hover:bg-red-200 transition-colors"
                       onClick={() => deleteOrder(order._id)}
+                      title="Remove"
                     >
-                      Cancel
-                    </button>
+                      Remove
+                    </span>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+
+          <Pagination
+            itemsPerPage={ordersPerPage}
+            totalItems={totalOrders}
+            paginate={handlePageChange}
+            currentPage={currentPage}
+            nextPage={handleNextPage}
+            prevPage={handlePrevPage}
+          />
         </div>
       ) : (
-        <div className="text-center mt-10 text-gray-500">No orders found.</div>
+        <div className="text-center mt-10 text-gray-600 text-lg font-medium">No orders found.</div>
       )}
 
-      {/* Order Details Modal */}
       {orderDetails && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
-            <h2 className="text-xl font-bold mb-4">Order Details</h2>
-            <p>
-              <strong>Order ID:</strong> {orderDetails._id}
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg relative">
+            <h2 className="text-xl font-bold mb-4 text-gray-800">Order Details</h2>
+            <p className="mb-2">
+              <strong className="text-gray-700">Order ID:</strong> {orderDetails._id}
             </p>
-            <p>
-              <strong>User:</strong> {orderDetails.userId?.fullName}
+            <p className="mb-2">
+              <strong className="text-gray-700">User:</strong> {orderDetails.userId?.fullName}
             </p>
-            <p>
-              <strong>Total Price:</strong> ₹{orderDetails.totalPrice}
+            <p className="mb-2">
+              <strong className="text-gray-700">Total Price:</strong> ₹{orderDetails.totalPrice}
             </p>
-            <p>
-              <strong>Status:</strong> {orderDetails.status}
+            <p className="mb-4">
+              <strong className="text-gray-700">Status:</strong> {orderDetails.status}
             </p>
-            <ul className="mt-4">
+            <ul className="mt-2">
               {orderDetails.products.map((product) => (
-                <li key={product.productId._id} className="flex items-center mb-2">
-                  <img
-                    src={product.productId.image}
-                    alt={product.productId.name}
-                    className="w-16 h-16 object-cover mr-4"
-                  />
-                  <div>
-                    <p className="font-bold">{product.productId.name}</p>
-                    <p>Qty: {product.quantity}</p>
-                    <p>Price: ₹{product.productId.price}</p>
+                <li key={product.productId._id} className="flex items-center mb-2 p-2 bg-gray-50 rounded-lg shadow-sm">
+                  <img src={product.productId.image} alt={product.productId.name} className="w-12 h-12 object-cover rounded-lg mr-4" />
+                  <div className="flex-1">
+                    <p className="text-gray-800 font-semibold">{product.productId.name}</p>
+                    <p className="text-gray-600">Quantity: {product.quantity}</p>
+                    <p className="text-gray-600">Price: ₹{product.price}</p>
                   </div>
                 </li>
               ))}
             </ul>
             <button
-              className="mt-6 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
               onClick={() => setOrderDetails(null)}
             >
-              Close
+              <IoMdClose size={24} />
             </button>
           </div>
         </div>
       )}
 
-      {/* Edit Order Modal */}
       {editOrder && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
-            <h2 className="text-xl font-bold mb-4">Edit Order</h2>
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-lg relative">
+            <h2 className="text-xl font-bold mb-4 text-gray-800">Edit Order</h2>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                updateOrder(editOrder._id, { status: e.target.status.value });
+                updateOrder(editOrder._id, { status: editOrder.status });
               }}
             >
-              <label className="block mb-2">
-                <span className="text-gray-700">Status:</span>
+              <div className="mb-4">
+                <label htmlFor="status" className="block text-gray-700 font-medium mb-2">
+                  Status
+                </label>
                 <select
-                  name="status"
-                  className="block w-full mt-1 border rounded-lg px-4 py-2"
-                  defaultValue={editOrder.status}
+                  id="status"
+                  value={editOrder.status}
+                  onChange={(e) => setEditOrder({ ...editOrder, status: e.target.value })}
+                  className="block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 >
-                  <option value="Pending">Pending</option>
-                  <option value="Shipped">Shipped</option>
-                  <option value="Delivered">Delivered</option>
-                  <option value="Cancelled">Cancelled</option>
+                  <option value="pending">Pending</option>
+                  <option value="shipped">Shipped</option>
+                  <option value="delivered">Delivered</option>
+                  <option value="cancelled">Cancelled</option>
                 </select>
-              </label>
+              </div>
               <button
                 type="submit"
-                className="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Save Changes
               </button>
-              <button
-                type="button"
-                className="mt-4 ml-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-                onClick={() => setEditOrder(null)}
-              >
-                Cancel
-              </button>
             </form>
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+              onClick={() => setEditOrder(null)}
+            >
+              <IoMdClose size={24} />
+            </button>
           </div>
         </div>
       )}

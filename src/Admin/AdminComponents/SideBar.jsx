@@ -33,7 +33,7 @@ const Sidebar = () => {
     <div className="flex">
       <div
         ref={menuRef}
-        className={`bg-white text-gray-800 fixed top-0 left-0 h-screen transition-transform duration-300 ease-in-out ${
+        className={`bg-white shadow-md text-gray-800 fixed top-0 left-0 h-screen transition-transform duration-300 ease-in-out ${
           isOpen ? "w-64" : "w-16"
         }`}
       >

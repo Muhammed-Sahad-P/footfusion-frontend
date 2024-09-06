@@ -222,7 +222,7 @@ const AdmOrders = () => {
                   <div className="flex-1">
                     <p className="text-gray-800 font-semibold">{product.productId.name}</p>
                     <p className="text-gray-600">Quantity: {product.quantity}</p>
-                    <p className="text-gray-600">Price: ₹{product.price}</p>
+                    <p className="text-gray-600">Price: ₹{product.productId.price}</p>
                   </div>
                 </li>
               ))}

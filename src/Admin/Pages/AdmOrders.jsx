@@ -141,24 +141,24 @@ const AdmOrders = () => {
       {/* Orders Table */}
       {orders.length ? (
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
+          <table className="w-full border-collapse border border-gray-200 text-sm">
             <thead className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white uppercase text-xs leading-normal">
               <tr>
-                <th className="py-3 px-6 text-left">Order ID</th>
-                <th className="py-3 px-6 text-left">User</th>
-                <th className="py-3 px-6 text-left">Total Price</th>
-                <th className="py-3 px-6 text-left">Status</th>
-                <th className="py-3 px-6 text-left">Actions</th>
+                <th className="py-3 px-6 text-left border-r border-gray-200">Order ID</th>
+                <th className="py-3 px-6 text-left border-r border-gray-200">User</th>
+                <th className="py-3 px-6 text-left border-r border-gray-200">Total Price</th>
+                <th className="py-3 px-6 text-left border-r border-gray-200">Status</th>
+                <th className="py-3 px-6 text-left border-r border-gray-200">Actions</th>
               </tr>
             </thead>
             <tbody className="text-gray-700">
               {orders.map((order) => (
                 <tr key={order._id} className="border-b hover:bg-gray-50 transition duration-200 ease-in-out">
-                  <td className="py-4 px-6">{order._id}</td>
-                  <td className="py-4 px-6">{order.userId?.fullName || "Unknown"}</td>
-                  <td className="py-4 px-6 text-green-600 font-semibold">₹{order.totalPrice}</td>
-                  <td className="py-4 px-6 capitalize">{order.status}</td>
-                  <td className="py-4 px-6 flex space-x-2">
+                  <td className="py-4 px-6 border-r border-gray-200">{order._id}</td>
+                  <td className="py-4 px-6 border-r border-gray-200">{order.userId?.fullName || "Unknown"}</td>
+                  <td className="py-4 px-6 border-r border-gray-200 text-green-600 font-semibold">₹{order.totalPrice}</td>
+                  <td className="py-4 px-6 border-r border-gray-200 capitalize">{order.status}</td>
+                  <td className="py-4 px-6 border-r border-gray-200 flex space-x-2">
                     <span
                       className="px-3 py-1 inline-block rounded-full text-xs font-semibold bg-blue-100 text-blue-700 cursor-pointer hover:bg-blue-200 transition-colors"
                       onClick={() => setOrderDetails(order)}
@@ -255,7 +255,7 @@ const AdmOrders = () => {
                   id="status"
                   value={editOrder.status}
                   onChange={(e) => setEditOrder({ ...editOrder, status: e.target.value })}
-                  className="block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="block w-full border border-gray-500 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 >
                   <option value="pending">Pending</option>
                   <option value="shipped">Shipped</option>

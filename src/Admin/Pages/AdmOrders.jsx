@@ -10,7 +10,7 @@ const AdmOrders = () => {
   const [orderDetails, setOrderDetails] = useState(null);
   const [editOrder, setEditOrder] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [ordersPerPage] = useState(10);
+  const [ordersPerPage] = useState(5);
   const [totalOrders, setTotalOrders] = useState(0);
 
   const fetchOrders = async (page = 1) => {

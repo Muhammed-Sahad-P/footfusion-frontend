@@ -1,6 +1,6 @@
 const Pagination = ({
-  productsPerPage,
-  totalProducts,
+  itemsPerPage,
+  totalItems,
   paginate,
   currentPage,
   nextPage,
@@ -8,7 +8,7 @@ const Pagination = ({
 }) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
     pageNumbers.push(i);
   }
 
@@ -37,7 +37,7 @@ const Pagination = ({
       <button
         onClick={nextPage}
         className="px-4 py-2 mx-1 bg-gray-200 border border-gray-300 rounded hover:bg-gray-300 disabled:opacity-50"
-        disabled={currentPage === Math.ceil(totalProducts / productsPerPage)}
+        disabled={currentPage === Math.ceil(totalItems / itemsPerPage)}
       >
         Next
       </button>

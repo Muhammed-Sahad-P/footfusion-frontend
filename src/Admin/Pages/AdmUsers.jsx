@@ -75,16 +75,13 @@ const AdmUsers = () => {
                     <th className="border border-gray-200 p-4 text-center">
                       #
                     </th>
-                    <th className="border border-gray-200 p-4 text-left">
-                      ID
-                    </th>
-                    <th className="border border-gray-200 p-4 text-left">
+                    <th className="border border-gray-200 p-4 text-center">
                       Name
                     </th>
-                    <th className="border border-gray-200 p-4 text-left">
+                    <th className="border border-gray-200 p-4 text-center">
                       Email
                     </th>
-                    <th className="border border-gray-200 p-4 text-left">
+                    <th className="border border-gray-200 p-4 text-center">
                       Role
                     </th>
                   </tr>
@@ -98,16 +95,13 @@ const AdmUsers = () => {
                       <td className="border border-gray-200 p-4 text-center">
                         {indexOfFirstUser + index + 1}
                       </td>
-                      <td className="border border-gray-200 p-4 font-medium text-gray-900">
-                        {user._id}
-                      </td>
-                      <td className="border border-gray-200 p-4">
+                      <td className="border border-gray-200 p-4 text-center">
                         {user.fullName}
                       </td>
-                      <td className="border border-gray-200 p-4">
+                      <td className="border border-gray-200 p-4 text-center">
                         {user.email}
                       </td>
-                      <td className="border border-gray-200 p-4">
+                      <td className="border border-gray-200 p-4 text-center">
                         <span
                           className={`px-3 py-1 inline-block rounded-full text-xs font-semibold ${
                             user.isAdmin

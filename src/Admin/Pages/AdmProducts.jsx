@@ -191,7 +191,7 @@ const AdmProducts = () => {
   };
 
   return (
-    <div className="p-6 max-w-7xl ml-20 mt-10 bg-white rounded-lg shadow-lg">
+    <div className="p-6 max-w-7xl ml-16 mt-10 bg-white rounded-lg shadow-lg">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-900">Product Management</h1>
         <button
@@ -220,12 +220,12 @@ const AdmProducts = () => {
           <table className="w-full border-collapse border border-gray-200 text-sm">
             <thead>
               <tr className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white uppercase text-xs leading-normal">
-                <th className="border border-gray-200 p-2">Image</th>
-                <th className="border border-gray-200 p-2">Name</th>
-                <th className="border border-gray-200 p-2">Price</th>
-                <th className="border border-gray-200 p-2">Category</th>
-                <th className="border border-gray-200 p-2">Edit</th>
-                <th className="border border-gray-200 p-2">Delete</th>
+                <th className="border border-gray-200 p-2 text-center">Image</th>
+                <th className="border border-gray-200 p-2 text-center">Name</th>
+                <th className="border border-gray-200 p-2 text-center">Price</th>
+                <th className="border border-gray-200 p-2 text-center">Category</th>
+                <th className="border border-gray-200 p-2 text-center">Edit</th>
+                <th className="border border-gray-200 p-2 text-center">Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -241,11 +241,11 @@ const AdmProducts = () => {
                       className="w-12 h-12 object-cover rounded"
                     />
                   </td>
-                  <td className="border border-gray-200 p-2">{product.name}</td>
-                  <td className="border border-gray-200 p-2">
+                  <td className="border border-gray-200 p-2 text-center">{product.name}</td>
+                  <td className="border border-gray-200 p-2 text-center ">
                     ₹{product.price.toFixed(2)}
                   </td>
-                  <td className="border border-gray-200 p-2">
+                  <td className="border border-gray-200 p-2 text-center">
                     {product.category}
                   </td>
                   <td className="border border-gray-200 p-2 text-center">

@@ -7,7 +7,7 @@ import Spinner from "../Components/Spinner";
 const SearchField = () => {
   const [value, setValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const { data, loading, error } = useFetch("http://localhost:3000/users/products");
+  const { data, loading, error } = useFetch("https://footfusion-backend.onrender.com/users/products");
   const searchRef = useRef(null);
 
   useEffect(() => {

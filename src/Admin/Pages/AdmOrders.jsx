@@ -16,7 +16,7 @@ const AdmOrders = () => {
   const fetchOrders = async (page = 1) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/admin/orders?page=${page}&limit=${ordersPerPage}`, {
+      const response = await fetch(`https://footfusion-backend.onrender.com/admin/orders?page=${page}&limit=${ordersPerPage}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const AdmOrders = () => {
     if (nextPage <= Math.ceil(totalOrders / ordersPerPage)) {
       setLoading(true);
       try {
-        const response = await fetch(`http://localhost:3000/admin/orders?page=${nextPage}&limit=${ordersPerPage}`, {
+        const response = await fetch(`https://footfusion-backend.onrender.com/admin/orders?page=${nextPage}&limit=${ordersPerPage}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -88,7 +88,7 @@ const AdmOrders = () => {
 
   const updateOrder = async (orderId, updatedData) => {
     try {
-      const response = await fetch(`http://localhost:3000/admin/orders/${orderId}`, {
+      const response = await fetch(`https://footfusion-backend.onrender.com/admin/orders/${orderId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -114,7 +114,7 @@ const AdmOrders = () => {
 
   const deleteOrder = async (orderId) => {
     try {
-      const response = await fetch(`http://localhost:3000/admin/orders/${orderId}`, {
+      const response = await fetch(`https://footfusion-backend.onrender.com/admin/orders/${orderId}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -158,7 +158,7 @@ const AdmOrders = () => {
                   <td className="py-4 px-6 border-r text-center border-gray-200">{order.userId?.fullName || "Unknown"}</td>
                   <td className="py-4 px-6 border-r text-center border-gray-200 text-green-600 font-semibold">₹{order.totalPrice}</td>
                   <td className="py-4 px-6 border-r text-center border-gray-200 capitalize">{order.status}</td>
-                  <td className="py-4 px-6 border-r border-gray-200 flex space-x-2">
+                  <td className="py-4 px-6 border-r border-gray-200 flex justify-center items-center space-x-2">
                     <span
                       className="px-3 py-1 inline-block rounded-full text-xs font-semibold bg-blue-100 text-blue-700 cursor-pointer hover:bg-blue-200 transition-colors"
                       onClick={() => setOrderDetails(order)}

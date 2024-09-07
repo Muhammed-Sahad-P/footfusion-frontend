@@ -4,7 +4,7 @@ import useFetch from "../utils/useFetch";
 
 const Women = () => {
   const { data, isPending, error } = useFetch(
-    "http://localhost:3000/users/products/women"
+    "https://footfusion-backend.onrender.com/users/products/women"
   );
 
   return (

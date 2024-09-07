@@ -30,7 +30,7 @@ export const CollectionProvider = (props) => {
     const fetchWishlist = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/users/wishlist/${currentUser?.user?._id}`,
+          `https://footfusion-backend.onrender.com/users/wishlist/${currentUser?.user?._id}`,
           {
             method: "GET",
             headers: {
@@ -55,7 +55,7 @@ export const CollectionProvider = (props) => {
   //add to wishlist
   const addToWishlist = async (itemId) => {
     try {
-      const response = await fetch(`http://localhost:3000/users/wishlist`, {
+      const response = await fetch(`https://footfusion-backend.onrender.com/users/wishlist`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -97,7 +97,7 @@ export const CollectionProvider = (props) => {
   const removeFromWishlist = async (itemId) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/users/wishlist/${currentUser?.user?._id}/${itemId}`,
+        `https://footfusion-backend.onrender.com/users/wishlist/${currentUser?.user?._id}/${itemId}`,
         {
           method: "DELETE",
           credentials: "include",
@@ -119,7 +119,7 @@ export const CollectionProvider = (props) => {
   //add to cart
   const addToCart = async (itemId) => {
     try {
-      const response = await fetch(`http://localhost:3000/users/cart`, {
+      const response = await fetch(`https://footfusion-backend.onrender.com/users/cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -148,7 +148,7 @@ export const CollectionProvider = (props) => {
     const getCart = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/users/cart/${currentUser?.user?._id}`,
+          `https://footfusion-backend.onrender.com/users/cart/${currentUser?.user?._id}`,
           {
             method: "GET",
             headers: {

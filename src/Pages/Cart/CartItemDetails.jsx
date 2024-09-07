@@ -4,7 +4,7 @@ import Spinner from "../../Components/Spinner";
 
 const CartItemDetails = () => {
   const { id } = useParams();
-  const { data: productDetails, isPending, error } = useFetch(`http://localhost:3000/users/product/${id}`);
+  const { data: productDetails, isPending, error } = useFetch(`https://footfusion-backend.onrender.com/users/product/${id}`);
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-white">

@@ -20,7 +20,7 @@ const CartCard = () => {
   const handleIncrement = async (productId) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/users/cart/${userId}/${productId}`,
+        `https://footfusion-backend.onrender.com/users/cart/${userId}/${productId}`,
         {
           method: "PUT",
           headers: {
@@ -47,7 +47,7 @@ const CartCard = () => {
   const handleDecrement = async (productId) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/users/cart/${userId}/${productId}`,
+        `https://footfusion-backend.onrender.com/users/cart/${userId}/${productId}`,
         {
           method: "PUT",
           headers: {
@@ -74,7 +74,7 @@ const CartCard = () => {
   const handleDelete = async (productId) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/users/cart/${userId}/${productId}`,
+        `https://footfusion-backend.onrender.com/users/cart/${userId}/${productId}`,
         {
           method: "DELETE",
           headers: {

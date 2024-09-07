@@ -32,7 +32,7 @@ const AdmProducts = () => {
           throw new Error("You are not authenticated. Please log in.");
         }
 
-        const response = await fetch("http://localhost:3000/admin/products", {
+        const response = await fetch("https://footfusion-backend.onrender.com/admin/products", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -91,7 +91,7 @@ const AdmProducts = () => {
         throw new Error("You are not authenticated. Please log in.");
       }
 
-      const response = await fetch("http://localhost:3000/admin/product", {
+      const response = await fetch("https://footfusion-backend.onrender.com/admin/product", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -130,7 +130,7 @@ const AdmProducts = () => {
       }
 
       const response = await fetch(
-        `http://localhost:3000/admin/product/${editProduct._id}`,
+        `https://footfusion-backend.onrender.com/admin/product/${editProduct._id}`,
         {
           method: "PUT",
           headers: {
@@ -168,7 +168,7 @@ const AdmProducts = () => {
       }
 
       const response = await fetch(
-        `http://localhost:3000/admin/product/${productId}`,
+        `https://footfusion-backend.onrender.com/admin/product/${productId}`,
         {
           method: "DELETE",
           headers: {

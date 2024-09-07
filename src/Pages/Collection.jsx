@@ -3,7 +3,7 @@ import Spinner from "../Components/Spinner";
 import useFetch from "../utils/useFetch";
 
 const Collection = () => {
-  const { data, isPending, error } = useFetch("http://localhost:3000/users/products");
+  const { data, isPending, error } = useFetch("https://footfusion-backend.onrender.com/users/products");
 
   return (
     <div className="mt-24 text-center">

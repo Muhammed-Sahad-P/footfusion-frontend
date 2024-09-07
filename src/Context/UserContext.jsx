@@ -26,7 +26,7 @@ export const UserContextProvider = (props) => {
 
   const SignUp = async (formValues) => {
     try {
-      const response = await fetch("http://localhost:3000/auth/register", {
+      const response = await fetch("https://footfusion-backend.onrender.com/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formValues),
@@ -62,7 +62,7 @@ export const UserContextProvider = (props) => {
 
   const Login = async (formValues) => {
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
+      const response = await fetch("https://footfusion-backend.onrender.com/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

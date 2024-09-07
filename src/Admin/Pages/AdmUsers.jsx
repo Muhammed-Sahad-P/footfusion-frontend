@@ -19,7 +19,7 @@ const AdmUsers = () => {
           throw new Error("You are not authenticated. Please log in.");
         }
 
-        const response = await fetch("http://localhost:3000/admin/users", {
+        const response = await fetch("https://footfusion-backend.onrender.com/admin/users", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,

@@ -2,12 +2,16 @@ import { useContext, useEffect, useState } from "react";
 import { CollectionContext } from "../../Context/CollectionContext";
 import { Link, useNavigate } from "react-router-dom";
 import { FiHeart } from "react-icons/fi";
+import Alert from "../../Components/Alert";
 
 const Card = ({ data }) => {
   const { addToCart, addToWishlist, wishlist } = useContext(CollectionContext);
   const [wishlistItems, setWishlistItems] = useState([]);
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const navigate = useNavigate();
+
+  const [alert, setAlert] = useState({ message: "", type: "" });
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     // Update wishlist state when the wishlist context changes
@@ -19,8 +23,11 @@ const Card = ({ data }) => {
   const handleAddToCart = (itemId) => {
     if (currentUser) {
       addToCart(itemId);
+      setAlert({ message: "Item added to cart", type: "success" });
+      setShowAlert(true);
     } else {
-      alert("You need to log in to add items to the cart");
+      setAlert({ message: "You need to log in to add items to the cart", type: "error" });
+      setShowAlert(true);
       navigate("/login");
     }
   };
@@ -28,8 +35,11 @@ const Card = ({ data }) => {
   const handleAddToWishlist = (itemId) => {
     if (currentUser) {
       addToWishlist(itemId);
+      setAlert({ message: "Item added to wishlist", type: "success" });
+      setShowAlert(true);
     } else {
-      alert("You need to log in to add items to the wishlist");
+      setAlert({ message: "You need to log in to add items to the wishlist", type: "error" });
+      setShowAlert(true);
       navigate("/login");
     }
   };
@@ -81,6 +91,15 @@ const Card = ({ data }) => {
           </div>
         </div>
       ))}
+
+      {/* Show Alert */}
+      {showAlert && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          onClose={() => setShowAlert(false)}
+        />
+      )}
     </>
   );
 };

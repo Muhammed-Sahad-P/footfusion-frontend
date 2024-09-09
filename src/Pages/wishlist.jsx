@@ -1,23 +1,34 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
 import { CollectionContext } from "../Context/CollectionContext";
 import { Link, Navigate } from "react-router-dom";
+import Alert from "../Components/Alert";
 
 const Wishlist = () => {
   const { wishlist, removeFromWishlist, addToCart } =
     useContext(CollectionContext);
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-  console.log(wishlist);
+  
+  const [alert, setAlert] = useState({ message: "", type: "" });
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleAddToCart = (itemId) => {
     if (currentUser) {
       addToCart(itemId);
+      setAlert({ message: "Item added to cart successfully", type: "success" });
+      setShowAlert(true);
     } else {
-      alert("You need to log in to add items to the cart");
+      setAlert({ message: "You need to log in to add items to the cart", type: "error" });
+      setShowAlert(true);
       Navigate("/login");
     }
+  };
+
+  const handleRemoveFromWishlist = (itemId) => {
+    removeFromWishlist(itemId);
+    setAlert({ message: "Item removed from wishlist", type: "error" });
+    setShowAlert(true);
   };
 
   return (
@@ -40,7 +51,7 @@ const Wishlist = () => {
                 <p className="text-gray-600">₹ {item.price}</p>
                 <div className="flex items-center justify-between mt-4">
                   <button
-                    onClick={() => removeFromWishlist(item._id)}
+                    onClick={() => handleRemoveFromWishlist(item._id)}
                     className="text-2xl py-2 px-4 rounded"
                   >
                     <MdDelete />
@@ -56,6 +67,15 @@ const Wishlist = () => {
           <p className="text-center text-gray-500">Your wishlist is empty.</p>
         )}
       </div>
+
+      {/* Show Alert */}
+      {showAlert && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          onClose={() => setShowAlert(false)}
+        />
+      )}
     </div>
   );
 };

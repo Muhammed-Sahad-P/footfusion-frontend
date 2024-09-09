@@ -26,11 +26,15 @@ export const UserContextProvider = (props) => {
 
   const SignUp = async (formValues) => {
     try {
-      const response = await fetch("https://footfusion-backend.onrender.com/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formValues),
-      });
+      const response = await fetch(
+        "https://footfusion-backend.onrender.com/auth/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(formValues),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -62,14 +66,17 @@ export const UserContextProvider = (props) => {
 
   const Login = async (formValues) => {
     try {
-      const response = await fetch("https://footfusion-backend.onrender.com/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formValues),
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://footfusion-backend.onrender.com/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formValues),
+          credentials: "include",
+        }
+      );
 
       const data = await response.json();
       console.log(data);
@@ -123,7 +130,13 @@ export const UserContextProvider = (props) => {
         currentUser,
       }}
     >
-      {alert && <Alert message={alert.message} type={alert.type} onClose={() => setAlert(null)} />}
+      {alert && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          onClose={() => setAlert(null)}
+        />
+      )}
       {props.children}
     </UserContext.Provider>
   );

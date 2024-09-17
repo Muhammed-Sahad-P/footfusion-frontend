@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ScrollReveal from "scrollreveal";
 import Spinner from "../../Components/Spinner";
@@ -54,16 +54,15 @@ const Home = () => {
   return (
     <div className="bg-[#F7F7F7] font-poppins">
       {/* Hero Section */}
-      <section className="py-16 bg-[#131842] text-white h-[100vh] flex items-center justify-center">
-        <div className="container mx-auto h-full px-4 flex flex-col md:flex-row items-center justify-evenly">
+      <section className="py-16 bg-[#131842] text-white min-h-[80vh] flex items-center justify-center">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-evenly text-center md:text-left">
+          {/* Text Content */}
           <div className="md:w-1/2 md:pr-8 mb-8 md:mb-0">
-            <h2 className="text-5xl md:text-7xl font-bold mb-4 animate-text-float">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 animate-text-float leading-tight">
               Discover Our Collection
             </h2>
-            <p className="text-xl mb-6 animate-text-slide">
-              Explore the latest trends in fashion and find your new favorite
-              pieces. From stylish shoes to elegant accessories, we have
-              everything you need to step up your wardrobe game.
+            <p className="text-lg md:text-xl mb-6 animate-text-slide">
+              Explore the latest trends in fashion and find your new favorite pieces. From stylish shoes to elegant accessories, we have everything you need to step up your wardrobe game.
             </p>
             <Link
               to="/collection"
@@ -72,11 +71,13 @@ const Home = () => {
               Browse Collection
             </Link>
           </div>
-          <div className="md:w-1/2 flex justify-end">
+
+          {/* Hero Image */}
+          <div className="md:w-1/2 flex justify-center md:justify-end">
             <img
               src={img}
               alt="hero"
-              className="w-full mb-10 h-full max-w-lg mt-6 object-contain object-center"
+              className="w-full h-auto max-w-xs md:max-w-lg object-contain"
             />
           </div>
         </div>
@@ -88,14 +89,14 @@ const Home = () => {
           <h2 className="text-4xl font-poppins mb-12 text-center uppercase">
             Featured Products
           </h2>
-          
+
           {/* Loading State */}
           {isLoading ? (
             <div className="flex justify-center">
               <div><Spinner /></div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {products.map((product) => (
                 <div
                   key={product.id}

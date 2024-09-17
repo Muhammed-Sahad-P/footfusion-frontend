@@ -118,11 +118,9 @@ const Navbar = () => {
                 <button onClick={() => handleMenuItemClick("/collection")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">COLLECTIONS</button>
                 <button onClick={() => handleMenuItemClick("/orders")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">ORDERS</button>
                 <button onClick={() => handleMenuItemClick("/contact")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">CONTACT</button>
-                {isLoggedIn && (
                   <button onClick={() => handleMenuItemClick("/profile")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
                     <FaUserCircle className="text-3xl" />
                   </button>
-                )}
               </div>
             )}
           </div>

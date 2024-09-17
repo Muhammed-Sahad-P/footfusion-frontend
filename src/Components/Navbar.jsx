@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, useRef, useCallback } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { FiShoppingCart, FiHeart } from "react-icons/fi";
 import { GiRunningShoe } from "react-icons/gi";
 import { FaUserCircle } from "react-icons/fa";
@@ -33,9 +33,9 @@ const Navbar = () => {
     };
   }, []);
 
-  const toggleMenu = useCallback(() => {
-    setMenuOpen((prevMenuOpen) => !prevMenuOpen);
-  }, []);
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
   const handleClick = () => {
     navigate(isLoggedIn ? "/profile" : "/login");
@@ -48,22 +48,12 @@ const Navbar = () => {
 
   const { viewCart, wishlist } = useContext(CollectionContext);
 
-  // Array for rendering menu items in both desktop and mobile view
-  const menuItems = [
-    { label: "MEN", path: "/men" },
-    { label: "WOMEN", path: "/women" },
-    { label: "COLLECTIONS", path: "/collection" },
-    { label: "ORDERS", path: "/orders" },
-    { label: "CONTACT", path: "/contact" },
-  ];
-
   return (
     <>
       {!isAdmin && (
         <nav className="bg-white shadow-md fixed top-0 left-0 w-full z-30">
           <div className="mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
-              {/* Logo */}
               <div className="flex items-center">
                 <Link to="/" className="flex items-center space-x-2">
                   <GiRunningShoe className="text-[#131842] text-3xl" />
@@ -71,16 +61,14 @@ const Navbar = () => {
                 </Link>
               </div>
 
-              {/* Desktop Menu */}
               <div className="hidden md:flex space-x-8 font-poppins">
-                {menuItems.map((item) => (
-                  <Link key={item.label} to={item.path} className="nav-link">
-                    {item.label}
-                  </Link>
-                ))}
+                <Link to="/men" className="nav-link">MEN</Link>
+                <Link to="/women" className="nav-link">WOMEN</Link>
+                <Link to="/collection" className="nav-link">COLLECTIONS</Link>
+                <Link to="/orders" className="nav-link">ORDERS</Link>
+                <Link to="/contact" className="nav-link">CONTACT</Link>
               </div>
 
-              {/* User Icons */}
               <div className="flex items-center space-x-4">
                 <SearchField />
                 {isLoggedIn && (
@@ -103,13 +91,14 @@ const Navbar = () => {
                     </div>
                   </>
                 )}
-                <FaUserCircle
-                  onClick={handleClick}
-                  className="text-4xl text-gray-700 cursor-pointer hover:text-[#131842]"
-                />
+                <div className="flex items-center">
+                  <FaUserCircle 
+                    onClick={handleClick} 
+                    className="text-4xl text-gray-700 cursor-pointer hover:text-[#131842]" 
+                  />
+                </div>
               </div>
 
-              {/* Mobile Menu Button */}
               <div className="md:hidden flex items-center">
                 <button onClick={toggleMenu}>
                   {menuOpen ? (
@@ -121,26 +110,15 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Mobile Menu */}
             {menuOpen && (
-              <div
-                ref={menuRef}
-                className="md:hidden absolute top-12 right-0 w-48 bg-white shadow-lg rounded-lg z-40"
-              >
-                {menuItems.map((item) => (
-                  <button
-                    key={item.label}
-                    onClick={() => handleMenuItemClick(item.path)}
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
-                    {item.label}
-                  </button>
-                ))}
+              <div ref={menuRef} className="md:hidden absolute top-12 right-0 w-48 bg-white shadow-lg rounded-lg z-40">
+                <button onClick={() => handleMenuItemClick("/men")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">MEN</button>
+                <button onClick={() => handleMenuItemClick("/women")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">WOMEN</button>
+                <button onClick={() => handleMenuItemClick("/collection")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">COLLECTIONS</button>
+                <button onClick={() => handleMenuItemClick("/orders")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">ORDERS</button>
+                <button onClick={() => handleMenuItemClick("/contact")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">CONTACT</button>
                 {isLoggedIn && (
-                  <button
-                    onClick={() => handleMenuItemClick("/profile")}
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
+                  <button onClick={() => handleMenuItemClick("/profile")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
                     <FaUserCircle className="text-3xl" />
                   </button>
                 )}

@@ -91,7 +91,8 @@ const Navbar = () => {
                     </div>
                   </>
                 )}
-                <div className="flex items-center">
+                {/* Profile icon visible only on larger screens */}
+                <div className="hidden md:block">
                   <FaUserCircle 
                     onClick={handleClick} 
                     className="text-4xl text-gray-700 cursor-pointer hover:text-[#131842]" 

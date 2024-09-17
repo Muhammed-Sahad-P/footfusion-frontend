@@ -20,10 +20,10 @@ const CartItemDetails = () => {
               className="w-full h-72 object-cover mb-6 rounded-2xl shadow-md transform transition-transform duration-500 hover:scale-105"
               style={{ maxWidth: "100%", maxHeight: "300px" }}
             />
-            <h2 className="text-4xl font-bold text-gray-800 mb-2">{productDetails.name}</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">{productDetails.name}</h2>
             <h4 className="text-sm text-black mb-4">{productDetails.category}</h4>
             <p className="text-sm text-gray-600 mb-4">{productDetails.description}</p>
-            <p className="text-2xl font-semibold text-blue-600">₹ {productDetails.price}</p>
+            <p className="text-2xl font-semibold text-[#131842]">₹ {productDetails.price}</p>
           </div>
         )}
       </div>

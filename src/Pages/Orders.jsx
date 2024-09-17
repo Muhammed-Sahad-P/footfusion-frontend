@@ -11,16 +11,13 @@ const Orders = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const response = await fetch(
-          "https://footfusion-backend.onrender.com/users/orders",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-            credentials: "include",
-          }
-        );
+        const response = await fetch("https://footfusion-backend.onrender.com/users/orders", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          credentials: "include",
+        });
 
         if (!response.ok) {
           throw new Error("Failed to fetch orders.");
@@ -38,12 +35,7 @@ const Orders = () => {
     fetchOrders();
   }, []);
 
-  if (loading)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <Spinner />
-      </div>
-    );
+  if (loading) return <div className="flex justify-center items-center h-screen"><Spinner/></div>
   if (error) return <p>{error}</p>;
 
   return (
@@ -78,6 +70,9 @@ const Orders = () => {
             <p className="text-sm text-gray-600 mb-4">
               <strong>Total:</strong> ₹ {order.totalPrice.toFixed(2)}
             </p>
+            <p className="text-sm text-gray-600 mb-4">
+              <strong>Status:</strong> ₹ {order.status}
+            </p>
             <div className="flex flex-wrap -mx-2">
               {order.products.map((product) => (
                 <div
@@ -103,9 +98,6 @@ const Orders = () => {
                       <p className="text-sm">
                         <strong>Price:</strong> ₹{" "}
                         {product.productId.price.toFixed(2)}
-                      </p>
-                      <p className="text-sm">
-                        <strong>Status:</strong> {product.status}
                       </p>
                     </div>
                   </div>

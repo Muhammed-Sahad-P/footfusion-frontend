@@ -73,7 +73,7 @@ const Home = () => {
           </div>
 
           {/* Hero Image */}
-          <div className="md:w-1/2 flex justify-center md:justify-end">
+          <div className="md:w-1/2 mt-8 md:mt-0 flex justify-center md:justify-end">
             <img
               src={img}
               alt="hero"

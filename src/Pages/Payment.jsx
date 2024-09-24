@@ -45,7 +45,7 @@ const Payment = () => {
       const token = localStorage.getItem("token");
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-      const response = await fetch("https://footfusion-backend.onrender.com/users/orders", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,7 +79,7 @@ const Payment = () => {
         handler: async (response) => {
           try {
             // Verify payment
-            const verifyResponse = await fetch("https://footfusion-backend.onrender.com/users/orders/verify", {
+            const verifyResponse = await fetch(`${import.meta.env.VITE_API_URL}/users/orders/verify`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

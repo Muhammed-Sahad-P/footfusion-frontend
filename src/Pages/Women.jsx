@@ -4,7 +4,7 @@ import useFetch from "../utils/useFetch";
 
 const Women = () => {
   const { data, isPending, error } = useFetch(
-    "https://footfusion-backend.onrender.com/users/products/women"
+    `${import.meta.env.VITE_API_URL}/users/products/women`
   );
 
   return (

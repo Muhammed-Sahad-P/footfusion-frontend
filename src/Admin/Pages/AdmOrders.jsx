@@ -16,7 +16,7 @@ const AdmOrders = () => {
   const fetchOrders = async (page = 1) => {
     setLoading(true);
     try {
-      const response = await fetch(`https://footfusion-backend.onrender.com/admin/orders?page=${page}&limit=${ordersPerPage}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/orders?page=${page}&limit=${ordersPerPage}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const AdmOrders = () => {
     if (nextPage <= Math.ceil(totalOrders / ordersPerPage)) {
       setLoading(true);
       try {
-        const response = await fetch(`https://footfusion-backend.onrender.com/admin/orders?page=${nextPage}&limit=${ordersPerPage}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/orders?page=${nextPage}&limit=${ordersPerPage}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -88,7 +88,7 @@ const AdmOrders = () => {
 
   const updateOrder = async (orderId, updatedData) => {
     try {
-      const response = await fetch(`https://footfusion-backend.onrender.com/admin/orders/${orderId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/orders/${orderId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -114,7 +114,7 @@ const AdmOrders = () => {
 
   const deleteOrder = async (orderId) => {
     try {
-      const response = await fetch(`https://footfusion-backend.onrender.com/admin/orders/${orderId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/orders/${orderId}`, {
         method: "DELETE",
         credentials: "include",
       });

@@ -22,22 +22,22 @@ const Dashboard = () => {
         if (!token) throw new Error("You are not authenticated. Please log in.");
 
         const [ordersRes, productsRes, usersRes, revenueRes] = await Promise.all([
-          fetch("https://footfusion-backend.onrender.com/admin/orders", {
+          fetch(`${import.meta.env.VITE_API_URL}/admin/orders`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}` },
             credentials: "include",
           }),
-          fetch("https://footfusion-backend.onrender.com/admin/products", {
+          fetch(`${import.meta.env.VITE_API_URL}/admin/products`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}` },
             credentials: "include",
           }),
-          fetch("https://footfusion-backend.onrender.com/admin/users", {
+          fetch(`${import.meta.env.VITE_API_URL}/admin/users`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}` },
             credentials: "include",
           }),
-          fetch("https://footfusion-backend.onrender.com/admin/revenue", {
+          fetch(`${import.meta.env.VITE_API_URL}/admin/revenue`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}` },
             credentials: "include",

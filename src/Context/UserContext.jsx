@@ -27,7 +27,7 @@ export const UserContextProvider = (props) => {
   const SignUp = async (formValues) => {
     try {
       const response = await fetch(
-        "https://footfusion-backend.onrender.com/auth/register",
+        `${import.meta.env.VITE_API_URL}/auth/register`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -67,7 +67,7 @@ export const UserContextProvider = (props) => {
   const Login = async (formValues) => {
     try {
       const response = await fetch(
-        "https://footfusion-backend.onrender.com/auth/login",
+        `${import.meta.env.VITE_API_URL}/auth/login`,
         {
           method: "POST",
           headers: {

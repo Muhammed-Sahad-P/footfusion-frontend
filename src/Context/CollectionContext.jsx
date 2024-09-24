@@ -30,7 +30,7 @@ export const CollectionProvider = (props) => {
     const fetchWishlist = async () => {
       try {
         const response = await fetch(
-          `https://footfusion-backend.onrender.com/users/wishlist/${currentUser?.user?._id}`,
+          `${import.meta.env.VITE_API_URL}/users/wishlist/${currentUser?.user?._id}`,
           {
             method: "GET",
             headers: {
@@ -55,7 +55,7 @@ export const CollectionProvider = (props) => {
   //add to wishlist
   const addToWishlist = async (itemId) => {
     try {
-      const response = await fetch(`https://footfusion-backend.onrender.com/users/wishlist`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/wishlist`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -97,7 +97,7 @@ export const CollectionProvider = (props) => {
   const removeFromWishlist = async (itemId) => {
     try {
       const response = await fetch(
-        `https://footfusion-backend.onrender.com/users/wishlist/${currentUser?.user?._id}/${itemId}`,
+        `${import.meta.env.VITE_API_URL}/users/wishlist/${currentUser?.user?._id}/${itemId}`,
         {
           method: "DELETE",
           credentials: "include",
@@ -119,7 +119,7 @@ export const CollectionProvider = (props) => {
   //add to cart
   const addToCart = async (itemId) => {
     try {
-      const response = await fetch(`https://footfusion-backend.onrender.com/users/cart`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -148,7 +148,7 @@ export const CollectionProvider = (props) => {
     const getCart = async () => {
       try {
         const response = await fetch(
-          `https://footfusion-backend.onrender.com/users/cart/${currentUser?.user?._id}`,
+          `${import.meta.env.VITE_API_URL}/users/cart/${currentUser?.user?._id}`,
           {
             method: "GET",
             headers: {

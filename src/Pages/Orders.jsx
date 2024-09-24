@@ -11,7 +11,7 @@ const Orders = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const response = await fetch("https://footfusion-backend.onrender.com/users/orders", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/orders`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,

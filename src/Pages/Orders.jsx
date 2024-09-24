@@ -11,13 +11,22 @@ const Orders = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/orders`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          credentials: "include",
-        });
+        if (!token) {
+          setError("You need to be logged in to view your orders.");
+          setLoading(false);
+          return;
+        }
+
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/users/orders`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            credentials: "include",
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch orders.");
@@ -35,8 +44,21 @@ const Orders = () => {
     fetchOrders();
   }, []);
 
-  if (loading) return <div className="flex justify-center items-center h-screen"><Spinner/></div>
-  if (error) return <p>{error}</p>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Spinner />
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative max-w-md mx-auto text-center">
+          {error}
+        </div>
+      </div>
+    );
 
   return (
     <div className="max-w-3xl mx-auto p-4 mt-20">
@@ -71,7 +93,7 @@ const Orders = () => {
               <strong>Total:</strong> ₹ {order.totalPrice.toFixed(2)}
             </p>
             <p className="text-sm text-gray-600 mb-4">
-              <strong>Status:</strong> ₹ {order.status}
+              <strong>Status:</strong> {order.status}
             </p>
             <div className="flex flex-wrap -mx-2">
               {order.products.map((product) => (

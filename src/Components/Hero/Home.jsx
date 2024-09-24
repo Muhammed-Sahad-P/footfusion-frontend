@@ -23,9 +23,9 @@ const Home = () => {
       setProducts([
         {
           id: 1,
-          name: "Stylish Sport Shoes",
-          price: 999,
-          image: "https://img.freepik.com/free-photo/view-soccer-shoes_23-2150887398.jpg?semt=ais_hybrid",
+          name: "New Balance 530 Sneakers",
+          price: 1799,
+          image: "https://i.pinimg.com/564x/46/12/87/4612872035bb7e4d477e9663b78bc507.jpg",
           rating: 4.5,
           isNew: true,
           discount: 20,
@@ -34,7 +34,7 @@ const Home = () => {
           id: 2,
           name: "Casual Sneakers",
           price: 799,
-          image: "https://media.istockphoto.com/id/609924218/photo/tying-sports-shoes.jpg?s=612x612&w=0&k=20&c=jDPQy90JEhy8FJYrW-2XHl1hC340wXha8RrQlZpfJaM=",
+          image: "https://i.pinimg.com/564x/ed/d9/9c/edd99ce7affd57c08fc4c75b0dffaa8b.jpg",
           rating: 4.0,
           isNew: false,
         },
@@ -42,7 +42,7 @@ const Home = () => {
           id: 3,
           name: "Women's Running Shoes",
           price: 1299,
-          image: "https://image.shutterstock.com/image-photo/woman-stylish-sneakers-tying-shoe-260nw-2318464139.jpg",
+          image: "https://i.pinimg.com/564x/51/0d/5a/510d5aee56f0496366317642702fe52a.jpg",
           rating: 5.0,
           isNew: true,
         },
@@ -112,7 +112,7 @@ const Home = () => {
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   
                   <div className="p-4">

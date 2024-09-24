@@ -54,6 +54,7 @@ const Navbar = () => {
         <nav className="bg-white shadow-md fixed top-0 left-0 w-full z-30">
           <div className="mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
+              {/* Logo */}
               <div className="flex items-center">
                 <Link to="/" className="flex items-center space-x-2">
                   <GiRunningShoe className="text-[#131842] text-3xl" />
@@ -61,7 +62,8 @@ const Navbar = () => {
                 </Link>
               </div>
 
-              <div className="hidden md:flex space-x-8 font-poppins">
+              {/* Desktop Links */}
+              <div className="hidden lg:flex space-x-8 font-poppins">
                 <Link to="/men" className="nav-link">MEN</Link>
                 <Link to="/women" className="nav-link">WOMEN</Link>
                 <Link to="/collection" className="nav-link">COLLECTIONS</Link>
@@ -69,37 +71,42 @@ const Navbar = () => {
                 <Link to="/contact" className="nav-link">CONTACT</Link>
               </div>
 
+              {/* Search Bar and Icons */}
               <div className="flex items-center space-x-4">
+                {/* Search Bar Always Visible */}
                 <SearchField />
+                {/* Cart and Wishlist Icons */}
                 {isLoggedIn && (
                   <>
-                    <div className="relative">
+                    <div className="relative hidden lg:block">
                       <Link to="/cart" className="flex items-center">
                         <FiShoppingCart className="text-3xl text-gray-700 hover:text-[#131842]" />
-                        <div className="absolute top-0 right-0 w-4 h-4 bg-[#131842] text-white text-xs rounded-full flex items-center justify-center">
+                        <div className="absolute -top-1 -right-1 w-5 h-5 bg-[#131842] text-white text-xs rounded-full flex items-center justify-center">
                           {viewCart.length}
                         </div>
                       </Link>
                     </div>
-                    <div className="relative">
+                    <div className="relative hidden lg:block">
                       <Link to="/wishlist" className="flex items-center">
                         <FiHeart className="text-3xl text-gray-700 hover:text-[#131842]" />
-                        <div className="absolute top-0 right-0 w-4 h-4 bg-[#131842] text-white text-xs rounded-full flex items-center justify-center">
+                        <div className="absolute -top-1 -right-1 w-5 h-5 bg-[#131842] text-white text-xs rounded-full flex items-center justify-center">
                           {wishlist.length}
                         </div>
                       </Link>
                     </div>
                   </>
                 )}
-                <div className="flex items-center">
-                  <FaUserCircle 
-                    onClick={handleClick} 
-                    className="text-4xl text-gray-700 cursor-pointer hover:text-[#131842]" 
+                {/* Profile Icon - Only Visible on Desktop */}
+                <div className="hidden lg:flex items-center">
+                  <FaUserCircle
+                    onClick={handleClick}
+                    className="text-4xl text-gray-700 cursor-pointer hover:text-[#131842]"
                   />
                 </div>
               </div>
 
-              <div className="md:hidden flex items-center">
+              {/* Mobile Menu Button */}
+              <div className="lg:hidden flex items-center">
                 <button onClick={toggleMenu}>
                   {menuOpen ? (
                     <MdClose className="text-2xl" />
@@ -110,17 +117,53 @@ const Navbar = () => {
               </div>
             </div>
 
+            {/* Mobile Menu */}
             {menuOpen && (
-              <div ref={menuRef} className="md:hidden absolute top-12 right-0 w-48 bg-white shadow-lg rounded-lg z-40">
-                <button onClick={() => handleMenuItemClick("/men")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">MEN</button>
-                <button onClick={() => handleMenuItemClick("/women")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">WOMEN</button>
-                <button onClick={() => handleMenuItemClick("/collection")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">COLLECTIONS</button>
-                <button onClick={() => handleMenuItemClick("/orders")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">ORDERS</button>
-                <button onClick={() => handleMenuItemClick("/contact")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">CONTACT</button>
+              <div ref={menuRef} className="lg:hidden absolute top-12 right-0 w-full bg-white shadow-lg z-40 p-4">
+                <button onClick={() => handleMenuItemClick("/men")} className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-200">
+                  <span>MEN</span>
+                </button>
+                <button onClick={() => handleMenuItemClick("/women")} className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-200">
+                  <span>WOMEN</span>
+                </button>
+                <button onClick={() => handleMenuItemClick("/collection")} className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-200">
+                  <span>COLLECTIONS</span>
+                </button>
+                <button onClick={() => handleMenuItemClick("/orders")} className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-200">
+                  <span>ORDERS</span>
+                </button>
+                <button onClick={() => handleMenuItemClick("/contact")} className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-200">
+                  <span>CONTACT</span>
+                </button>
+                {/* Profile Icon in Mobile Menu */}
+                <button
+                  onClick={() => handleMenuItemClick(isLoggedIn ? "/profile" : "/login")}
+                  className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-200"
+                >
+                  <FaUserCircle className="text-3xl mr-2" />
+                  <span className="hidden lg:block">{isLoggedIn ? "Profile" : "Login/Register"}</span>
+                </button>
                 {isLoggedIn && (
-                  <button onClick={() => handleMenuItemClick("/profile")} className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
-                    <FaUserCircle className="text-3xl" />
-                  </button>
+                  <>
+                    <button
+                      onClick={() => handleMenuItemClick("/cart")}
+                      className="relative flex items-center px-4 py-2 text-gray-800 hover:bg-gray-200"
+                    >
+                      <FiShoppingCart className="text-xl mr-2" />
+                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-[#131842] text-white text-xs rounded-full flex items-center justify-center">
+                        {viewCart.length}
+                      </div>
+                    </button>
+                    <button
+                      onClick={() => handleMenuItemClick("/wishlist")}
+                      className="relative flex items-center px-4 py-2 text-gray-800 hover:bg-gray-200"
+                    >
+                      <FiHeart className="text-xl mr-2" />
+                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-[#131842] text-white text-xs rounded-full flex items-center justify-center">
+                        {wishlist.length}
+                      </div>
+                    </button>
+                  </>
                 )}
               </div>
             )}

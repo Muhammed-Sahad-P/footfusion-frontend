@@ -16,8 +16,8 @@ const Wishlist = () => {
   const handleAddToCart = (itemId) => {
     if (currentUser) {
       addToCart(itemId);
-      setAlert({ message: "Item added to cart successfully", type: "success" });
-      setShowAlert(true);
+      // setAlert({ message: "Item added to cart successfully", type: "success" });
+      // setShowAlert(true);
     } else {
       setAlert({ message: "You need to log in to add items to the cart", type: "error" });
       setShowAlert(true);
@@ -27,8 +27,8 @@ const Wishlist = () => {
 
   const handleRemoveFromWishlist = (itemId) => {
     removeFromWishlist(itemId);
-    setAlert({ message: "Item removed from wishlist", type: "error" });
-    setShowAlert(true);
+    // setAlert({ message: "Item removed from wishlist", type: "error" });
+    // setShowAlert(true);
   };
 
   return (

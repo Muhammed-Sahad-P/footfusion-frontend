@@ -23,8 +23,8 @@ const Card = ({ data }) => {
   const handleAddToCart = (itemId) => {
     if (currentUser) {
       addToCart(itemId);
-      setAlert({ message: "Item added to cart", type: "success" });
-      setShowAlert(true);
+      // setAlert({ message: "Item added to cart", type: "success" });
+      // setShowAlert(true);
     } else {
       setAlert({ message: "You need to log in to add items to the cart", type: "error" });
       setShowAlert(true);
@@ -35,8 +35,8 @@ const Card = ({ data }) => {
   const handleAddToWishlist = (itemId) => {
     if (currentUser) {
       addToWishlist(itemId);
-      setAlert({ message: "Item added to wishlist", type: "success" });
-      setShowAlert(true);
+      // setAlert({ message: "Item added to wishlist", type: "success" });
+      // setShowAlert(true);
     } else {
       setAlert({ message: "You need to log in to add items to the wishlist", type: "error" });
       setShowAlert(true);

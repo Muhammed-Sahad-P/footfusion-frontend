@@ -142,7 +142,7 @@ const Login = () => {
             Continue
           </button>
           <p className="text-center-[#0A043C] mt-4">
-            Don't have an Account?
+            Don&apos;t have an Account?
             <Link
               to="/signup"
               className="text-red-600 cursor-pointer hover:underline"

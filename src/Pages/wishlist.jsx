@@ -9,17 +9,18 @@ const Wishlist = () => {
   const { wishlist, removeFromWishlist, addToCart } =
     useContext(CollectionContext);
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  
+
   const [alert, setAlert] = useState({ message: "", type: "" });
   const [showAlert, setShowAlert] = useState(false);
 
   const handleAddToCart = (itemId) => {
     if (currentUser) {
       addToCart(itemId);
-      // setAlert({ message: "Item added to cart successfully", type: "success" });
-      // setShowAlert(true);
     } else {
-      setAlert({ message: "You need to log in to add items to the cart", type: "error" });
+      setAlert({
+        message: "You need to log in to add items to the cart",
+        type: "error",
+      });
       setShowAlert(true);
       Navigate("/login");
     }
@@ -27,8 +28,6 @@ const Wishlist = () => {
 
   const handleRemoveFromWishlist = (itemId) => {
     removeFromWishlist(itemId);
-    // setAlert({ message: "Item removed from wishlist", type: "error" });
-    // setShowAlert(true);
   };
 
   return (
@@ -68,7 +67,6 @@ const Wishlist = () => {
         )}
       </div>
 
-      {/* Show Alert */}
       {showAlert && (
         <Alert
           message={alert.message}
